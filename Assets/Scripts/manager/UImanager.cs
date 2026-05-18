@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Inst = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.root.gameObject);
     }
 
     private void Start()
@@ -61,8 +61,15 @@ public class UIManager : MonoBehaviour
         if (_openedUISet.Contains(uiType))
         {
             var targetUI = _createdUIDic[uiType];
-            targetUI.gameObject.SetActive(false);
+            if (targetUI != null)
+            {
+
+                // 완전히 파괴하여 유니티가 센서와 데이터를 깨끗하게 지우도록함
+                Destroy(targetUI.gameObject);
+            }
+            _createdUIDic.Remove(uiType);
             _openedUISet.Remove(uiType);
+            Debug.Log($"[UIManager] {uiType} 가 화면에서 완전히 파괴 및 해제되었습니다.");
         }
     }
 
@@ -71,7 +78,13 @@ public class UIManager : MonoBehaviour
         if (_createdUIDic.ContainsKey(uiType) == false)
         {
             string path = $"Prefabs/UI/{rootType}/{uiType}";
+            Debug.Log($"[UI 로드 시도] 조립된 경로: {path}");
             GameObject loadedObj = Resources.Load<GameObject>(path);
+            if (loadedObj == null)
+            {
+                Debug.LogError($"[UI 로드 실패] {path} 경로에서 프리팹을 찾지 못했습니다! 대소문자나 폴더 구조를 다시 확인하세요.");
+                return null;
+            }
             Transform parentRoot = GetRootTransform(rootType);
 
             GameObject gObj = Instantiate(loadedObj, parentRoot);

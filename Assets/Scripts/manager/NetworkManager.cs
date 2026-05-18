@@ -8,7 +8,7 @@ public class NetworkManager : MonoBehaviour
     private void Awake()
     {
         Inst = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.root.gameObject);
     }
 
     private string GetPath()

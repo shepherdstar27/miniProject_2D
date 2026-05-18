@@ -10,7 +10,16 @@ public class MainUI : UIBase
     [SerializeField] private UIButton Button_Options;
     [SerializeField] private UIButton Button_ExitGame;
 
+    private void Start()
+    {
+        BindEvents();
+    }
     private void OnEnable()
+    {
+        BindEvents();
+    }
+
+    private void BindEvents()
     {
         // 규칙: 함수는 동사로 시작할 것
         // UIButton에 만들어둔 코드 기반 이벤트 바인딩 메서드 활용
