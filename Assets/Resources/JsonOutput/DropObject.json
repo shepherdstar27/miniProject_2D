@@ -1,0 +1,93 @@
+[
+  {
+    "Id": "dropItem_Gold_0001",
+    "FieldObjectType": "DropItem",
+    "Name": "화폐",
+    "Description": "드랍된 화폐",
+    "DropCountRange": [
+      10,
+      500
+    ],
+    "DropItemDataId": "Item_Gold_0001",
+    "IconPath": "Icon/Icon_Item_Gold_0001",
+    "PrefabPath": "2DPrefab/2DPrefab_Item_Gold_0001"
+  },
+  {
+    "Id": "dropItem_Fuel_0002",
+    "FieldObjectType": "DropItem",
+    "Name": "연료",
+    "Description": "드랍된 연료",
+    "DropCountRange": [
+      1,
+      5
+    ],
+    "DropItemDataId": "Item_Fuel_0002",
+    "IconPath": "Icon/Icon_Item_Fuel_0002",
+    "PrefabPath": "2DPrefab/2DPrefab_Item_Fuel_0002"
+  },
+  {
+    "Id": "dropItem_Supplies_0003",
+    "FieldObjectType": "DropItem",
+    "Name": "보급품",
+    "Description": "드랍된 보급품",
+    "DropCountRange": [
+      1,
+      5
+    ],
+    "DropItemDataId": "Item_Supplies_0003",
+    "IconPath": "Icon/Icon_Item_Supplies_0003",
+    "PrefabPath": "2DPrefab/2DPrefab_Item_Supplies_0003"
+  },
+  {
+    "Id": "dropItem_TradingGoods_0004",
+    "FieldObjectType": "DropItem",
+    "Name": "교역품 1",
+    "Description": "드랍된 교역품 1",
+    "DropCountRange": [
+      1,
+      5
+    ],
+    "DropItemDataId": "Item_TradingGoods_0004",
+    "IconPath": "Icon/Icon_Item_TradingGoods_0004",
+    "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0004"
+  },
+  {
+    "Id": "dropItem_TradingGoods_0005",
+    "FieldObjectType": "DropItem",
+    "Name": "교역품 2",
+    "Description": "드랍된 교역품 2",
+    "DropCountRange": [
+      1,
+      5
+    ],
+    "DropItemDataId": "Item_TradingGoods_0005",
+    "IconPath": "Icon/Icon_Item_TradingGoods_0005",
+    "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0005"
+  },
+  {
+    "Id": "dropItem_TradingGoods_0006",
+    "FieldObjectType": "DropItem",
+    "Name": "교역품 3",
+    "Description": "드랍된 교역품 3",
+    "DropCountRange": [
+      1,
+      5
+    ],
+    "DropItemDataId": "Item_TradingGoods_0006",
+    "IconPath": "Icon/Icon_Item_TradingGoods_0006",
+    "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0006"
+  },
+  {
+    "Id": "dropItem_TradingGoods_0007",
+    "FieldObjectType": "DropItem",
+    "Name": "교역품 4",
+    "Description": "드랍된 교역품 4",
+    "DropCountRange": [
+      1,
+      5
+    ],
+    "DropItemDataId": "Item_TradingGoods_0007",
+    "IconPath": "Icon/Icon_Item_TradingGoods_0007",
+    "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0007"
+  }
+]

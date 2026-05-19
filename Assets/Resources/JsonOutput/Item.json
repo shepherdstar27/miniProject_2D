@@ -1,0 +1,72 @@
+[
+  {
+    "Id": "Item_Gold_0001",
+    "Name": "화폐",
+    "Description": "지역에 나타나는 금화",
+    "ItemType": "valuable",
+    "Grade": "Legend",
+    "Price": 1,
+    "MaxStack": 999999999,
+    "IconPath": "Icon/Icon_Item_Gold_0001"
+  },
+  {
+    "Id": "Item_Fuel_0002",
+    "Name": "연료",
+    "Description": "연료다. 보통은 석탄이다",
+    "ItemType": "valuable",
+    "Grade": "Normal",
+    "Price": 10,
+    "MaxStack": 1000,
+    "IconPath": "Icon/Icon_Item_Fuel_0002"
+  },
+  {
+    "Id": "Item_Supplies_0003",
+    "Name": "보급품",
+    "Description": "식량, 자재, 탄약 등",
+    "ItemType": "valuable",
+    "Grade": "Normal",
+    "Price": 20,
+    "MaxStack": 1000,
+    "IconPath": "Icon/Icon_Item_Supplies_0003"
+  },
+  {
+    "Id": "Item_TradingGoods_0004",
+    "Name": "교역품 1",
+    "Description": "교역품 1",
+    "ItemType": "Cargo",
+    "Grade": "Normal",
+    "Price": 10,
+    "MaxStack": 10,
+    "IconPath": "Icon/Icon_Item_TradingGoods_0004"
+  },
+  {
+    "Id": "Item_TradingGoods_0005",
+    "Name": "교역품 2",
+    "Description": "교역품 2",
+    "ItemType": "Cargo",
+    "Grade": "Normal",
+    "Price": 30,
+    "MaxStack": 10,
+    "IconPath": "Icon/Icon_Item_TradingGoods_0005"
+  },
+  {
+    "Id": "Item_TradingGoods_0006",
+    "Name": "교역품 3",
+    "Description": "교역품 3",
+    "ItemType": "Cargo",
+    "Grade": "Normal",
+    "Price": 50,
+    "MaxStack": 10,
+    "IconPath": "Icon/Icon_Item_TradingGoods_0006"
+  },
+  {
+    "Id": "Item_TradingGoods_0007",
+    "Name": "교역품 4",
+    "Description": "교역품 4",
+    "ItemType": "Cargo",
+    "Grade": "Normal",
+    "Price": 100,
+    "MaxStack": 10,
+    "IconPath": "Icon/Icon_Item_TradingGoods_0007"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "Id": "mob_ship_0001",
+    "Name": "해적001",
+    "Description": "해적이다",
+    "IconPath": "Icon/Icon_mob_ship_0001",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0001"
+  },
+  {
+    "Id": "mob_ship_0002",
+    "Name": "해적002",
+    "Description": "해적이다",
+    "IconPath": "Icon/Icon_mob_ship_0002",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0002"
+  },
+  {
+    "Id": "mob_ship_0003",
+    "Name": "해적003",
+    "Description": "해적이다",
+    "IconPath": "Icon/Icon_mob_ship_0003",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0003"
+  },
+  {
+    "Id": "mob_ship_0004",
+    "Name": "해적004",
+    "Description": "해적이다",
+    "IconPath": "Icon/Icon_mob_ship_0004",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0004"
+  },
+  {
+    "Id": "mob_ship_0005",
+    "Name": "해적005",
+    "Description": "해적이다",
+    "IconPath": "Icon/Icon_mob_ship_0005",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0005"
+  },
+  {
+    "Id": "mob_seacreature_0001",
+    "Name": "문어",
+    "Description": "해양생물이다",
+    "IconPath": "Icon/Icon_mob_seacreature_0001",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0001"
+  },
+  {
+    "Id": "mob_seacreature_0002",
+    "Name": "고래",
+    "Description": "해양생물이다",
+    "IconPath": "Icon/Icon_mob_seacreature_0002",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0002"
+  },
+  {
+    "Id": "mob_seacreature_0003",
+    "Name": "상어",
+    "Description": "해양생물이다",
+    "IconPath": "Icon/Icon_mob_seacreature_0003",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0003"
+  },
+  {
+    "Id": "mob_seacreature_0004",
+    "Name": "장어",
+    "Description": "해양생물이다",
+    "IconPath": "Icon/Icon_mob_seacreature_0004",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0004"
+  },
+  {
+    "Id": "mob_seacreature_0005",
+    "Name": "거북이",
+    "Description": "해양생물이다",
+    "IconPath": "Icon/Icon_mob_seacreature_0005",
+    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0005"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "Id": "character_Sailor_0001",
+    "Name": "선원 1",
+    "Description": "선원 1 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0001"
+  },
+  {
+    "Id": "character_Sailor_0002",
+    "Name": "선원 2",
+    "Description": "선원 2 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0002"
+  },
+  {
+    "Id": "character_Sailor_0003",
+    "Name": "선원 3",
+    "Description": "선원 3 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0003"
+  },
+  {
+    "Id": "character_Sailor_0004",
+    "Name": "선원 4",
+    "Description": "선원 4 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0004"
+  },
+  {
+    "Id": "character_Sailor_0005",
+    "Name": "선원 5",
+    "Description": "선원 5 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0005"
+  },
+  {
+    "Id": "character_Sailor_0006",
+    "Name": "선원 6",
+    "Description": "선원 6 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0006"
+  },
+  {
+    "Id": "character_Sailor_0007",
+    "Name": "선원 7",
+    "Description": "선원 7 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0007"
+  },
+  {
+    "Id": "character_Sailor_0008",
+    "Name": "선원 8",
+    "Description": "선원 8 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0008"
+  },
+  {
+    "Id": "character_Sailor_0009",
+    "Name": "선원 9",
+    "Description": "선원 9 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0009"
+  },
+  {
+    "Id": "character_Sailor_0010",
+    "Name": "선원 10",
+    "Description": "선원 10 이다",
+    "PortraitPath": "Portrait/Portrait_character_Sailor_0010"
+  }
+]

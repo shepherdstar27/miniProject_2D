@@ -1,0 +1,38 @@
+[
+  {
+    "Id": "Weapon_Canon_0001",
+    "Name": "세이커 포",
+    "Description": "기초적인 대포",
+    "Damage": 10
+  },
+  {
+    "Id": "Weapon_Canon_0002",
+    "Name": "캘버린 포",
+    "Description": "표준적인 대포",
+    "Damage": 15
+  },
+  {
+    "Id": "Weapon_Canon_0003",
+    "Name": "데미캐논",
+    "Description": "위력이 상승한 포",
+    "Damage": 20
+  },
+  {
+    "Id": "Weapon_Canon_0004",
+    "Name": "캐논포",
+    "Description": "중장거리에서 강력한 포",
+    "Damage": 30
+  },
+  {
+    "Id": "Weapon_Canon_0005",
+    "Name": "중 캐논 포",
+    "Description": "최고의 관통력을 자랑하는 포",
+    "Damage": 50
+  },
+  {
+    "Id": "Weapon_Canon_0006",
+    "Name": "캐러네이드 포",
+    "Description": "사거리와 관통력이 뛰어난 최강의 포",
+    "Damage": 80
+  }
+]
