@@ -1,4 +1,5 @@
-﻿public static class UIManagerExtension
+﻿using UnityEngine;
+public static class UIManagerExtension
 {
     public static void ShowStartupUIOnGameStart(this UIManager uiManager)
     {
@@ -19,5 +20,23 @@
 
         // 2. 최초 메인 화면(MainUI) 프리팹을 다시 동적 생성하여 오픈
         uiManager.OpenUI(UIRootType.MainUI, UIType.MainUI);
+    }
+
+    public static void OpenPortUI(this UIManager uiManager)
+    {
+        //  PortUI 열기
+        uiManager.OpenUI(UIRootType.ContentUI, UIType.PortUI);
+    }
+
+    public static void ClosePortUI(this UIManager uiManager)
+    {
+        uiManager.CloseUI(UIRootType.ContentUI, UIType.PortUI);
+
+        // PortUI 닫기
+        PlayerInteractionPort playerInteraction = Object.FindFirstObjectByType<PlayerInteractionPort>();
+        if (playerInteraction != null)
+        {
+            playerInteraction.ExitPortAnchor();
+        }
     }
 }

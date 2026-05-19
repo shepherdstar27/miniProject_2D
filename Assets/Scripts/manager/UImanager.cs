@@ -16,12 +16,12 @@ public enum UIType
 {
     MainUI,
     GameUI,
-    SimplePopup
+    SimplePopup,
+    PortUI 
 }
 
 public class UIManager : MonoBehaviour
 {
-    // 규칙: 유니티에서 참조하는 객체는 대문자 시작, SerializeField private 구조
     [SerializeField] private Transform Canvas_BgRoot;
     [SerializeField] private Transform Canvas_MainRoot;
     [SerializeField] private Transform Canvas_ContentRoot;
@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        // 규칙: UI 매니저 확장 메서드를 활용해 스타트업 UI 세팅
         this.ShowStartupUIOnGameStart();
     }
 
@@ -58,16 +57,17 @@ public class UIManager : MonoBehaviour
 
     public void CloseUI(UIRootType rootType, UIType uiType)
     {
-        if (_openedUISet.Contains(uiType))
+        if (_openedUISet.Contains(uiType) == true)
         {
-            var targetUI = _createdUIDic[uiType];
-            if (targetUI != null)
+            if (_createdUIDic.ContainsKey(uiType) == true)
             {
-
-                // 완전히 파괴하여 유니티가 센서와 데이터를 깨끗하게 지우도록함
-                Destroy(targetUI.gameObject);
+                var targetUI = _createdUIDic[uiType];
+                if (targetUI != null)
+                {
+                    Destroy(targetUI.gameObject);
+                }
+                _createdUIDic.Remove(uiType);
             }
-            _createdUIDic.Remove(uiType);
             _openedUISet.Remove(uiType);
             Debug.Log($"[UIManager] {uiType} 가 화면에서 완전히 파괴 및 해제되었습니다.");
         }
@@ -88,6 +88,18 @@ public class UIManager : MonoBehaviour
             Transform parentRoot = GetRootTransform(rootType);
 
             GameObject gObj = Instantiate(loadedObj, parentRoot);
+
+            // 동적 생성 직후 화면 찌그러짐 원천 차단용
+            RectTransform rect = gObj.GetComponent<RectTransform>();
+            if (rect != null)
+            {
+                rect.anchorMin = Vector2.zero;
+                rect.anchorMax = Vector2.one;
+                rect.offsetMin = Vector2.zero;
+                rect.offsetMax = Vector2.zero;
+                rect.localScale = Vector3.one;
+            }
+
             var uiBase = gObj.GetComponent<UIBase>();
             _createdUIDic.Add(uiType, uiBase);
         }
@@ -96,15 +108,21 @@ public class UIManager : MonoBehaviour
 
     private Transform GetRootTransform(UIRootType rootType)
     {
-        return rootType switch
+        switch (rootType)
         {
-            UIRootType.BackgroundUI => Canvas_BgRoot.transform,
-            UIRootType.MainUI => Canvas_MainRoot.transform,
-            UIRootType.ContentUI => Canvas_ContentRoot.transform,
-            UIRootType.PopupUI => Canvas_PopupRoot.transform,
-            UIRootType.VeryFrontUI => Canvas_VeryFrontRoot.transform,
-            _ => null
-        };
+            case UIRootType.BackgroundUI:
+                return Canvas_BgRoot;
+            case UIRootType.MainUI:
+                return Canvas_MainRoot;
+            case UIRootType.ContentUI:
+                return Canvas_ContentRoot;
+            case UIRootType.PopupUI:
+                return Canvas_PopupRoot;
+            case UIRootType.VeryFrontUI:
+                return Canvas_VeryFrontRoot;
+            default:
+                return null;
+        }
     }
 
 }
