@@ -39,4 +39,18 @@ public static class UIManagerExtension
             playerInteraction.ExitPortAnchor();
         }
     }
+
+    public static void OpenInventoryUI(this UIManager manager)
+    {
+        // PopupUI 또는 ContentUI 레이어에 InventoryUI 프리팹을 찍어냅니다.
+        manager.OpenUI(UIRootType.PopupUI, UIType.InventoryUI);
+    }
+
+    // 인벤토리 UI 완전 파괴 및 닫기 함수
+    public static void CloseInventoryUI(this UIManager manager)
+    {
+        manager.CloseUI(UIRootType.PopupUI, UIType.InventoryUI);
+    }
+
+
 }

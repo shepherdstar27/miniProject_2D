@@ -20,6 +20,9 @@ public class GameUI : UIBase
     [Header("Top Menu Buttons")]
     [SerializeField] private UIButton Button_InGameMenu;
 
+    [Header("Bottom Menu Buttons")]
+    [SerializeField] private UIButton Button_Inventory;
+
     private void Start()
     {
         BindEvents();
@@ -42,6 +45,8 @@ public class GameUI : UIBase
         Button_BackToMenu.BindOnClickButtonEvent(OnClick_BackToMenu);
         Button_ExitGame.BindOnClickButtonEvent(OnClick_ExitGame);
         Button_InGameMenu.BindOnClickButtonEvent(OnClick_InGameMenu);
+        Button_Inventory.BindOnClickButtonEvent(OnClick_Inventory);
+
     }
 
     private void SetDefaultUI()
@@ -115,5 +120,12 @@ public class GameUI : UIBase
         ToggleMenuWindow();
     }
 
+    private void OnClick_Inventory()
+    {
+        Debug.Log("[GameUI] 인벤토리 버튼이 클릭되었습니다. UI 매니저에게 동적 생성을 요청합니다.");
+
+        // 확장 메서드를 통해 인벤토리 UI를 화면에 동적으로 로드하여 띄웁니다.
+        UIManager.Inst.OpenInventoryUI();
+    }
 
 }
