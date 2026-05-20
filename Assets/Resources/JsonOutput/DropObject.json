@@ -8,7 +8,7 @@
       10,
       500
     ],
-    "DropItemDataId": "Item_Gold_0001",
+    "DropItemDataId": "Gold_0001",
     "IconPath": "Icon/Icon_Item_Gold_0001",
     "PrefabPath": "2DPrefab/2DPrefab_Item_Gold_0001"
   },
@@ -21,7 +21,7 @@
       1,
       5
     ],
-    "DropItemDataId": "Item_Fuel_0002",
+    "DropItemDataId": "Fuel_0002",
     "IconPath": "Icon/Icon_Item_Fuel_0002",
     "PrefabPath": "2DPrefab/2DPrefab_Item_Fuel_0002"
   },
@@ -34,7 +34,7 @@
       1,
       5
     ],
-    "DropItemDataId": "Item_Supplies_0003",
+    "DropItemDataId": "Supplies_0003",
     "IconPath": "Icon/Icon_Item_Supplies_0003",
     "PrefabPath": "2DPrefab/2DPrefab_Item_Supplies_0003"
   },
@@ -47,7 +47,7 @@
       1,
       5
     ],
-    "DropItemDataId": "Item_TradingGoods_0004",
+    "DropItemDataId": "TradingGoods_0004",
     "IconPath": "Icon/Icon_Item_TradingGoods_0004",
     "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0004"
   },
@@ -60,7 +60,7 @@
       1,
       5
     ],
-    "DropItemDataId": "Item_TradingGoods_0005",
+    "DropItemDataId": "TradingGoods_0005",
     "IconPath": "Icon/Icon_Item_TradingGoods_0005",
     "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0005"
   },
@@ -73,7 +73,7 @@
       1,
       5
     ],
-    "DropItemDataId": "Item_TradingGoods_0006",
+    "DropItemDataId": "TradingGoods_0006",
     "IconPath": "Icon/Icon_Item_TradingGoods_0006",
     "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0006"
   },
@@ -86,7 +86,7 @@
       1,
       5
     ],
-    "DropItemDataId": "Item_TradingGoods_0007",
+    "DropItemDataId": "TradingGoods_0007",
     "IconPath": "Icon/Icon_Item_TradingGoods_0007",
     "PrefabPath": "2DPrefab/2DPrefab_Item_TradingGoods_0007"
   }

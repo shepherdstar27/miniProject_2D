@@ -1,6 +1,6 @@
 [
   {
-    "Id": "1001001",
+    "Id": "Gold_0001",
     "Name": "화폐",
     "Description": "지역에 나타나는 금화",
     "ItemType": "valuable",
@@ -10,7 +10,7 @@
     "IconPath": "Icon/Icon_Item_Gold_0001"
   },
   {
-    "Id": "1001002",
+    "Id": "Fuel_0002",
     "Name": "연료",
     "Description": "연료다. 보통은 석탄이다",
     "ItemType": "valuable",
@@ -20,7 +20,7 @@
     "IconPath": "Icon/Icon_Item_Fuel_0002"
   },
   {
-    "Id": "1001003",
+    "Id": "Supplies_0003",
     "Name": "보급품",
     "Description": "식량, 자재, 탄약 등",
     "ItemType": "valuable",
@@ -30,7 +30,7 @@
     "IconPath": "Icon/Icon_Item_Supplies_0003"
   },
   {
-    "Id": "1001004",
+    "Id": "TradingGoods_0004",
     "Name": "교역품 1",
     "Description": "교역품 1",
     "ItemType": "Cargo",
@@ -40,7 +40,7 @@
     "IconPath": "Icon/Icon_Item_TradingGoods_0004"
   },
   {
-    "Id": "1001005",
+    "Id": "TradingGoods_0005",
     "Name": "교역품 2",
     "Description": "교역품 2",
     "ItemType": "Cargo",
@@ -50,7 +50,7 @@
     "IconPath": "Icon/Icon_Item_TradingGoods_0005"
   },
   {
-    "Id": "1001006",
+    "Id": "TradingGoods_0006",
     "Name": "교역품 3",
     "Description": "교역품 3",
     "ItemType": "Cargo",
@@ -60,7 +60,7 @@
     "IconPath": "Icon/Icon_Item_TradingGoods_0006"
   },
   {
-    "Id": "1001007",
+    "Id": "TradingGoods_0007",
     "Name": "교역품 4",
     "Description": "교역품 4",
     "ItemType": "Cargo",

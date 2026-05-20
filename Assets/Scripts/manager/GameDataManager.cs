@@ -50,7 +50,7 @@ public class GameDataManager : MonoBehaviour
         // 몬스터나 항구 정보도 여기에 동일한 규격으로 Resources.Load 함수들을 늘려가시면 데이터 드리븐이 완성됩니다.
     }
    
-    public ItemData GetItemData(int targetId)
+    public ItemData GetItemData(string targetId)
     {
         foreach (ItemData item in List_ItemTable)
         {

@@ -5,13 +5,13 @@ using System.Collections.Generic;
 [Serializable]
 public class ItemData
 {
-    public int Id;             // 아이템 고유 번호
+    public string Id;             // 아이템 고유 번호
     public string Name;        // 아이템 이름
     public string Description; // 아이템 설명
     public string ItemType;        // 아이템 타입
     public string Grade;        // 등급
-    public int Price;        // 아이템 가치
-    public int MaxStack;        // 아이템 최대 보유
+    public string Price;        // 아이템 가치
+    public string MaxStack;        // 아이템 최대 보유
     public string IconPath;    // Resources 폴더 내의 아이콘 이미지 경로
 }
 
