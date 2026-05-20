@@ -32,7 +32,8 @@ Transform:
   m_LocalPosition: {x: -0.764, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5672411610963496219}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5322284241808447589
@@ -170,3 +171,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394689acae417e643a94346226066870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  Rigidbody_Rb2D: {fileID: 0}
+  float_CurrentHP: 0
+  float_Max_HP: 0
+  Float_MoveSpeed: 0
+  Int_AttackDamage: 0
+  Float_RotateSpeed: 0
+  Float_Acceleration: 0
+  Transform_TargetPlayer: {fileID: 0}
+  _currentMoveSpeed: 0
+  GameObject_CannonballPrefab: {fileID: 8978922980080356671, guid: 6312b8a98ff913e478f5df60fa248c1f, type: 3}
+  Transform_FirePoint: {fileID: 5672411610963496219}
+  Float_FireCooldown: 1
+  Float_DetectionDistance: 8
+  LayerMask_PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!1 &7953088684844694161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5672411610963496219}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5672411610963496219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7953088684844694161}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6995620053790666387}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

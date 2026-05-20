@@ -10,6 +10,8 @@ public class GameDataManager : MonoBehaviour
     [SerializeField] private List<WeaponData> List_WeaponTable = new List<WeaponData>(); // 무기 테이블 그릇 추가
     [SerializeField] private List<EnemyData> List_EnemyTable = new List<EnemyData>(); // 적 테이블 그릇 추가
     [SerializeField] private List<EngineData> List_EngineTable = new List<EngineData>(); // 엔진 테이블 그릇 추가
+    [SerializeField] private List<ShipData> List_ShipTable = new List<ShipData>(); // 엔진 테이블 그릇 추가
+
 
 
     // [SerializeField] private List<PortData> List_PortTable = new List<PortData>();       // 추후 확장용
@@ -118,12 +120,8 @@ public class GameDataManager : MonoBehaviour
         Debug.LogError($"[GameDataManager] {EnemyJsonPath} 경로에서 데이터를 찾지 못했습니다.");
         }
 
-
-
-        // 몬스터나 항구 정보도 여기에 동일한 규격으로 Resources.Load 함수들을 늘려가시면 데이터 드리븐이 완성
-
         // =========================================================================
-        // Engine Data 로드 로직
+        // EngineData 로드 로직
         // =========================================================================
         string EngineJsonPath = "JsonOutput/Engine";
         TextAsset EngineTextAsset = Resources.Load<TextAsset>(EngineJsonPath);
@@ -149,8 +147,30 @@ public class GameDataManager : MonoBehaviour
         }
 
         // =========================================================================
-        // Engine Data 로드 로직
+        // ShipData 로드 로직
         // =========================================================================
+        string ShipJsonPath = "JsonOutput/Ship";
+        TextAsset ShipTextAsset = Resources.Load<TextAsset>(ShipJsonPath);
+
+        if (ShipTextAsset != null)
+        {
+            //  [핵심 해결] 앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)합니다.
+            string cleanJson = ShipTextAsset.text.Trim();
+            string wrappedJson = "{ \"Data\": " + cleanJson + " }";
+
+            //  ShipTable 규격으로 FromJson을 실행
+            ShipTable parsedTable = JsonUtility.FromJson<ShipTable>(wrappedJson);
+
+            if (parsedTable != null && parsedTable.Data != null)
+            {
+                List_ShipTable = parsedTable.Data;
+                Debug.Log($"[GameDataManager] {List_ShipTable.Count}개의 배 기획 데이터를 성공적으로 로드했습니다!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"[GameDataManager] {ShipJsonPath} 경로에서 데이터를 찾지 못했습니다.");
+        }
 
 
     }
@@ -225,4 +245,27 @@ public class GameDataManager : MonoBehaviour
         Debug.LogWarning($"[GameDataManager] 엔진 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
         return null;
     }
+
+
+    // =========================================================================
+    // ShipData 조회 메서드 
+    // =========================================================================
+    public ShipData GetShipData(string targetId)
+    {
+        foreach (ShipData Ship in List_ShipTable)
+        {
+            if (Ship.Id == targetId)
+            {
+                return Ship;
+            }
+        }
+        Debug.LogWarning($"[GameDataManager] 배 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
+        return null;
+    }
+
+
+
+
+
+
 }

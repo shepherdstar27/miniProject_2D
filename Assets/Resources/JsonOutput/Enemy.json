@@ -5,9 +5,10 @@
     "Description": "해적이다",
     "Engine_Id": "Engine_0001",
     "Weapon_Id": "Weapon_Canon_0001",
-    "HP": 20,
+    "Ship_Id": "ship_0001",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0001",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0001"
+    "PrefabPath": "Prefabs/Enemy/mob_ship_0001"
   },
   {
     "Id": "mob_ship_0002",
@@ -15,9 +16,10 @@
     "Description": "해적이다",
     "Engine_Id": "Engine_0002",
     "Weapon_Id": "Weapon_Canon_0002",
-    "HP": 50,
+    "Ship_Id": "ship_0001",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0002",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0002"
+    "PrefabPath": "Prefabs/Enemy/mob_ship_0002"
   },
   {
     "Id": "mob_ship_0003",
@@ -25,9 +27,10 @@
     "Description": "해적이다",
     "Engine_Id": "Engine_0003",
     "Weapon_Id": "Weapon_Canon_0003",
-    "HP": 100,
+    "Ship_Id": "ship_0002",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0003",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0003"
+    "PrefabPath": "Prefabs/Enemy/mob_ship_0003"
   },
   {
     "Id": "mob_ship_0004",
@@ -35,9 +38,10 @@
     "Description": "해적이다",
     "Engine_Id": "Engine_0004",
     "Weapon_Id": "Weapon_Canon_0004",
-    "HP": 200,
+    "Ship_Id": "ship_0002",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0004",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0004"
+    "PrefabPath": "Prefabs/Enemy/mob_ship_0004"
   },
   {
     "Id": "mob_ship_0005",
@@ -45,9 +49,10 @@
     "Description": "해적이다",
     "Engine_Id": "Engine_0005",
     "Weapon_Id": "Weapon_Canon_0005",
-    "HP": 300,
+    "Ship_Id": "ship_0003",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0005",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_ship_0005"
+    "PrefabPath": "Prefabs/Enemy/mob_ship_0005"
   },
   {
     "Id": "mob_seacreature_0001",
@@ -55,9 +60,10 @@
     "Description": "해양생물이다",
     "Engine_Id": "Engine_0006",
     "Weapon_Id": "Weapon_Canon_0007",
-    "HP": 100,
+    "Ship_Id": "ship_0004",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0001",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0001"
+    "PrefabPath": "Prefabs/Enemy/mob_seacreature_0001"
   },
   {
     "Id": "mob_seacreature_0002",
@@ -65,9 +71,10 @@
     "Description": "해양생물이다",
     "Engine_Id": "Engine_0007",
     "Weapon_Id": "Weapon_Canon_0008",
-    "HP": 200,
+    "Ship_Id": "ship_0005",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0002",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0002"
+    "PrefabPath": "Prefabs/Enemy/mob_seacreature_0002"
   },
   {
     "Id": "mob_seacreature_0003",
@@ -75,9 +82,10 @@
     "Description": "해양생물이다",
     "Engine_Id": "Engine_0008",
     "Weapon_Id": "Weapon_Canon_0009",
-    "HP": 300,
+    "Ship_Id": "ship_0006",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0003",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0003"
+    "PrefabPath": "Prefabs/Enemy/mob_seacreature_0003"
   },
   {
     "Id": "mob_seacreature_0004",
@@ -85,9 +93,10 @@
     "Description": "해양생물이다",
     "Engine_Id": "Engine_0009",
     "Weapon_Id": "Weapon_Canon_0010",
-    "HP": 400,
+    "Ship_Id": "ship_0007",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0004",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0004"
+    "PrefabPath": "Prefabs/Enemy/mob_seacreature_0004"
   },
   {
     "Id": "mob_seacreature_0005",
@@ -95,8 +104,9 @@
     "Description": "해양생물이다",
     "Engine_Id": "Engine_0010",
     "Weapon_Id": "Weapon_Canon_0011",
-    "HP": 500,
+    "Ship_Id": "ship_0008",
+    "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0005",
-    "PrefabPath": "2DPrefab/2DPrefab_mob_seacreature_0005"
+    "PrefabPath": "Prefabs/Enemy/mob_seacreature_0005"
   }
 ]

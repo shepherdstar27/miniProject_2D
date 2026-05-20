@@ -55,6 +55,16 @@ public class Cannonball : MonoBehaviour
             // 타격했으므로 포탄 자신은 파괴됩니다.
             DestroyCannonball();
         }
+
+        if (collision.CompareTag("Player") == true)
+        {
+            Debug.Log($"[포탄] 플레이어 명중! {Int_Damage}의 데미지를 입힙니다.");
+
+            // TODO: collision.GetComponent<EnemyHP>().TakeDamage(Int_Damage); 형태로 데미지 전달
+
+            // 타격했으므로 포탄 자신은 파괴됩니다.
+            DestroyCannonball();
+        }
     }
 
     // 포탄을 안전하게 파괴하는 함수

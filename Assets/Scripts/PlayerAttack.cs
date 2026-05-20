@@ -22,25 +22,21 @@ public class PlayerAttack : MonoBehaviour
     }
     private void HandleAimInput()
     {
-        // Shift 키가 누르고 있는 상태인지 먼저 확인합니다. (LeftShift 또는 RightShift 모두 허용)
-        if (Input.GetKey(KeyCode.LeftShift) == true || Input.GetKey(KeyCode.RightShift) == true)
+        float rotateDirection = 0f;
+
+        // 좌/우 화살표(방향키) 입력을 받습니다.
+        if (Input.GetKey(KeyCode.LeftArrow) == true)
         {
-            float rotateDirection = 0f;
+            rotateDirection = 1f;  // 반시계 회전
+        }
+        else if (Input.GetKey(KeyCode.RightArrow) == true)
+        {
+            rotateDirection = -1f; // 시계 회전
+        }
 
-            // Shift를 누른 상태에서 좌/우 화살표(방향키) 입력을 받습니다.
-            if (Input.GetKey(KeyCode.LeftArrow) == true)
-            {
-                rotateDirection = 1f;  // 반시계 회전
-            }
-            else if (Input.GetKey(KeyCode.RightArrow) == true)
-            {
-                rotateDirection = -1f; // 시계 회전
-            }
-
-            if (rotateDirection != 0f)
-            {
-                CalculateAimRotation(rotateDirection);
-            }
+        if (rotateDirection != 0f)
+        {
+            CalculateAimRotation(rotateDirection);
         }
     }
 
@@ -93,8 +89,12 @@ public class PlayerAttack : MonoBehaviour
     {
         if (GameObject_CannonballPrefab != null && Transform_FirePoint != null)
         {
+
+            Vector3 spawnPosition = Transform_FirePoint.position + (Transform_FirePoint.right * 0.5f);
+
+
             // 1. 포탄을 먼저 복사 생성합니다.
-            GameObject spawnedBall = Instantiate(GameObject_CannonballPrefab, Transform_FirePoint.position, Transform_FirePoint.rotation);
+            GameObject spawnedBall = Instantiate(GameObject_CannonballPrefab, spawnPosition, Transform_FirePoint.rotation);
 
             // 2. 생성된 포탄에서 컴포넌트를 낚아챕니다.
             Cannonball cannonballScript = spawnedBall.GetComponent<Cannonball>();
