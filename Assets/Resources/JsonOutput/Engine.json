@@ -1,0 +1,92 @@
+[
+  {
+    "Id": "Engine_0001",
+    "Name": "엔진 1",
+    "Description": "기초적인 엔진",
+    "MoveSpeed": 0.1,
+    "RotateSpeed": 10,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0002",
+    "Name": "엔진 2",
+    "Description": "표준적인 엔진",
+    "MoveSpeed": 0.2,
+    "RotateSpeed": 12,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0003",
+    "Name": "엔진 3",
+    "Description": "위력이 상승한 포",
+    "MoveSpeed": 0.4,
+    "RotateSpeed": 14,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0004",
+    "Name": "엔진 4",
+    "Description": "중장거리에서 강력한 포",
+    "MoveSpeed": 0.6,
+    "RotateSpeed": 16,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0005",
+    "Name": "엔진 5",
+    "Description": "최고의 관통력을 자랑하는 포",
+    "MoveSpeed": 0.8,
+    "RotateSpeed": 20,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0006",
+    "Name": "해양생물 이동력 1",
+    "Description": "해양생물의 이동력 1 이다",
+    "MoveSpeed": 0.1,
+    "RotateSpeed": 10,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0007",
+    "Name": "해양생물 이동력 2",
+    "Description": "해양생물의 이동력 2 이다",
+    "MoveSpeed": 0.2,
+    "RotateSpeed": 12,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0008",
+    "Name": "해양생물 이동력 3",
+    "Description": "해양생물의 이동력 3 이다",
+    "MoveSpeed": 0.4,
+    "RotateSpeed": 14,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0009",
+    "Name": "해양생물 이동력 4",
+    "Description": "해양생물의 이동력 4 이다",
+    "MoveSpeed": 0.6,
+    "RotateSpeed": 16,
+    "Acceleration": 0.5,
+    "IconPath": null
+  },
+  {
+    "Id": "Engine_0010",
+    "Name": "해양생물 이동력 5",
+    "Description": "해양생물의 이동력 5 이다",
+    "MoveSpeed": 0.8,
+    "RotateSpeed": 20,
+    "Acceleration": 0.5,
+    "IconPath": null
+  }
+]

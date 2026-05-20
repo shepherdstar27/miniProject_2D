@@ -34,5 +34,35 @@
     "Name": "캐러네이드 포",
     "Description": "사거리와 관통력이 뛰어난 최강의 포",
     "Damage": 80
+  },
+  {
+    "Id": "Weapon_Canon_0007",
+    "Name": "근접공격 1",
+    "Description": "근접공격 1 이다",
+    "Damage": 20
+  },
+  {
+    "Id": "Weapon_Canon_0008",
+    "Name": "근접공격 2",
+    "Description": "근접공격 2 이다",
+    "Damage": 40
+  },
+  {
+    "Id": "Weapon_Canon_0009",
+    "Name": "근접공격 3",
+    "Description": "근접공격 3 이다",
+    "Damage": 60
+  },
+  {
+    "Id": "Weapon_Canon_0010",
+    "Name": "근접공격 4",
+    "Description": "근접공격 4 이다",
+    "Damage": 80
+  },
+  {
+    "Id": "Weapon_Canon_0011",
+    "Name": "근접공격 5",
+    "Description": "근접공격 5 이다",
+    "Damage": 100
   }
 ]
