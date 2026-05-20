@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [Serializable]
 public class ItemData
 {
-    public int ID;             // 아이템 고유 번호
+    public int Id;             // 아이템 고유 번호
     public string Name;        // 아이템 이름
     public string Description; // 아이템 설명
     public string ItemType;        // 아이템 타입

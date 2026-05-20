@@ -30,6 +30,10 @@ public class GameDataManager : MonoBehaviour
 
         if (itemTextAsset != null)
         {
+            //  [핵심 해결책] 유니티가 배열 [ ] 을 읽지 못하는 병을 고치기 위해, 
+            // 텍스트 앞뒤로 {"Data": 와 } 를 강제로 붙여서 객체 포맷으로 둔갑시킵니다.
+            string wrappedJson = "{ \"Data\": " + itemTextAsset.text + " }";
+
             // JsonUtility는 루트가 배열([ ])이면 파싱하지 못하므로, 유저님이 선언해둔 ItemTable 컨테이너 클래스를 활용합니다.
             ItemTable parsedTable = JsonUtility.FromJson<ItemTable>(itemTextAsset.text);
             if (parsedTable != null && parsedTable.Data != null)
@@ -50,13 +54,13 @@ public class GameDataManager : MonoBehaviour
     {
         foreach (ItemData item in List_ItemTable)
         {
-            if (item.ID == targetId)
+            if (item.Id == targetId)
             {
                 return item;
             }
         }
 
-        Debug.LogWarning($"[GameDataManager] ID [{targetId}] 에 해당하는 아이템 정보가 기획 데이터에 없습니다!");
+        Debug.LogWarning($"[GameDataManager] Id [{targetId}] 에 해당하는 아이템 정보가 기획 데이터에 없습니다!");
         return null;
     }
 }

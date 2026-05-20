@@ -90,17 +90,6 @@ public class UIManager : MonoBehaviour
 
             GameObject gObj = Instantiate(loadedObj, parentRoot);
 
-            // 동적 생성 직후 화면 찌그러짐 원천 차단용
-            RectTransform rect = gObj.GetComponent<RectTransform>();
-            if (rect != null)
-            {
-                rect.anchorMin = Vector2.zero;
-                rect.anchorMax = Vector2.one;
-                rect.offsetMin = Vector2.zero;
-                rect.offsetMax = Vector2.zero;
-                rect.localScale = Vector3.one;
-            }
-
             var uiBase = gObj.GetComponent<UIBase>();
             _createdUIDic.Add(uiType, uiBase);
         }

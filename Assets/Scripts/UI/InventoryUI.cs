@@ -80,5 +80,23 @@ public class InventoryUI : UIBase
         }
     }
 
+    public void AcquireItemAndRefreshUI(int itemId, int count)
+    {
+        if (TargetInventory == null)
+        {
+            return;
+        }
+
+        // 1. 기존에 2단계에서 구현했던 Inventory.cs 데이터 연산 함수에 아이템 주입 지시
+        bool isSuccess = TargetInventory.AddItemToInventory(itemId, count);
+
+        if (isSuccess == true)
+        {
+            // 2. 가방 데이터가 성공적으로 바뀌었다면 화면에 보이는 눈동자(UI)를 싹 새로고침 시킵니다.
+            UpdateInventoryUI();
+            Debug.Log($"[인벤토리 연동] ID {itemId} 아이템을 {count}개 획득하여 UI 새로고침을 완료했습니다.");
+        }
+    }
+
 
 }

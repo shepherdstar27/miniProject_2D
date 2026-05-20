@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlotUI : MonoBehaviour
+public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image Image_Icon;
-    [SerializeField] private Text Text_Count;
+    [SerializeField] private TextMeshProUGUI Text_Count;
+
+    private InventorySlot _currentSlotData;
 
     // 슬롯 기물에 실시간 알맹이 데이터를 주입하여 시각화하는 마술사 함수
     public void SetupSlot(InventorySlot slotData)
@@ -15,7 +19,7 @@ public class InventorySlotUI : MonoBehaviour
             return;
         }
 
-        // ⭕ 데이터 드리븐의 심장: 동적 획득한 데이터 ID를 마스터 기획 DB에 대입해 기획 스펙을 빼옵니다.
+        // 데이터 드리븐의 심장: 동적 획득한 데이터 ID를 마스터 기획 DB에 대입해 기획 스펙을 빼옵니다.
         ItemData originData = GameDataManager.Instance.GetItemData(slotData.itemID);
 
         if (originData != null)
@@ -42,7 +46,34 @@ public class InventorySlotUI : MonoBehaviour
 
     public void ClearSlot()
     {
+        _currentSlotData = null;
         Image_Icon.sprite = null;
         Text_Count.gameObject.SetActive(false);
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // 빈 슬롯이거나 데이터가 없다면 툴팁을 띄우지 않고 리턴합니다.
+        if (_currentSlotData == null || _currentSlotData.itemID == 0)
+        {
+            return;
+        }
+
+        // 데이터 드리븐: 아이템 ID를 마스터 테이블에 대입해 기획 정보를 원격 조회합니다.
+        ItemData originData = GameDataManager.Instance.GetItemData(_currentSlotData.itemID);
+        if (originData != null)
+        {
+            // 툴팁 매니저에게 기획 원본 데이터를 던지며 출력을 요청합니다.
+            ItemTooltipUI.Instance.ShowTooltip(originData);
+        }
+    }
+
+    // 슬롯에서 마우스 커서가 벗어났을 때 실행되는 유니티 순정 함수
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        // 마우스가 떠나면 툴팁창을 즉시 닫습니다.
+        ItemTooltipUI.Instance.HideTooltip();
+    }
+
+
 }
