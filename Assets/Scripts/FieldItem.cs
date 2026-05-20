@@ -3,7 +3,7 @@
 public class FieldItem : MonoBehaviour
 {
     [Header("Item Info")]
-    [SerializeField] private int Int_ItemId = 1001; // 주울 아이템의 JSON 마스터 ID
+    [SerializeField] private string string_ItemId = "000"; // 주울 아이템의 JSON 마스터 ID
     [SerializeField] private int Int_ItemCount = 1; // 주울 개수
 
     // 배가 아이템 영역에 닿았을 때 물리 엔진이 자동으로 호출해 주는 센서 함수
@@ -26,11 +26,11 @@ public class FieldItem : MonoBehaviour
     private void TryAcquireItem(Inventory playerInventory)
     {
         // 1. 플레이어의 가방에 아이템을 넣어봅니다. (자리가 없으면 false 반환됨)
-        bool isSuccess = playerInventory.AddItemToInventory(Int_ItemId, Int_ItemCount);
+        bool isSuccess = playerInventory.AddItemToInventory(string_ItemId, Int_ItemCount);
 
         if (isSuccess == true)
         {
-            Debug.Log($"[필드 아이템] ID {Int_ItemId} ({Int_ItemCount}개) 습득 완료!");
+            Debug.Log($"[필드 아이템] ID {string_ItemId} ({Int_ItemCount}개) 습득 완료!");
 
             // 2. 만약 화면에 인벤토리 창이 열려있는 상태로 먹었다면, 
             // 열려있는 UI를 찾아서 실시간으로 새로고침 해줍니다.

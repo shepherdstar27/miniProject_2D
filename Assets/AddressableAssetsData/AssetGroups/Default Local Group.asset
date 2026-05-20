@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7036b826b6a8b954a9b3105ebf5c9dd3
+    m_Address: Image/CanonBall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 850310d3bb370254db359281dbe7803b
     m_Address: Image/Port_001
     m_ReadOnly: 0

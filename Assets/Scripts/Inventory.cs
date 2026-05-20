@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
         List_Slots.Clear();
         for (int i = 0; i < Int_MaxSlotCount; i++)
         {
-            List_Slots.Add(new InventorySlot(0, 0)); // ID가 0이면 빈 슬롯으로 규정합니다.
+            List_Slots.Add(new InventorySlot("", 0)); // ID가 0이면 빈 슬롯으로 규정합니다.
         }
     }
 
@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
     }
 
     // ⭕ [아이템 획득 기능]: 외부(보물상자 상호작용 등)에서 호출할 정석 함수
-    public bool AddItemToInventory(int itemId, int count)
+    public bool AddItemToInventory(string itemId, int count)
     {
         ItemData masterData = GameDataManager.Instance.GetItemData(itemId);
         if (masterData == null)
@@ -43,7 +43,10 @@ public class Inventory : MonoBehaviour
         {
             if (slot.itemID == itemId)
             {
-                if (slot.itemCount < masterData.MaxStack)
+                int maxStack = 0;
+                int.TryParse(masterData.MaxStack, out maxStack);
+
+                if (slot.itemCount < maxStack)
                 {
                     slot.itemCount += count;
                     Debug.Log($"[가방 데이터] 기존 슬롯에 [{masterData.Name}] 수량 추가. 현재: {slot.itemCount}개");
@@ -55,7 +58,7 @@ public class Inventory : MonoBehaviour
         // 2. 겹칠 칸이 없다면 새로운 빈 칸(ID가 0인 칸)을 찾아서 새로 입주 시킵니다.
         foreach (InventorySlot slot in List_Slots)
         {
-            if (slot.itemID == 0)
+            if (slot.itemID == "")
             {
                 slot.itemID = itemId;
                 slot.itemCount = count;

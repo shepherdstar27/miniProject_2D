@@ -80,7 +80,7 @@ public class InventoryUI : UIBase
         }
     }
 
-    public void AcquireItemAndRefreshUI(int itemId, int count)
+    public void AcquireItemAndRefreshUI(string itemId, int count)
     {
         if (TargetInventory == null)
         {

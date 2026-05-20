@@ -13,7 +13,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // 슬롯 기물에 실시간 알맹이 데이터를 주입하여 시각화하는 마술사 함수
     public void SetupSlot(InventorySlot slotData)
     {
-        if (slotData == null || slotData.itemID == 0)
+        if (slotData == null || slotData.itemID == "")
         {
             ClearSlot();
             return;
@@ -54,7 +54,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData eventData)
     {
         // 빈 슬롯이거나 데이터가 없다면 툴팁을 띄우지 않고 리턴합니다.
-        if (_currentSlotData == null || _currentSlotData.itemID == 0)
+        if (_currentSlotData == null || _currentSlotData.itemID == "")
         {
             return;
         }
