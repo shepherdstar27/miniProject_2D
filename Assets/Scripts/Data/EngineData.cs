@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class EngineData
 {
     // 규칙 반영: JSON의 "Id", "Name", "Description", "Damage"와 완벽히 일치
-
     public string Id;          // 엔진 고유 ID
     public string Name;        // 엔진 이름
     public string Description; // 엔진 설명 (도감용)
