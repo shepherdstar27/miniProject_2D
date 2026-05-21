@@ -82,10 +82,15 @@ public class LootBox : MonoBehaviour
     {
         if (collision.CompareTag("Player") == true)
         {
-            Debug.Log($"[루팅 성공] 플레이어가 상자를 획득했습니다! 품목: {String_ContainedItemId} / 수량: {Int_ContainedItemCount}개");
+            Debug.Log($"[루팅 청취] 플레이어 함선과 드랍 보물상자 충돌 확인.");
 
-            // TODO: InventoryManager.Instance.AddItem(String_ContainedItemId, Int_ContainedItemCount); 
-
+            if (Inventory.Instance != null)
+            {
+                // [최종 수송]: 상자가 간직했던 아이템 마스터 정보 ID와 수량을 
+                // 인벤토리 백엔드 매니저의 필터 적재 연산 함수인 AddItemToInventory로 토스 배달합니다.
+                Inventory.Instance.AddItemToInventory(String_ContainedItemId, Int_ContainedItemCount);
+            }
+            // 상자 기물 파쇄 철거
             Destroy(gameObject);
         }
     }

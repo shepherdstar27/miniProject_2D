@@ -1,73 +1,141 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class InventorySlotData
+{
+    public string String_ItemId = "";
+    public int Int_Count = 0;
+}
+
 public class Inventory : MonoBehaviour
 {
-    // 가방의 최대 크기 칸 수 고정
-    [SerializeField] private int Int_MaxSlotCount = 20;
+    public static Inventory Instance { get; set; }
 
-    // 실제 실시간으로 아이템 ID와 수량을 보관하는 인벤토리 내부 그릇 리스트
-    [SerializeField] private List<InventorySlot> List_Slots = new List<InventorySlot>();
+    [Header("Special Resource Wallet Status")]
+    [SerializeField] private int Int_GoldCount = 0;
+    [SerializeField] private int Int_FuelCount = 0;
+    [SerializeField] private int Int_SuppliesCount = 0;
+
+    [Header("Live Cargo Slots Memory")]
+    [SerializeField] private List<InventorySlotData> List_CargoSlots;
 
     private void Awake()
     {
-        InitEmptySlots();
+        InitSingleton();
     }
 
-    // 빈 가방 틀을 미리 20칸 확보하여 인덱스 에러와 UGUI 정렬 뒤틀림을 원천 방지합니다.
-    private void InitEmptySlots()
+    private void InitSingleton()
     {
-        List_Slots.Clear();
-        for (int i = 0; i < Int_MaxSlotCount; i++)
+        Instance = this;
+    }
+
+    public void SetupInventorySlots(int cargoCapacity)
+    {
+        List_CargoSlots = new List<InventorySlotData>();
+
+        // 기획된 화물칸 개수만큼 빈 공간 그릇을 순정 루프로 미리 파둡니다.
+        for (int i = 0; i < cargoCapacity; i++)
         {
-            List_Slots.Add(new InventorySlot("", 0)); // ID가 0이면 빈 슬롯으로 규정합니다.
-        }
-    }
-
-    public List<InventorySlot> GetSlots()
-    {
-        return List_Slots;
-    }
-
-    // ⭕ [아이템 획득 기능]: 외부(보물상자 상호작용 등)에서 호출할 정석 함수
-    public bool AddItemToInventory(string itemId, int count)
-    {
-        ItemData masterData = GameDataManager.Instance.GetItemData(itemId);
-        if (masterData == null)
-        {
-            return false;
+            InventorySlotData emptySlot = new InventorySlotData();
+            List_CargoSlots.Add(emptySlot);
         }
 
-        // 1. 이미 똑같은 아이템이 가방에 있는지 확인하고, 최대 보유량(MaxStack) 안에서 겹칠 수 있는지 봅니다.
-        foreach (InventorySlot slot in List_Slots)
+        Debug.Log($"[인벤토리 백엔드] JSON 함선 스펙 동기화 완료. 총 {cargoCapacity}칸의 빈 화물창 가동.");
+
+        // UI 화면 레이아웃 최초 생성 지시
+        InventoryUI.Instance.CreateUIContainerSlots(cargoCapacity);
+    }
+
+    // 아이템 습득 필터
+    public void AddItemToInventory(string itemId, int count)
+    {
+        // 만약 장비 장착이 늦어져 화물칸 리스트가 없다면, 임시로 강제 개설하여 크래시를 막습니다.
+        if (List_CargoSlots == null)
         {
-            if (slot.itemID == itemId)
+            List_CargoSlots = new List<InventorySlotData>();
+            Debug.LogWarning("[인벤토리 경고] 슬롯 초기화 전 아이템이 유입되어 임시 데이터 공간을 개설합니다.");
+        }
+
+        // UI 캔버스가 씬에 없어도 백엔드 데이터 적재는 정상 수행되도록 널(Null) 체크 분기를 씌웁니다.
+        if (InventoryUI.Instance == null)
+        {
+            Debug.LogWarning("[인벤토리 경고] InventoryUI가 씬에 존재하지 않아 화면 그래픽 갱신은 생략됩니다.");
+        }
+
+        // 1: 특수 자원 3종 세트 검증 방화벽 (인벤토리 칸을 쓰지 않고 전용 그릇에 적재)
+        if (itemId == "Gold_0001")
+        {
+            Int_GoldCount += count;
+            InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            return;
+        }
+        if (itemId == "Fuel_0002")
+        {
+            Int_FuelCount += count;
+            InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            return;
+        }
+        if (itemId == "Supplies_0003")
+        {
+            Int_SuppliesCount += count;
+            InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            return;
+        }
+
+        // 2: 일반 아이템 10개 상한 누적 연산 분기 공정 1단계 (이미 존재하는 같은 아이템 칸 채우기)
+        for (int i = 0; i < List_CargoSlots.Count; i++)
+        {
+            if (List_CargoSlots[i].String_ItemId == itemId && List_CargoSlots[i].Int_Count < 10)
             {
-                int maxStack = 0;
-                int.TryParse(masterData.MaxStack, out maxStack);
+                int currentAvailableSpace = 10 - List_CargoSlots[i].Int_Count;
 
-                if (slot.itemCount < maxStack)
+                if (count <= currentAvailableSpace)
                 {
-                    slot.itemCount += count;
-                    Debug.Log($"[가방 데이터] 기존 슬롯에 [{masterData.Name}] 수량 추가. 현재: {slot.itemCount}개");
-                    return true;
+                    List_CargoSlots[i].Int_Count += count;
+                    count = 0;
+                    break;
+                }
+                else
+                {
+                    List_CargoSlots[i].Int_Count = 10;
+                    count -= currentAvailableSpace;
                 }
             }
         }
 
-        // 2. 겹칠 칸이 없다면 새로운 빈 칸(ID가 0인 칸)을 찾아서 새로 입주 시킵니다.
-        foreach (InventorySlot slot in List_Slots)
+        // 3: 10개 스택 오버플로우 발생 시 분기 공정 2단계 (새로운 빈 칸 찾아서 10개 단위 쪼개기 적재)
+        if (count > 0)
         {
-            if (slot.itemID == "")
+            for (int i = 0; i < List_CargoSlots.Count; i++)
             {
-                slot.itemID = itemId;
-                slot.itemCount = count;
-                Debug.Log($"[가방 데이터] 빈 슬롯에 [{masterData.Name}] 새롭게 획득 시전.");
-                return true;
+                if (string.IsNullOrEmpty(List_CargoSlots[i].String_ItemId) == true)
+                {
+                    List_CargoSlots[i].String_ItemId = itemId;
+
+                    if (count <= 10)
+                    {
+                        List_CargoSlots[i].Int_Count = count;
+                        count = 0;
+                        break;
+                    }
+                    else
+                    {
+                        List_CargoSlots[i].Int_Count = 10;
+                        count -= 10;
+                    }
+                }
             }
         }
 
-        Debug.LogWarning("[가방 데이터] 가방 공간이 가득 차서 아이템을 더 넣을 수 없습니다!");
-        return false;
+        // 화물창 공간 전멸 대처 예외 처리 보험
+        if (count > 0)
+        {
+            Debug.LogWarning($"[화물창 포화] 공간이 부족하여 아이템 [{itemId}] {count}개가 버려졌습니다.");
+        }
+
+        // 데이터 계산이 종료되었으므로 프론트엔드 UI 화면 새로고침 전송
+        InventoryUI.Instance.RefreshInventoryDisplay(List_CargoSlots);
     }
+
 }

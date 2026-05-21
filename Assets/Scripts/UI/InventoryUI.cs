@@ -1,102 +1,78 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class InventoryUI : UIBase
+public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private Inventory TargetInventory;
-    [SerializeField] private Transform SlotGridContent;
-    [SerializeField] private GameObject SlotPrefab;
+    public static InventoryUI Instance { get; set; }
 
-    [Header("Inventory Close Button")]
-    [SerializeField] private UIButton Button_Close; //  창을 닫기 위한 닫기 버튼 변수 추가
+    [Header("UI Resource References")]
+    [SerializeField] private GameObject GameObject_SlotUiPrefab;       // 장착할 InventorySlotUI 프리팹
+    [SerializeField] private Transform Transform_SlotGridContainer;    // LayoutGroup 컴포넌트가 붙은 그리드 부모 트랜스폼
 
-    private List<InventorySlotUI> _uiSlots = new List<InventorySlotUI>(); 
-    private void Start()
+    [Header("Left Tooltip UI Object Link")]
+    [SerializeField] private ItemTooltipUI Component_LeftTooltipUI;    // 좌측 아이템 상세 정보창 컴포넌트 주소
+
+    [Header("Special Resource Texts")]
+    [SerializeField] private TextMeshProUGUI TextMesh_GoldAmount;
+    [SerializeField] private TextMeshProUGUI TextMesh_FuelAmount;
+    [SerializeField] private TextMeshProUGUI TextMesh_SuppliesAmount;
+
+    [Header("Generated Live Slot List")]
+    [SerializeField] private List<InventorySlotUI> List_CreatedSlotScripts = new List<InventorySlotUI>();
+
+    private void Awake()
     {
-        BindEvents();
-        InitUISlots();
-        UpdateInventoryUI();
+        Instance = this;
     }
 
-    private void OnEnable()
+    //  좌측 툴팁에 손쉽게 교차 접근을 허용하기 위한 중간 외교 게이트웨이 함수
+    public ItemTooltipUI GetTooltipUI()
     {
-        BindEvents();
-        UpdateInventoryUI(); // 창이 켜질 때마다 최신 실시간 가방 데이터 동기화
+        return Component_LeftTooltipUI;
     }
 
-    private void BindEvents()
+    //  [슬롯 실물 작도]: 배 스펙 칸 수에 맞추어 격자 화면 UI 기물을 실시간 생성합니다.
+    public void CreateUIContainerSlots(int totalCount)
     {
-        if (Button_Close != null)
+        // 기존에 잔존하던 레이아웃 박스 요소 일제 청소 루프
+        for (int i = 0; i < List_CreatedSlotScripts.Count; i++)
         {
-            Button_Close.BindOnClickButtonEvent(OnClick_CloseInventory);
+            if (List_CreatedSlotScripts[i] != null) Destroy(List_CreatedSlotScripts[i].gameObject);
         }
-    }
+        List_CreatedSlotScripts.Clear();
 
-    private void OnClick_CloseInventory()
-    {
-        Debug.Log("[인벤토리 UI] 닫기 버튼 클릭됨 - UI 매니저에게 메모리 파괴를 요청합니다.");
-
-        // UI 매니저 확장 메서드를 불러서 자신을 완전히 파괴(Destroy)하게 만듭니다.
-        UIManager.Inst.CloseInventoryUI();
-    }
-
-    private void InitUISlots()
-    {
-        foreach (Transform child in SlotGridContent)
+        // 새로운 슬롯 인스턴스 일제 생성 주입
+        for (int i = 0; i < totalCount; i++)
         {
-            Destroy(child.gameObject);
-        }
+            GameObject spawnSlotObj = Instantiate(GameObject_SlotUiPrefab, Transform_SlotGridContainer);
+            InventorySlotUI slotScript = spawnSlotObj.GetComponent<InventorySlotUI>();
 
-        _uiSlots.Clear();
-
-        int maxSlots = 20;
-        for (int i = 0; i < maxSlots; i++)
-        {
-            GameObject go = Instantiate(SlotPrefab, SlotGridContent);
-            InventorySlotUI uiSlot = go.GetComponent<InventorySlotUI>();
-            if (uiSlot != null)
+            if (slotScript != null)
             {
-                _uiSlots.Add(uiSlot);
+                List_CreatedSlotScripts.Add(slotScript);
+                slotScript.ClearSlotGraphic(); // 순정 공백 정돈
             }
         }
     }
 
-    public void UpdateInventoryUI()
+    //  [화면 새로고침 동기화 공정]: 아이템 습득 시 백엔드 리스트를 토스받아 그래픽을 한 번에 정렬합니다.
+    public void RefreshInventoryDisplay(List<InventorySlotData> backendSlots)
     {
-        if (TargetInventory == null) return;
-
-        List<InventorySlot> realDataSlots = TargetInventory.GetSlots();
-
-        for (int i = 0; i < _uiSlots.Count; i++)
+        for (int i = 0; i < List_CreatedSlotScripts.Count; i++)
         {
-            if (i < realDataSlots.Count)
+            if (i < backendSlots.Count)
             {
-                _uiSlots[i].SetupSlot(realDataSlots[i]);
-            }
-            else
-            {
-                _uiSlots[i].ClearSlot();
+                List_CreatedSlotScripts[i].SetupSlotDetails(backendSlots[i].String_ItemId, backendSlots[i].Int_Count);
             }
         }
     }
 
-    public void AcquireItemAndRefreshUI(string itemId, int count)
+    //  [특수 재화 실시간 수치 인쇄부]
+    public void UpdateSpecialResourceText(int gold, int fuel, int supplies)
     {
-        if (TargetInventory == null)
-        {
-            return;
-        }
-
-        // 1. 기존에 2단계에서 구현했던 Inventory.cs 데이터 연산 함수에 아이템 주입 지시
-        bool isSuccess = TargetInventory.AddItemToInventory(itemId, count);
-
-        if (isSuccess == true)
-        {
-            // 2. 가방 데이터가 성공적으로 바뀌었다면 화면에 보이는 눈동자(UI)를 싹 새로고침 시킵니다.
-            UpdateInventoryUI();
-            Debug.Log($"[인벤토리 연동] ID {itemId} 아이템을 {count}개 획득하여 UI 새로고침을 완료했습니다.");
-        }
+        if (TextMesh_GoldAmount != null) TextMesh_GoldAmount.text = gold.ToString();
+        if (TextMesh_FuelAmount != null) TextMesh_FuelAmount.text = fuel.ToString();
+        if (TextMesh_SuppliesAmount != null) TextMesh_SuppliesAmount.text = supplies.ToString();
     }
-
-
 }

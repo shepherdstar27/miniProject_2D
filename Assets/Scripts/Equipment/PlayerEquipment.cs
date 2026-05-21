@@ -26,6 +26,11 @@ public class PlayerEquipment : MonoBehaviour
             {
                 healthScript.SetupMaxHp(shipMaster.Max_HP);
             }
+
+            if (Inventory.Instance != null)
+            {
+                Inventory.Instance.SetupInventorySlots(shipMaster.Cargo);
+            }
         }
 
         // 2. 엔진(Engine) 데이터 로드 및 이동 컴포넌트 배달

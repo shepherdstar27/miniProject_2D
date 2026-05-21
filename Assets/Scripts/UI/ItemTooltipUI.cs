@@ -4,76 +4,56 @@ using TMPro;
 
 public class ItemTooltipUI : MonoBehaviour
 {
-    // 슬롯 UI들이 원격으로 데이터를 쏠 수 있도록 싱글톤 구조 유지
-    public static ItemTooltipUI Instance { get; set; }
+    [Header("Tooltip Panel Frame View")]
+    [SerializeField] private GameObject GameObject_TooltipMasterFrame; // 좌측 정보창 총괄 캔버스 덩어리 오브젝트
 
-    [Header("Tooltip Panel Group")]
-    [SerializeField] private GameObject GameObject_TooltipPanel; // 껐다 켤 고정 패널 부모
+    [Header("Tooltip Detail Renderer Elements")]
+    [SerializeField] private Image Image_BigItemIcon;
+    [SerializeField] private TextMeshProUGUI TextMesh_ItemName;
+    [SerializeField] private TextMeshProUGUI TextMesh_ItemDescription;
 
-    [Header("Tooltip Info Elements")]
-    [SerializeField] private Image Image_ItemIcon;
-    [SerializeField] private TextMeshProUGUI Text_ItemName;
-    [SerializeField] private TextMeshProUGUI Text_ItemDescription;
-    [SerializeField] private TextMeshProUGUI Text_ItemType;
-    [SerializeField] private TextMeshProUGUI Text_ItemGrade;
-
-    // 매니저가 켜질 때 자신을 등록하고 창을 숨기는 초기화 과정 (필수)
-    private void Awake()
+    private void Start()
     {
-        InitInstance();
+        HideItemTooltip(); // 최초 시동 시 보이지 않게 클로즈 처리
     }
 
-    private void InitInstance()
+    //  [정보창 가동 출력]: 슬롯에서 호출 시 프레임을 켜고 JSON 정보를 추출 매핑합니다.
+    public void RenderItemTooltip(string itemId)
     {
-        Instance = this;
-        HideTooltip();
-    }
+        if (GameDataManager.Instance == null || GameObject_TooltipMasterFrame == null) return;
 
-    public void ShowTooltip(ItemData itemData)
-    {
-        if (itemData == null)
-        {
-            return;
-        }
+        ItemData itemMaster = GameDataManager.Instance.GetItemData(itemId);
+        if (itemMaster == null) return;
 
-        // 1. 텍스트 데이터 안전하게 주입
-        if (Text_ItemName != null)
-        {
-            Text_ItemName.text = itemData.Name;
-        }
-        if (Text_ItemDescription != null)
-        {
-            Text_ItemDescription.text = itemData.Description;
-        }
-        if (Text_ItemType != null)
-        {
-            Text_ItemType.text = itemData.ItemType;
-        }
-        if (Text_ItemGrade != null)
-        {
-            Text_ItemGrade.text = itemData.Grade;
-        }
+        // 1. 텍스트 명세 수치 동기화
+        if (TextMesh_ItemName != null) TextMesh_ItemName.text = itemMaster.Name;
+        if (TextMesh_ItemDescription != null) TextMesh_ItemDescription.text = itemMaster.Description;
 
-        // 2. 아이콘 이미지 안전하게 주입
-        if (Image_ItemIcon != null)
+        // 2. 외형 리소스 실시간 동적 할당
+        if (Image_BigItemIcon != null)
         {
-            Sprite loadedIcon = Resources.Load<Sprite>(itemData.IconPath);
-            if (loadedIcon != null)
+            Sprite loadedSprite = Resources.Load<Sprite>(itemMaster.IconPath);
+            if (loadedSprite != null)
             {
-                Image_ItemIcon.sprite = loadedIcon;
+                Image_BigItemIcon.sprite = loadedSprite;
+                Image_BigItemIcon.enabled = true;
+            }
+            else
+            {
+                Image_BigItemIcon.enabled = false;
             }
         }
 
-
-        // 3. 데이터 조립이 끝나면 좌측 패널을 켭니다.
-        GameObject_TooltipPanel.SetActive(true);
+        // 3. 최종 완성된 정보 보드 뷰 레이어 해제 및 출력
+        GameObject_TooltipMasterFrame.SetActive(true);
     }
 
-    public void HideTooltip()
+    //  [정보창 은닉 소멸]: 마우스가 나가면 보드를 검은 장막 뒤로 숨깁니다.
+    public void HideItemTooltip()
     {
-        if (GameObject_TooltipPanel != null)
+        if (GameObject_TooltipMasterFrame != null)
         {
-            GameObject_TooltipPanel.SetActive(false);
+            GameObject_TooltipMasterFrame.SetActive(false);
         }
     }
 }
