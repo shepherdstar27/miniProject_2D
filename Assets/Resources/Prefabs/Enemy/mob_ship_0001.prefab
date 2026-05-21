@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8107385297933279564}
   - component: {fileID: 7571143103134532158}
   - component: {fileID: -4913696469502242563}
+  - component: {fileID: 544006662389172984}
   m_Layer: 0
   m_Name: mob_ship_0001
   m_TagString: Enemy
@@ -172,8 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   Rigidbody_Rb2D: {fileID: 0}
-  float_CurrentHP: 0
-  float_Max_HP: 0
+  Float_CurrentHP: 0
+  Float_Max_HP: 0
   Float_MoveSpeed: 0
   Int_AttackDamage: 0
   Float_RotateSpeed: 0
@@ -187,6 +188,23 @@ MonoBehaviour:
   LayerMask_PlayerLayer:
     serializedVersion: 2
     m_Bits: 64
+  Float_ChaseRange: 3
+  Bool_IsChasingPlayer: 0
+--- !u!114 &544006662389172984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2788240517796926794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40752ec07431fc849964d1e36c0207af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthController
+  float_CurrentHP: 0
+  float_MaxHP: 0
+  Bool_IsPlayer: 0
 --- !u!1 &7953088684844694161
 GameObject:
   m_ObjectHideFlags: 0

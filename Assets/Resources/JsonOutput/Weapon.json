@@ -3,66 +3,88 @@
     "Id": "Weapon_Canon_0001",
     "Name": "세이커 포",
     "Description": "기초적인 대포",
-    "Damage": 10
+    "Damage": 10,
+    "FireCoolDown": 1,
+    "FireRange": 3
   },
   {
     "Id": "Weapon_Canon_0002",
     "Name": "캘버린 포",
     "Description": "표준적인 대포",
-    "Damage": 15
+    "Damage": 15,
+    "FireCoolDown": 1,
+    "FireRange": 4
   },
   {
     "Id": "Weapon_Canon_0003",
     "Name": "데미캐논",
     "Description": "위력이 상승한 포",
-    "Damage": 20
+    "Damage": 20,
+    "FireCoolDown": 1,
+    "FireRange": 5
   },
   {
     "Id": "Weapon_Canon_0004",
     "Name": "캐논포",
     "Description": "중장거리에서 강력한 포",
-    "Damage": 30
+    "Damage": 30,
+    "FireCoolDown": 1,
+    "FireRange": 6
   },
   {
     "Id": "Weapon_Canon_0005",
     "Name": "중 캐논 포",
     "Description": "최고의 관통력을 자랑하는 포",
-    "Damage": 50
+    "Damage": 50,
+    "FireCoolDown": 1,
+    "FireRange": 7
   },
   {
     "Id": "Weapon_Canon_0006",
     "Name": "캐러네이드 포",
     "Description": "사거리와 관통력이 뛰어난 최강의 포",
-    "Damage": 80
+    "Damage": 80,
+    "FireCoolDown": 1,
+    "FireRange": 8
   },
   {
     "Id": "Weapon_Canon_0007",
     "Name": "근접공격 1",
     "Description": "근접공격 1 이다",
-    "Damage": 20
+    "Damage": 20,
+    "FireCoolDown": 1,
+    "FireRange": 1
   },
   {
     "Id": "Weapon_Canon_0008",
     "Name": "근접공격 2",
     "Description": "근접공격 2 이다",
-    "Damage": 40
+    "Damage": 40,
+    "FireCoolDown": 1,
+    "FireRange": 1
   },
   {
     "Id": "Weapon_Canon_0009",
     "Name": "근접공격 3",
     "Description": "근접공격 3 이다",
-    "Damage": 60
+    "Damage": 60,
+    "FireCoolDown": 1,
+    "FireRange": 1
   },
   {
     "Id": "Weapon_Canon_0010",
     "Name": "근접공격 4",
     "Description": "근접공격 4 이다",
-    "Damage": 80
+    "Damage": 80,
+    "FireCoolDown": 1,
+    "FireRange": 1
   },
   {
     "Id": "Weapon_Canon_0011",
     "Name": "근접공격 5",
     "Description": "근접공격 5 이다",
-    "Damage": 100
+    "Damage": 100,
+    "FireCoolDown": 1,
+    "FireRange": 1
   }
 ]

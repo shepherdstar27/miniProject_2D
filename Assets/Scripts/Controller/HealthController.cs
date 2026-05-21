@@ -1,0 +1,49 @@
+﻿using UnityEngine;
+
+public class HealthController : MonoBehaviour
+{
+    [Header("Health Configuration")]
+    [SerializeField] private bool Bool_IsPlayer = false; // 플레이어 배인지 적 배인지 구분하는 인스펙터 스위치
+
+    [Header("Live Health Status")]
+    [SerializeField] private float float_CurrentHP;
+    [SerializeField] private float float_Max_HP;
+
+    // [핵심 데이터 주입구]: 각 함선의 초기화 스크립트가 JSON 수치를 가져와 이 함수를 때려줍니다.
+    public void SetupMaxHp(float maxHpValue)
+    {
+        float_Max_HP = maxHpValue;
+        float_CurrentHP = float_Max_HP;
+        Debug.Log($"[{gameObject.name}] 체력 데이터 동동기화 완료. HP: {float_Max_HP}");
+    }
+
+    // [핵심 피격 제어]: 포탄이 나를 맞췄을 때 호출하는 정식 물리 대미지 차감 함수
+    public void TakeDamage(float damageAmount)
+    {
+        if (BattleManager.Instance.GetIsGameOver() == true) return;
+
+        float_CurrentHP -= damageAmount;
+        Debug.Log($"[{gameObject.name}] 피격 발생! 데미지: {damageAmount} / 남은체력: {float_CurrentHP}");
+
+        if (float_CurrentHP <= 0f)
+        {
+            float_CurrentHP = 0f;
+            HandleDeath();
+        }
+    }
+
+    private void HandleDeath()
+    {
+        if (Bool_IsPlayer == true)
+        {
+            // 나 자신이 플레이어였다면 심판에게 패배를 타전
+            BattleManager.Instance.CallPlayerDefeat();
+        }
+        else
+        {
+            // 나 자신이 적이었다면 심판에게 승리를 타전하고 시체 철거
+            BattleManager.Instance.CallPlayerVictory();
+            Destroy(gameObject);
+        }
+    }
+}

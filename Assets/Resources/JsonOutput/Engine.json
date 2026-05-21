@@ -20,7 +20,7 @@
   {
     "Id": "Engine_0003",
     "Name": "엔진 3",
-    "Description": "위력이 상승한 포",
+    "Description": "조금 좋은 엔진",
     "MoveSpeed": 0.4,
     "RotateSpeed": 14,
     "Acceleration": 0.5,
@@ -29,7 +29,7 @@
   {
     "Id": "Engine_0004",
     "Name": "엔진 4",
-    "Description": "중장거리에서 강력한 포",
+    "Description": "가장 좋은 엔진",
     "MoveSpeed": 0.6,
     "RotateSpeed": 16,
     "Acceleration": 0.5,
@@ -38,7 +38,7 @@
   {
     "Id": "Engine_0005",
     "Name": "엔진 5",
-    "Description": "최고의 관통력을 자랑하는 포",
+    "Description": "최고의 엔진",
     "MoveSpeed": 0.8,
     "RotateSpeed": 20,
     "Acceleration": 0.5,
@@ -46,8 +46,8 @@
   },
   {
     "Id": "Engine_0006",
-    "Name": "해양생물 이동력 1",
-    "Description": "해양생물의 이동력 1 이다",
+    "Name": "해양생물1 이동력",
+    "Description": "해양생물1 이동력이다",
     "MoveSpeed": 0.1,
     "RotateSpeed": 10,
     "Acceleration": 0.5,
@@ -55,8 +55,8 @@
   },
   {
     "Id": "Engine_0007",
-    "Name": "해양생물 이동력 2",
-    "Description": "해양생물의 이동력 2 이다",
+    "Name": "해양생물2 이동력",
+    "Description": "해양생물2 이동력이다",
     "MoveSpeed": 0.2,
     "RotateSpeed": 12,
     "Acceleration": 0.5,
@@ -64,8 +64,8 @@
   },
   {
     "Id": "Engine_0008",
-    "Name": "해양생물 이동력 3",
-    "Description": "해양생물의 이동력 3 이다",
+    "Name": "해양생물3 이동력",
+    "Description": "해양생물3 이동력이다",
     "MoveSpeed": 0.4,
     "RotateSpeed": 14,
     "Acceleration": 0.5,
@@ -73,8 +73,8 @@
   },
   {
     "Id": "Engine_0009",
-    "Name": "해양생물 이동력 4",
-    "Description": "해양생물의 이동력 4 이다",
+    "Name": "해양생물4 이동력",
+    "Description": "해양생물4 이동력이다",
     "MoveSpeed": 0.6,
     "RotateSpeed": 16,
     "Acceleration": 0.5,
@@ -82,8 +82,8 @@
   },
   {
     "Id": "Engine_0010",
-    "Name": "해양생물 이동력 5",
-    "Description": "해양생물의 이동력 5 이다",
+    "Name": "해양생물5 이동력",
+    "Description": "해양생물5 이동력이다",
     "MoveSpeed": 0.8,
     "RotateSpeed": 20,
     "Acceleration": 0.5,

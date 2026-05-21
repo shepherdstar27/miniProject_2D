@@ -219,12 +219,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179907399}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1071.8623, y: 569.8749, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1773952781}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &179907401
 MonoBehaviour:
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 208940492}
   - component: {fileID: 208940491}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Enemy spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebf4d97cf27bad47b48267b8db4da16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  Prefab_Enemy: {fileID: 2788240517796926794, guid: 49a8924b3583c7042a09f921979ec7ad, type: 3}
-  Root_Enemy: {fileID: 903491248}
+  String_TargetEnemyId: mob_ship_0001
+  Transform_SpawnPoint: {fileID: 0}
 --- !u!212 &208940492
 SpriteRenderer:
   serializedVersion: 2
@@ -338,7 +338,7 @@ Transform:
   m_GameObject: {fileID: 208940490}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24329, y: -1.51, z: 0}
+  m_LocalPosition: {x: 0.23, y: -3.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 267560004}
   - component: {fileID: 267560003}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Item(temp)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 595008610}
   - component: {fileID: 595008612}
   - component: {fileID: 595008613}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1493,12 +1493,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240644469}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1071.8623, y: 569.8749, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1773952781}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1240644471
 MonoBehaviour:
@@ -1578,11 +1578,11 @@ Transform:
   m_GameObject: {fileID: 1303776672}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1071.8623, y: 569.8749, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1773952781}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1303776674
 MonoBehaviour:
@@ -1606,7 +1606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384064866}
   - component: {fileID: 1384064867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackAngle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1734,7 +1734,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568154212}
   - component: {fileID: 1568154213}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1805,7 +1805,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1467041151927264188, guid: a7fae7e821af8b644a1ed6bb40c99e48, type: 3}
+  m_Sprite: {fileID: 9148983701185379285, guid: 8dda4bad6077a464db13381360c7aab7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1815,41 +1815,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &1773952780
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1773952781}
-  m_Layer: 0
-  m_Name: ManagerContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1773952781
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773952780}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1071.8623, y: 569.8749, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1303776673}
-  - {fileID: 179907400}
-  - {fileID: 1240644470}
-  - {fileID: 1861675366}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861675365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,11 +1844,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1773952781}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -111.862305, y: -29.874878}
+  m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861675367
@@ -1899,6 +1864,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDataManager
   List_ItemTable: []
+  List_WeaponTable: []
+  List_EnemyTable: []
+  List_EngineTable: []
+  List_ShipTable: []
 --- !u!1 &1981460358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,8 +2061,11 @@ SceneRoots:
   - {fileID: 595008607}
   - {fileID: 1981460362}
   - {fileID: 1111283429}
-  - {fileID: 1773952781}
   - {fileID: 994089414}
   - {fileID: 267560006}
   - {fileID: 208940493}
   - {fileID: 903491248}
+  - {fileID: 1303776673}
+  - {fileID: 179907400}
+  - {fileID: 1240644470}
+  - {fileID: 1861675366}

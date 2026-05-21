@@ -50,7 +50,11 @@ public class Cannonball : MonoBehaviour
         {
             Debug.Log($"[포탄] 적 명중! {Int_Damage}의 데미지를 입힙니다.");
 
-            // TODO: collision.GetComponent<EnemyHP>().TakeDamage(Int_Damage); 형태로 데미지 전달
+            HealthController targetHealth = collision.GetComponent<HealthController>();
+            if (targetHealth != null)
+            {
+                targetHealth.TakeDamage(Int_Damage);
+            }
 
             // 타격했으므로 포탄 자신은 파괴됩니다.
             DestroyCannonball();
@@ -60,7 +64,11 @@ public class Cannonball : MonoBehaviour
         {
             Debug.Log($"[포탄] 플레이어 명중! {Int_Damage}의 데미지를 입힙니다.");
 
-            // TODO: collision.GetComponent<EnemyHP>().TakeDamage(Int_Damage); 형태로 데미지 전달
+            HealthController targetHealth = collision.GetComponent<HealthController>();
+            if (targetHealth != null)
+            {
+                targetHealth.TakeDamage(Int_Damage);
+            }
 
             // 타격했으므로 포탄 자신은 파괴됩니다.
             DestroyCannonball();

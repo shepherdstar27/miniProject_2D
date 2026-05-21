@@ -7,8 +7,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Rigidbody2D Rigidbody_Rb2D;
 
     [Header("Enemy Live Specs")]
-    [SerializeField] private float Float_CurrentHP;
-    [SerializeField] private float Float_Max_HP;
     [SerializeField] private float Float_MoveSpeed;
     [SerializeField] private int Int_AttackDamage;
     [SerializeField] private float Float_RotateSpeed; // 배의 회전 속도
@@ -50,6 +48,12 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (BattleManager.Instance.GetIsGameOver() == true)
+        {
+            if (Rigidbody_Rb2D != null) Rigidbody_Rb2D.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (Transform_TargetPlayer == null)
         {
             FindPlayerTarget();
@@ -158,11 +162,14 @@ public class EnemyAI : MonoBehaviour
         ShipData shipMaster = GameDataManager.Instance.GetShipData(enemyMaster.Ship_Id);
         if (shipMaster != null)
         {
-            Float_Max_HP = shipMaster.Max_HP;
-            Float_CurrentHP = Float_Max_HP;
+            HealthController myHealth = GetComponent<HealthController>();
+            if (myHealth != null)
+            {
+                myHealth.SetupMaxHp(shipMaster.Max_HP);
+            }
         }
 
-        Debug.Log($"[적 스펙 조립완료] 명칭: {enemyMaster.Name} / HP: {Float_Max_HP} / 속도: {Float_MoveSpeed} / 공격력: {Int_AttackDamage}");
+        Debug.Log($"[적 스펙 조립완료] 명칭: {enemyMaster.Name} / HP: {shipMaster.Max_HP} / 속도: {Float_MoveSpeed} / 공격력: {Int_AttackDamage}");
     }
 
     private void HandleMovementAI()

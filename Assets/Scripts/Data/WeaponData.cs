@@ -8,7 +8,10 @@ public class WeaponData
     public string Id;          // 무기 고유 ID
     public string Name;        // 무기 이름
     public string Description; // 무기 설명
-    public int Damage;         // 무기 데미지 (JSON 상 숫자로 들어오므로 int)
+    public float Damage;         // 무기 데미지 (JSON 상 숫자로 들어오므로 int)
+    public float FireCoolDown;         // 무기 데미지 (JSON 상 숫자로 들어오므로 int)
+    public float FireRange;         // 무기 데미지 (JSON 상 숫자로 들어오므로 int)
+
 }
 
 [Serializable]
