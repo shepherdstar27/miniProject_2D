@@ -47,6 +47,12 @@ public class UIManager : MonoBehaviour
 
     public UIBase OpenUI(UIRootType rootType, UIType uiType)
     {
+        if (_createdUIDic.ContainsKey(uiType) && _createdUIDic[uiType] == null)
+        {
+            _createdUIDic.Remove(uiType);
+            _openedUISet.Remove(uiType);
+        }
+
         var targetUI = GetCreatedUI(rootType, uiType);
         if (_openedUISet.Contains(uiType) == false)
         {
@@ -56,7 +62,7 @@ public class UIManager : MonoBehaviour
         return targetUI;
     }
 
-    public void CloseUI(UIRootType rootType, UIType uiType)
+    public void CloseUI(UIType uiType)
     {
         if (_openedUISet.Contains(uiType) == true)
         {

@@ -43,43 +43,44 @@ public class Inventory : MonoBehaviour
 
         Debug.Log($"[인벤토리 백엔드] JSON 함선 스펙 동기화 완료. 총 {cargoCapacity}칸의 빈 화물창 가동.");
 
-        // UI 화면 레이아웃 최초 생성 지시
-        InventoryUI.Instance.CreateUIContainerSlots(cargoCapacity);
+        // UI가 꺼져있으면 화면 생성 지시를 패스합니다.
+        if (InventoryUI.Instance != null)
+        {
+            InventoryUI.Instance.CreateUIContainerSlots(cargoCapacity);
+        }
     }
 
     // 아이템 습득 필터
     public void AddItemToInventory(string itemId, int count)
     {
-        // 만약 장비 장착이 늦어져 화물칸 리스트가 없다면, 임시로 강제 개설하여 크래시를 막습니다.
-        if (List_CargoSlots == null)
-        {
-            List_CargoSlots = new List<InventorySlotData>();
-            Debug.LogWarning("[인벤토리 경고] 슬롯 초기화 전 아이템이 유입되어 임시 데이터 공간을 개설합니다.");
-        }
 
-        // UI 캔버스가 씬에 없어도 백엔드 데이터 적재는 정상 수행되도록 널(Null) 체크 분기를 씌웁니다.
-        if (InventoryUI.Instance == null)
-        {
-            Debug.LogWarning("[인벤토리 경고] InventoryUI가 씬에 존재하지 않아 화면 그래픽 갱신은 생략됩니다.");
-        }
 
         // 1: 특수 자원 3종 세트 검증 방화벽 (인벤토리 칸을 쓰지 않고 전용 그릇에 적재)
         if (itemId == "Gold_0001")
         {
             Int_GoldCount += count;
-            InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            }
             return;
         }
         if (itemId == "Fuel_0002")
         {
             Int_FuelCount += count;
-            InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            }
             return;
         }
         if (itemId == "Supplies_0003")
         {
             Int_SuppliesCount += count;
-            InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
+            }
             return;
         }
 
@@ -134,8 +135,11 @@ public class Inventory : MonoBehaviour
             Debug.LogWarning($"[화물창 포화] 공간이 부족하여 아이템 [{itemId}] {count}개가 버려졌습니다.");
         }
 
-        // 데이터 계산이 종료되었으므로 프론트엔드 UI 화면 새로고침 전송
-        InventoryUI.Instance.RefreshInventoryDisplay(List_CargoSlots);
+        if (InventoryUI.Instance != null)
+        {
+            // 데이터 계산이 종료되었으므로 프론트엔드 UI 화면 새로고침 전송
+            InventoryUI.Instance.RefreshInventoryDisplay(List_CargoSlots);
+        }
     }
 
 }

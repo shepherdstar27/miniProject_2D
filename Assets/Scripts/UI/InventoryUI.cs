@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InventoryUI : MonoBehaviour
 {
     public static InventoryUI Instance { get; set; }
+
 
     [Header("UI Resource References")]
     [SerializeField] private GameObject GameObject_SlotUiPrefab;       // 장착할 InventorySlotUI 프리팹
@@ -21,10 +23,38 @@ public class InventoryUI : MonoBehaviour
     [Header("Generated Live Slot List")]
     [SerializeField] private List<InventorySlotUI> List_CreatedSlotScripts = new List<InventorySlotUI>();
 
+    [Header("Close Buttons")]
+    [SerializeField] private UIButton Button_Close;
+
+
     private void Awake()
     {
         Instance = this;
+        BindEvents();
     }
+
+    private void BindEvents()
+    {
+        if (Button_Close != null)
+        {
+            Button_Close.BindOnClickButtonEvent(OnClick_Close);
+        }
+    }
+
+    private void OnClick_Close()
+    {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        Debug.Log("[인벤토리 UI] UIManager에게 정식 폐쇄를 요청합니다.");
+
+        // 수정된 UIManager의 CloseUI를 호출합니다.
+        UIManager.Inst.CloseUI(UIType.InventoryUI);
+    }
+
+
 
     //  좌측 툴팁에 손쉽게 교차 접근을 허용하기 위한 중간 외교 게이트웨이 함수
     public ItemTooltipUI GetTooltipUI()
@@ -75,4 +105,6 @@ public class InventoryUI : MonoBehaviour
         if (TextMesh_FuelAmount != null) TextMesh_FuelAmount.text = fuel.ToString();
         if (TextMesh_SuppliesAmount != null) TextMesh_SuppliesAmount.text = supplies.ToString();
     }
+
+
 }

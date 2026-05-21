@@ -14,7 +14,6 @@ public class ItemTooltipUI : MonoBehaviour
 
     private void Start()
     {
-        HideItemTooltip(); // 최초 시동 시 보이지 않게 클로즈 처리
     }
 
     //  [정보창 가동 출력]: 슬롯에서 호출 시 프레임을 켜고 JSON 정보를 추출 매핑합니다.

@@ -23,10 +23,6 @@ public class GameUI : UIBase
     [Header("Bottom Menu Buttons")]
     [SerializeField] private UIButton Button_Inventory;
 
-    private void Start()
-    {
-        BindEvents();
-    }
 
     private void OnEnable()
     {

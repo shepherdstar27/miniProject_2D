@@ -4,6 +4,7 @@
     "Name": "조각배",
     "Description": "조각배다",
     "Max_HP": 100,
+    "Cargo": 100,
     "PrefabPath": "Prefabs/Ship/ship_0001"
   },
   {
@@ -11,6 +12,7 @@
     "Name": "통통배",
     "Description": "통통배다",
     "Max_HP": 200,
+    "Cargo": 200,
     "PrefabPath": "Prefabs/Ship/ship_0002"
   },
   {
@@ -18,6 +20,7 @@
     "Name": "전함",
     "Description": "전함이다",
     "Max_HP": 500,
+    "Cargo": 500,
     "PrefabPath": "Prefabs/Ship/ship_0003"
   },
   {
@@ -25,6 +28,7 @@
     "Name": "문어",
     "Description": "문어이다",
     "Max_HP": 100,
+    "Cargo": 100,
     "PrefabPath": "Prefabs/Ship/ship_0004"
   },
   {
@@ -32,6 +36,7 @@
     "Name": "고래",
     "Description": "고래이다",
     "Max_HP": 200,
+    "Cargo": 200,
     "PrefabPath": "Prefabs/Ship/ship_0005"
   },
   {
@@ -39,6 +44,7 @@
     "Name": "상어",
     "Description": "상어이다",
     "Max_HP": 300,
+    "Cargo": 300,
     "PrefabPath": "Prefabs/Ship/ship_0006"
   },
   {
@@ -46,6 +52,7 @@
     "Name": "장어",
     "Description": "장어이다",
     "Max_HP": 400,
+    "Cargo": 400,
     "PrefabPath": "Prefabs/Ship/ship_0007"
   },
   {
@@ -53,6 +60,7 @@
     "Name": "거북이",
     "Description": "거북이이다",
     "Max_HP": 500,
+    "Cargo": 500,
     "PrefabPath": "Prefabs/Ship/ship_0008"
   }
 ]

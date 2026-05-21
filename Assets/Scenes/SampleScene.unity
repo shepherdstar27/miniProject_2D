@@ -320,7 +320,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.09411765}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -739,10 +739,10 @@ GameObject:
   - component: {fileID: 595008611}
   - component: {fileID: 595008608}
   - component: {fileID: 595008610}
-  - component: {fileID: 595008612}
   - component: {fileID: 595008613}
   - component: {fileID: 595008614}
   - component: {fileID: 595008615}
+  - component: {fileID: 595008616}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -922,20 +922,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.015148254, y: -0.002163945}
   m_Size: {x: 0.69047433, y: 0.28363276}
   m_Direction: 1
---- !u!114 &595008612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595008605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1a7040fd117d544aa3adef832b9500, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  Int_MaxSlotCount: 20
-  List_Slots: []
 --- !u!114 &595008613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,6 +972,22 @@ MonoBehaviour:
   String_EquippedShipId: ship_0002
   String_EquippedEngineId: Engine_0005
   String_EquippedWeaponId: Weapon_Canon_0006
+--- !u!114 &595008616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595008605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1a7040fd117d544aa3adef832b9500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  Int_GoldCount: 0
+  Int_FuelCount: 0
+  Int_SuppliesCount: 0
+  List_CargoSlots: []
 --- !u!1 &618421851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,6 +1585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
   Bool_IsGameOver: 0
+  GameObject_BaseLootBoxPrefab: {fileID: 5281078856713700105, guid: 698859cad80629447af06c75e78ac24f, type: 3}
 --- !u!4 &1268017079
 Transform:
   m_ObjectHideFlags: 0
@@ -1896,6 +1899,54 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1806554792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1806554794}
+  - component: {fileID: 1806554793}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1806554793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806554792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1a7040fd117d544aa3adef832b9500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  Int_GoldCount: 0
+  Int_FuelCount: 0
+  Int_SuppliesCount: 0
+  List_CargoSlots: []
+--- !u!4 &1806554794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806554792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.03346, y: -0.50226, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861675365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,6 +2000,7 @@ MonoBehaviour:
   List_EnemyTable: []
   List_EngineTable: []
   List_ShipTable: []
+  List_DropTable: []
 --- !u!1 &1981460358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,3 +2203,4 @@ SceneRoots:
   - {fileID: 1240644470}
   - {fileID: 1861675366}
   - {fileID: 1268017079}
+  - {fileID: 1806554794}

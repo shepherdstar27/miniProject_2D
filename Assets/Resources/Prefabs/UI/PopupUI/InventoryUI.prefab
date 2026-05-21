@@ -857,6 +857,7 @@ MonoBehaviour:
   TextMesh_FuelAmount: {fileID: 1626840383996299938}
   TextMesh_SuppliesAmount: {fileID: 8333499087989102804}
   List_CreatedSlotScripts: []
+  Button_Close: {fileID: 2869151807445587855}
 --- !u!1 &3208955880717274118
 GameObject:
   m_ObjectHideFlags: 0
