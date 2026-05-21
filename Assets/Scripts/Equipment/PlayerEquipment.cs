@@ -35,7 +35,7 @@ public class PlayerEquipment : MonoBehaviour
             PlayerMove moveScript = GetComponent<PlayerMove>();
             if (moveScript != null)
             {
-                moveScript.SetupEngineSpecs(engineMaster.MoveSpeed, engineMaster.RotateSpeed, engineMaster.Acceleration);
+                moveScript.SetupEngineSpecs(String_EquippedEngineId, engineMaster.MoveSpeed, engineMaster.RotateSpeed, engineMaster.Acceleration);
             }
         }
 
@@ -46,7 +46,7 @@ public class PlayerEquipment : MonoBehaviour
             PlayerAttack attackScript = GetComponent<PlayerAttack>();
             if (attackScript != null)
             {
-                attackScript.SetupWeaponSpecs(String_EquippedWeaponId, weaponMaster.FireCooldown);
+                attackScript.SetupWeaponSpecs(String_EquippedWeaponId, weaponMaster.FireCoolDown, weaponMaster.FireRange);
             }
         }
 

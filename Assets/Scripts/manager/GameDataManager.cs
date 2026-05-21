@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
@@ -6,11 +7,13 @@ public class GameDataManager : MonoBehaviour
     public static GameDataManager Instance { get; set; }
 
     [Header("Master Tables")]
-    [SerializeField] private List<ItemData> List_ItemTable = new List<ItemData>();
+    [SerializeField] private List<ItemData> List_ItemTable = new List<ItemData>();// 아이템 테이블 그릇 추가
     [SerializeField] private List<WeaponData> List_WeaponTable = new List<WeaponData>(); // 무기 테이블 그릇 추가
     [SerializeField] private List<EnemyData> List_EnemyTable = new List<EnemyData>(); // 적 테이블 그릇 추가
     [SerializeField] private List<EngineData> List_EngineTable = new List<EngineData>(); // 엔진 테이블 그릇 추가
-    [SerializeField] private List<ShipData> List_ShipTable = new List<ShipData>(); // 엔진 테이블 그릇 추가
+    [SerializeField] private List<ShipData> List_ShipTable = new List<ShipData>(); // 배 테이블 그릇 추가
+    [SerializeField] private List<DropTableData> List_DropTable = new List<DropTableData>(); // 드랍테이블 테이블 그릇 추가
+
 
 
 
@@ -173,6 +176,33 @@ public class GameDataManager : MonoBehaviour
         }
 
 
+        // =========================================================================
+        // DropTableData 로드 로직
+        // =========================================================================
+        string DropTableJsonPath = "JsonOutput/DropTable";
+        TextAsset DropTableTextAsset = Resources.Load<TextAsset>(DropTableJsonPath);
+
+        if (DropTableTextAsset != null)
+        {
+            //  [핵심 해결] 앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)합니다.
+            string cleanJson = DropTableTextAsset.text.Trim();
+            string wrappedJson = "{ \"Data\": " + cleanJson + " }";
+
+            //  DropTable 규격으로 FromJson을 실행
+            DropTable parsedTable = JsonUtility.FromJson<DropTable>(wrappedJson);
+
+            if (parsedTable != null && parsedTable.Data != null)
+            {
+                List_DropTable = parsedTable.Data;
+                Debug.Log($"[GameDataManager] {List_DropTable.Count}개의 배 기획 데이터를 성공적으로 로드했습니다!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"[GameDataManager] {ShipJsonPath} 경로에서 데이터를 찾지 못했습니다.");
+        }
+
+
     }
 
 
@@ -263,7 +293,21 @@ public class GameDataManager : MonoBehaviour
         return null;
     }
 
-
+    // =========================================================================
+    // DropTableData 조회 메서드 
+    // =========================================================================
+    public DropTableData GetDropItemData(string targetId)
+    {
+        foreach (DropTableData DropTable in List_DropTable)
+        {
+            if (DropTable.Id == targetId)
+            {
+                return DropTable;
+            }
+        }
+        Debug.LogWarning($"[GameDataManager] 드랍테이블 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
+        return null;
+    }
 
 
 

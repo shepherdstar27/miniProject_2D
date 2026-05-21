@@ -13,16 +13,16 @@ public class PlayerMove : MonoBehaviour
     }
 
     [Header("Speed Settings")]
-    [SerializeField] private float Float_MoveFastSpeed = 10f;
-    [SerializeField] private float Float_MoveSlowSpeed = 5f;
-    [SerializeField] private float Float_MoveBackSlowSpeed = -5f;
-    [SerializeField] private float Float_MoveBackFastSpeed = -10f;
+    [SerializeField] private float Float_MoveFastSpeed = 1f;
+    [SerializeField] private float Float_MoveSlowSpeed = 1f;
+    [SerializeField] private float Float_MoveBackSlowSpeed = -1f;
+    [SerializeField] private float Float_MoveBackFastSpeed = -1f;
 
-    [Header("Rotation Settings")]
-    [SerializeField] private float Float_RotateSpeed = 150f; // 배의 회전 속도
-
-    [Header("Inertia Settings")]
-    [SerializeField] private float Float_Acceleration = 3f;  // 배의 관성
+    [Header("Engine Extracted Specs")]
+    [SerializeField] private string  String_EngineId = "";
+    [SerializeField] private float   Float_MoveSpeed = 1f;
+    [SerializeField] private float   Float_RotateSpeed = 150f;
+    [SerializeField] private float   Float_Acceleration = 3f;
 
     private Rigidbody2D m_rigidbody2D; // 기존 변수명 유지
 
@@ -51,7 +51,7 @@ public class PlayerMove : MonoBehaviour
         {
             return;
         }
-
+        SetupSpeedSettings();
         HandleSpeedInput();
         HandleRotateInput();
     }
@@ -63,6 +63,26 @@ public class PlayerMove : MonoBehaviour
         MoveShip();
         RotateShip();
     }
+
+    //[핵심 데이터 주입구]: PlayerEquipment에서 JSON의 EngineData 데이터를 읽어와 원격 호출
+
+    public void SetupEngineSpecs(string engineId, float movespeed, float rotatespeed, float acceleration)
+    {
+        String_EngineId = engineId;
+        Float_MoveSpeed = movespeed;
+        Float_RotateSpeed = rotatespeed;
+        Float_Acceleration = acceleration;
+    }
+
+    // EngineData 의 speed를 읽어와 배율 곱해줌
+    private void SetupSpeedSettings()
+    {
+        Float_MoveFastSpeed = Float_MoveSpeed * 2;
+        Float_MoveSlowSpeed = Float_MoveSpeed;
+        Float_MoveBackSlowSpeed = Float_MoveSpeed * -1;
+        Float_MoveBackFastSpeed = Float_MoveSpeed * -2;
+    }
+
 
     private void HandleSpeedInput()
     {
@@ -118,7 +138,6 @@ public class PlayerMove : MonoBehaviour
         // FixedUpdate 안이므로 Time.fixedDeltaTime을 곱해 컴퓨터 사양에 상관없이 일정한 가속을 보장합니다.
         _currentMoveSpeed = Mathf.MoveTowards(_currentMoveSpeed, _targetMoveSpeed, Float_Acceleration * Time.fixedDeltaTime);
     }
-
 
     // 2. A/D 키 입력을 받아 좌/우 회전 방향을 결정하는 함수
     private void HandleRotateInput()

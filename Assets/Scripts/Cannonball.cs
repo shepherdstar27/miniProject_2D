@@ -4,12 +4,12 @@ public class Cannonball : MonoBehaviour
 {
     [Header("Cannonball Settings")]
     [SerializeField] private float Float_Speed = 10f;       // 포탄 날아가는 속도
-    [SerializeField] private int Int_Damage = 0;           // 적에게 줄 데미지
+    [SerializeField] private float Float_Damage = 0;           // 적에게 줄 데미지
     [SerializeField] private float Float_LifeTime = 2f;     // 허공에 날아가다 사라질 시간 (메모리 누수 방지)
 
 
     [Header("Cannonball Destroy Effect")]
-    public GameObject Prefab_CannonballDestroyEffect;       // 파괴될 때 파편이 튀는 폭발 이펙트 프리팹
+    [SerializeField] private GameObject Prefab_CannonballDestroyEffect;       // 파괴될 때 파편이 튀는 폭발 이펙트 프리팹
 
 
     private void Start()
@@ -33,12 +33,15 @@ public class Cannonball : MonoBehaviour
     // 대포를 발사하는 플레이어나 적이 생성 직후 이 함수를 호출하여 무기 제원을 주입
     public void SetupCannonballData(string weaponId)
     {
+        if (GameDataManager.Instance == null) return;
+
+
         WeaponData masterData = GameDataManager.Instance.GetWeaponData(weaponId);
 
         if (masterData != null)
         {
-            Int_Damage = masterData.Damage;
-            Debug.Log($"[포탄 셋업] 무기 [{masterData.Name}]의 데이터 동기화 완료. 위력: {Int_Damage}");
+            Float_Damage = masterData.Damage;
+            Debug.Log($"[포탄 셋업] 무기 [{masterData.Name}]의 데이터 동기화 완료. 위력: {Float_Damage}");
         }
     }
 
@@ -48,12 +51,12 @@ public class Cannonball : MonoBehaviour
         // 부딪힌 대상이 적(Enemy)인지 확인합니다.
         if (collision.CompareTag("Enemy") == true)
         {
-            Debug.Log($"[포탄] 적 명중! {Int_Damage}의 데미지를 입힙니다.");
+            Debug.Log($"[포탄] 적 명중! {Float_Damage}의 데미지를 입힙니다.");
 
             HealthController targetHealth = collision.GetComponent<HealthController>();
             if (targetHealth != null)
             {
-                targetHealth.TakeDamage(Int_Damage);
+                targetHealth.TakeDamage(Float_Damage);
             }
 
             // 타격했으므로 포탄 자신은 파괴됩니다.
@@ -62,12 +65,12 @@ public class Cannonball : MonoBehaviour
 
         if (collision.CompareTag("Player") == true)
         {
-            Debug.Log($"[포탄] 플레이어 명중! {Int_Damage}의 데미지를 입힙니다.");
+            Debug.Log($"[포탄] 플레이어 명중! {Float_Damage}의 데미지를 입힙니다.");
 
             HealthController targetHealth = collision.GetComponent<HealthController>();
             if (targetHealth != null)
             {
-                targetHealth.TakeDamage(Int_Damage);
+                targetHealth.TakeDamage(Float_Damage);
             }
 
             // 타격했으므로 포탄 자신은 파괴됩니다.

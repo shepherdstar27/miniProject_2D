@@ -3,9 +3,13 @@
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
-    [SerializeField] private GameObject GameObject_CannonballPrefab; // 쏠 포탄 프리팹
     [SerializeField] private Transform Transform_FirePoint;          // 포탄이 생성될 포구의 위치
+
+    [Header("Weapon Extracted Specs")]
+    [SerializeField] private float Float_FireRange = 8f;             //  [신규] JSON 무기 사거리 제원 수용 그릇
+    [SerializeField] private string _equippedWeaponId;               // 주입된 무기 고유 식별자
     [SerializeField] private float Float_FireCooldown = 1f;          // 연사 대기 시간 (1초에 1발)
+    [SerializeField] private GameObject GameObject_CannonballPrefab; // 쏠 포탄 프리팹
 
     [Header("Aim Settings")]
     [SerializeField] private float Float_AimRotateSpeed = 100f;       // 조준선 회전 속도
@@ -17,9 +21,22 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        if (BattleManager.Instance.GetIsGameOver() == true) return;
+
         HandleAimInput();
         HandleAttackInput();
     }
+
+    //[핵심 데이터 주입구]: PlayerEquipment에서 JSON의 WeaponData 데이터를 읽어와 원격 호출
+    public void SetupWeaponSpecs(string weaponId, float cooldown, float range)
+    {
+        _equippedWeaponId = weaponId;
+        Float_FireCooldown = cooldown;
+        Float_FireRange = range; //  JSON의 FireRange 제원을 동기화합니다.
+
+        Debug.Log($"[무기 제원 정렬] 무기ID: {_equippedWeaponId} / 쿨타임: {Float_FireCooldown}s / 사거리: {Float_FireRange}m");
+    }
+
     private void HandleAimInput()
     {
         float rotateDirection = 0f;
@@ -102,7 +119,7 @@ public class PlayerAttack : MonoBehaviour
             if (cannonballScript != null)
             {
                 //  3. 기획 데이터 ID를 주입합니다! (예: 표준 캘버린 포 장착 상태라고 가정)
-                string currentEquippedWeaponId = "Weapon_Canon_0002";
+                string currentEquippedWeaponId = _equippedWeaponId;
 
                 cannonballScript.SetupCannonballData(currentEquippedWeaponId);
             }

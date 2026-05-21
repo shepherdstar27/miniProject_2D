@@ -6,6 +6,7 @@
     "Engine_Id": "Engine_0001",
     "Weapon_Id": "Weapon_Canon_0001",
     "Ship_Id": "ship_0001",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0001",
     "PrefabPath": "Prefabs/Enemy/mob_ship_0001"
@@ -17,6 +18,7 @@
     "Engine_Id": "Engine_0002",
     "Weapon_Id": "Weapon_Canon_0002",
     "Ship_Id": "ship_0001",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0002",
     "PrefabPath": "Prefabs/Enemy/mob_ship_0002"
@@ -28,6 +30,7 @@
     "Engine_Id": "Engine_0003",
     "Weapon_Id": "Weapon_Canon_0003",
     "Ship_Id": "ship_0002",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0003",
     "PrefabPath": "Prefabs/Enemy/mob_ship_0003"
@@ -39,6 +42,7 @@
     "Engine_Id": "Engine_0004",
     "Weapon_Id": "Weapon_Canon_0004",
     "Ship_Id": "ship_0002",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0004",
     "PrefabPath": "Prefabs/Enemy/mob_ship_0004"
@@ -50,6 +54,7 @@
     "Engine_Id": "Engine_0005",
     "Weapon_Id": "Weapon_Canon_0005",
     "Ship_Id": "ship_0003",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_ship_0005",
     "PrefabPath": "Prefabs/Enemy/mob_ship_0005"
@@ -61,6 +66,7 @@
     "Engine_Id": "Engine_0006",
     "Weapon_Id": "Weapon_Canon_0007",
     "Ship_Id": "ship_0004",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0001",
     "PrefabPath": "Prefabs/Enemy/mob_seacreature_0001"
@@ -72,6 +78,7 @@
     "Engine_Id": "Engine_0007",
     "Weapon_Id": "Weapon_Canon_0008",
     "Ship_Id": "ship_0005",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0002",
     "PrefabPath": "Prefabs/Enemy/mob_seacreature_0002"
@@ -83,6 +90,7 @@
     "Engine_Id": "Engine_0008",
     "Weapon_Id": "Weapon_Canon_0009",
     "Ship_Id": "ship_0006",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0003",
     "PrefabPath": "Prefabs/Enemy/mob_seacreature_0003"
@@ -94,6 +102,7 @@
     "Engine_Id": "Engine_0009",
     "Weapon_Id": "Weapon_Canon_0010",
     "Ship_Id": "ship_0007",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0004",
     "PrefabPath": "Prefabs/Enemy/mob_seacreature_0004"
@@ -105,6 +114,7 @@
     "Engine_Id": "Engine_0010",
     "Weapon_Id": "Weapon_Canon_0011",
     "Ship_Id": "ship_0008",
+    "DropTable_Id": "DropTable_0001",
     "ChaseRange": 3,
     "IconPath": "Icon/Icon_mob_seacreature_0005",
     "PrefabPath": "Prefabs/Enemy/mob_seacreature_0005"

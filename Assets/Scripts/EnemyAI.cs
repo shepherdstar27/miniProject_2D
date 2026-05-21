@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Enemy Live Specs")]
     [SerializeField] private float Float_MoveSpeed;
-    [SerializeField] private int Int_AttackDamage;
+    [SerializeField] private float Float_AttackDamage;
     [SerializeField] private float Float_RotateSpeed; // 배의 회전 속도
     [SerializeField] private float Float_Acceleration; // 배의 관성
 
@@ -24,12 +24,16 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float Float_FireCooldown = 1f;          // 연사 대기 시간 (1초에 1발)
 
     [Header("Raycast AI Detector Settings")]
-    [SerializeField] private float Float_DetectionDistance = 8f;     //  레이캐스트 사거리 제한
+    [SerializeField] private float Float_DetectionDistance = 8f;     //  레이캐스트 및 무기 사거리
     [SerializeField] private LayerMask LayerMask_PlayerLayer;        //  플레이어만 골라 감지할 필터 레이어
 
     [Header("AI Intelligence Settings")]
     [SerializeField] private float Float_ChaseRange = 3f;          //  이 거리 안으로 들어오면 추적 및 사격 개시
     [SerializeField] private bool Bool_IsChasingPlayer = false;      //  현재 추적 상태인지 여부 기록 그릇
+
+    [Header("AI DropTable")]
+    [SerializeField] private string Float_DropTable = "DropTable_0001";          //  드랍테이블
+
 
     private float _lastFireTime = 0f; // 마지막 발사 시간 기록용 일반 private 변수
     private string _equippedWeaponId; // 적이 장착 중인 무기 ID
@@ -135,11 +139,10 @@ public class EnemyAI : MonoBehaviour
         EnemyData enemyMaster = GameDataManager.Instance.GetEnemyData(enemyId);
         if (enemyMaster == null) return;
 
-        // 적 체력 동기화
-
         // ChaseRange 값으로 두 사거리 변수 덮어 씌우기
         Float_ChaseRange = enemyMaster.ChaseRange;
-        Float_DetectionDistance = enemyMaster.ChaseRange;
+        Float_DropTable = enemyMaster.DropTable_Id;
+
 
         // 2. 엔진 ID를 활용해 엔진 마스터 테이블 교차 검색 (속도 낚아채기)
         EngineData engineMaster = GameDataManager.Instance.GetEngineData(enemyMaster.Engine_Id);
@@ -154,8 +157,10 @@ public class EnemyAI : MonoBehaviour
         WeaponData weaponMaster = GameDataManager.Instance.GetWeaponData(enemyMaster.Weapon_Id);
         if (weaponMaster != null)
         {
-            Int_AttackDamage = weaponMaster.Damage;
             _equippedWeaponId = enemyMaster.Weapon_Id;
+            Float_AttackDamage = weaponMaster.Damage;
+            Float_DetectionDistance = weaponMaster.FireRange;
+
         }
 
         // 4. 배 ID를 활용해 배 마스터 테이블 교차 검색 (배Hp 낚아채기)
@@ -169,7 +174,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        Debug.Log($"[적 스펙 조립완료] 명칭: {enemyMaster.Name} / HP: {shipMaster.Max_HP} / 속도: {Float_MoveSpeed} / 공격력: {Int_AttackDamage}");
+        Debug.Log($"[적 스펙 조립완료] 명칭: {enemyMaster.Name} / HP: {shipMaster.Max_HP} / 속도: {Float_MoveSpeed} / 공격력: {Float_AttackDamage}");
     }
 
     private void HandleMovementAI()
@@ -235,7 +240,6 @@ public class EnemyAI : MonoBehaviour
         }
 
     }
-   
     
     // 쿨타임을 계산하여 발사 가능 여부를 검증하는 함수
     private void TryFireCannon()
@@ -295,5 +299,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
+    //사망 시 HealthController가 안전하게 드랍 ID를 낚아채갈 수 있도록 개설하는 함수
+    public string GetDropTableId()
+    {
+        return Float_DropTable;
+    }
 }

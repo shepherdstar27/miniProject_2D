@@ -9,8 +9,10 @@ public class WeaponData
     public string Name;        // 무기 이름
     public string Description; // 무기 설명
     public float Damage;         // 무기 데미지 (JSON 상 숫자로 들어오므로 int)
-    public float FireCoolDown;         // 무기 데미지 (JSON 상 숫자로 들어오므로 int)
-    public float FireRange;         // 무기 데미지 (JSON 상 숫자로 들어오므로 int)
+    public float FireCoolDown;         // 무기 쿨다운
+    public float FireRange;         // 무기 사거리
+    public string AttackPrefab;         // 무기 공격 유형 프리팹
+
 
 }
 

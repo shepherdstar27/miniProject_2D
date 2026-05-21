@@ -1,0 +1,9 @@
+[
+  {
+    "Id": "DropTable_0001",
+    "Drop_Item_List": "Gold_0001,Fuel_0002,Supplies_0003,TradingGoods_0004,TradingGoods_0005,TradingGoods_0006,TradingGoods_0007",
+    "Drop_Chance_List": "100,100,100,100,100,100,100",
+    "Min_Count": "1,1,1,1,1,1,1",
+    "Max_Count": "100,100,100,100,100,100,100"
+  }
+]

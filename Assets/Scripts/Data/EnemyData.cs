@@ -11,6 +11,7 @@ public class EnemyData
     public string Engine_Id; // 적의 소유 엔진
     public string Weapon_Id; // 적의 소유 무기
     public string Ship_Id; // 적의 탑승물
+    public string DropTable_Id; // 적의 탑승물
     public float ChaseRange; // 적의 인식거리
     public string IconPath; // 몬스터 표기용 Icon
     public string PrefabPath; // 몬스터를 우선 프리팹으로 구현

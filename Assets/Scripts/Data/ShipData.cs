@@ -9,6 +9,7 @@ public class ShipData
     public string Name;        // 몬스터 이름
     public string Description; // 몬스터 설명 (도감용)
     public float Max_HP; // 체력
+    public int Cargo; // 화물칸
     public string PrefabPath; // 프리팹으로 구현
 
 }
