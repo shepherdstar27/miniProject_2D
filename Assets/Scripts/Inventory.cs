@@ -116,4 +116,19 @@ public class Inventory : MonoBehaviour
         if (InventoryUI.Instance != null)
             InventoryUI.Instance.UpdateSpecialResourceText(Int_GoldCount, Int_FuelCount, Int_SuppliesCount);
     }
+    public int GetGoldCount()
+    {
+        return Int_GoldCount;
+    }
+
+    public int GetFuelCount()
+    {
+        return Int_FuelCount;
+    }
+
+    public int GetSuppliesCount()
+    {
+        return Int_SuppliesCount;
+    }
+
 }

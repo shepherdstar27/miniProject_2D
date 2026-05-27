@@ -48,9 +48,7 @@ public class BattleManager : MonoBehaviour
     // 적 함선이 침몰했을 때 호출되는 함수
     public void CallPlayerVictory(string dropTableId, Vector3 enemyPosition)
     {
-        if (Bool_IsGameOver == true) return;
 
-        Bool_IsGameOver = true;
         Debug.Log(" [배틀 매니저] 적 함선 격침 완료! 승리 프로세스 및 보상 연산을 가동합니다.");
 
         // 1. JSON 마스터 테이블에서 해당하는 드랍테이블 행 데이터를 조회합니다.

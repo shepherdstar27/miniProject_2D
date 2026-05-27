@@ -48,9 +48,14 @@ public class InventoryUI : UIBase
                     CreateUIContainerSlots(data.Count);
                 }
                 RefreshInventoryDisplay(data);
-                Debug.Log($"[인벤토리UI] {data.Count}개 슬롯 동기화 성공!");
-                Debug.Log($"[인벤토리UI] 나를 부른 Inventory ID: {Inventory.Instance.GetInstanceID()}");
             }
+
+            int currentGold = Inventory.Instance.GetGoldCount();
+            int currentFuel = Inventory.Instance.GetFuelCount();
+            int currentSupplies = Inventory.Instance.GetSuppliesCount();
+
+            UpdateSpecialResourceText(currentGold, currentFuel, currentSupplies);
+
         }
     }
 

@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour
 
         var targetUI = GetCreatedUI(rootType, uiType);
 
-        // 🚨 [추적 1] 여기서 targetUI가 null인지 검사하고, null이면 강제 중단!
+        // targetUI가 null인지 검사하고, null이면 강제 중단
         if (targetUI == null)
         {
             Debug.LogError($"[추적 1] OpenUI 멈춤: {uiType}의 targetUI가 null입니다! 화면에 띄울 수 없습니다.");
@@ -90,6 +90,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public bool IsOpened(UIType uiType)
+    {
+        // _openedUISet에 해당 UI가 들어있다면 true(열림), 없다면 false(닫힘)를 반환합니다.
+        return _openedUISet.Contains(uiType);
+    }
+
     private UIBase GetCreatedUI(UIRootType rootType, UIType uiType)
     {
         if (_createdUIDic.ContainsKey(uiType) == false)
@@ -97,7 +103,7 @@ public class UIManager : MonoBehaviour
             string path = $"Prefabs/UI/{rootType}/{uiType}";
             GameObject loadedObj = Resources.Load<GameObject>(path);
 
-            // 🚨 [추적 2] 프리팹 로드 자체를 실패했는지 확인
+            // 프리팹 로드 자체를 실패했는지 확인
             if (loadedObj == null)
             {
                 Debug.LogError($"[추적 2] 로드 실패: Resources 폴더 안에서 '{path}' 경로의 프리팹을 아예 찾지 못했습니다.");
@@ -109,7 +115,7 @@ public class UIManager : MonoBehaviour
 
             var uiBase = gObj.GetComponent<UIBase>();
 
-            // 🚨 [추적 3] 생성은 했는데 UIBase 컴포넌트를 못 찾았는지 확인
+            // 생성은 했는데 UIBase 컴포넌트를 못 찾았는지 확인
             if (uiBase == null)
             {
                 Debug.LogError($"[추적 3] 컴포넌트 실종: 프리팹({loadedObj.name})은 생성했지만, 그 최상위 객체에서 'UIBase'를 상속받은 스크립트를 찾을 수 없습니다!");

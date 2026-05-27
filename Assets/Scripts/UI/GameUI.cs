@@ -6,19 +6,6 @@ using UnityEngine.UI;
 public class GameUI : UIBase
 {
     // 규칙: 유니티 참조 객체는 대문자 시작, SerializeField private 구조
-    [Header("InGame Menu Window")]
-    [SerializeField] private GameObject GameObject_Menu;
-
-    [Header("InGame Menu Buttons")]
-    [SerializeField] private UIButton Button_Continue;
-    [SerializeField] private UIButton Button_NewGame;
-    [SerializeField] private UIButton Button_LoadGame;
-    [SerializeField] private UIButton Button_Options;
-    [SerializeField] private UIButton Button_BackToMenu;
-    [SerializeField] private UIButton Button_ExitGame;
-
-    [Header("Top Menu Buttons")]
-    [SerializeField] private UIButton Button_InGameMenu;
 
     [Header("Bottom Menu Buttons")]
     [SerializeField] private UIButton Button_Inventory;
@@ -27,101 +14,47 @@ public class GameUI : UIBase
     private void OnEnable()
     {
         BindEvents();
-        SetDefaultUI();
     }
-
 
     private void BindEvents()
     {
         // 규칙: 함수는 동사로 시작할 것
-        Button_Continue.BindOnClickButtonEvent(OnClick_Continue);
-        Button_NewGame.BindOnClickButtonEvent(OnClick_StartNewGame);
-        Button_LoadGame.BindOnClickButtonEvent(OnClick_LoadGame);
-        Button_Options.BindOnClickButtonEvent(OnClick_OpenOptions);
-        Button_BackToMenu.BindOnClickButtonEvent(OnClick_BackToMenu);
-        Button_ExitGame.BindOnClickButtonEvent(OnClick_ExitGame);
-        Button_InGameMenu.BindOnClickButtonEvent(OnClick_InGameMenu);
+
         Button_Inventory.BindOnClickButtonEvent(OnClick_Inventory);
 
     }
 
-    private void SetDefaultUI()
-    {
-        // 인게임 UI가 처음 켜질 때는 메뉴판이 숨겨진 채로(게임 플레이 상태) 시작
-        if (GameObject_Menu != null)
-        {
-            GameObject_Menu.SetActive(false);
-        }
-    }
 
-    //  게임 중에 ESC 키를 누르면 메뉴판이 열리고 닫히는 기능
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)&& GameObject_Menu != null)
-        {
-            ToggleMenuWindow();
-        }
-    }
 
     //  인게임 메뉴창 토글
-    private void ToggleMenuWindow()
+
+
+    private void OnClick_Inventory()
     {
-        bool isMenuCurrentActive = GameObject_Menu.activeSelf;
-        GameObject_Menu.SetActive(!isMenuCurrentActive);
+        Debug.Log("[GameUI] 인벤토리 버튼 클릭");
+
+        Toggle_Inventory_Window();
     }
-
-    private void OnClick_Continue()
+    private void Toggle_Inventory_Window()
     {
-        Debug.Log("계속하기 버튼 클릭됨, - 인게임 메뉴창을 닫습니다.");
-
-        // [핵심 안전장치] 버튼이 사라지기 전에 유니티 UI 포커스(선택 상태)를 강제로 초기화
+        // 버튼 클릭 후 유니티 UI 포커스 강제 해제 (안전장치 유지)
         if (EventSystem.current != null)
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
 
-        if (GameObject_Menu != null)
+        // UIManager를 통해 현재 인벤토리가 열려있는지 확인하여 분기 처리
+        if (UIManager.Inst.IsOpened(UIType.InventoryUI) == true)
         {
-            GameObject_Menu.SetActive(false);
+            Debug.Log("[항구 UI] 인벤토리가 이미 열려있으므로, UIManager에게 폐쇄");
+            UIManager.Inst.CloseUI(UIType.InventoryUI);
+        }
+        else
+        {
+            Debug.Log("[항구 UI] 인벤토리가 닫혀있으므로, UIManager에게 동적 생성");
+            UIManager.Inst.OpenInventoryUI(); // (또는 UIManager.Inst.OpenUI(UIRootType.PopupUI, UIType.InventoryUI);)
         }
     }
 
-    private void OnClick_StartNewGame()
-    {
-        Debug.Log("새 게임 버튼 클릭됨");
-    }
-
-    private void OnClick_LoadGame()
-    {
-        Debug.Log("불러오기 버튼 클릭됨");
-    }
-
-    private void OnClick_OpenOptions()
-    {
-        Debug.Log("옵션 버튼 클릭됨");
-    }
-    private void OnClick_BackToMenu()
-    {
-        Debug.Log("메인 메뉴로 돌아갑니다.");
-        UIManager.Inst.BackToMainMenuUI();
-    }
-    private void OnClick_ExitGame()
-    {
-        Debug.Log("게임 종료 버튼 클릭됨 - 데이터 저장 후 종료");
-        GameManager.Inst.SaveAndEndGame();
-    }
-
-    private void OnClick_InGameMenu()
-    {
-        ToggleMenuWindow();
-    }
-
-    private void OnClick_Inventory()
-    {
-        Debug.Log("[GameUI] 인벤토리 버튼이 클릭되었습니다. UI 매니저에게 동적 생성을 요청합니다.");
-
-        // 확장 메서드를 통해 인벤토리 UI를 화면에 동적으로 로드하여 띄웁니다.
-        UIManager.Inst.OpenInventoryUI();
-    }
 
 }
