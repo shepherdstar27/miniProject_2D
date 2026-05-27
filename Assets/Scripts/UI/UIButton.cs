@@ -27,7 +27,7 @@ public class UIButton : MonoBehaviour
     private void OnDisable()
     {
         // 오브젝트가 비활성화되면 메모리 누수 방지를 위해 모든 클릭 이벤트 연결을 해제
-        Button_Base.onClick.RemoveAllListeners();
+        UnBindOnClickButtonEvent(OnClickSetSelectUI);
     }
 
     private void SetDefaultUI()
@@ -58,8 +58,11 @@ public class UIButton : MonoBehaviour
     // 버튼 클릭 시 수행할 함수(Action)를 외부에서 받아 등록하는 함수
     public void BindOnClickButtonEvent(Action onClickCallback)
     {
-        if (Button_Base == null) return;
-        // 유니티 이벤트 시스템에 클릭 함수를 리스너로 추가
+        if (Button_Base == null)
+        {
+            Debug.LogError($"[UIButton 오류] {gameObject.name}에 연결될 Button 컴포넌트(Button_Base)가 없습니다. 바인딩 실패!");
+            return;
+        }
         Button_Base.onClick.AddListener(new UnityEngine.Events.UnityAction(onClickCallback));
     }
 

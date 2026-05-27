@@ -14,37 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: d6743a00f9b24584aa1b9d26f6eb44c8
-  m_SerializeEntries:
-  - m_GUID: 41e55da252d262541ad04380d3cbc81f
-    m_Address: Image/ship 1, 2, 3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7036b826b6a8b954a9b3105ebf5c9dd3
-    m_Address: Image/CanonBall
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 850310d3bb370254db359281dbe7803b
-    m_Address: Image/Port_001
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9392e6f6527808b4fb1ec5ea69623bd4
-    m_Address: Image/Loading_002
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ddc1236b789ef1c42957732c1972f081
-    m_Address: Image/storage
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e32f4ef935250084b8d4eddff4fb2259
-    m_Address: Image/main_001
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 106bf23e70e10e74e82ed216d0e2bf75, type: 2}
   m_SchemaSet:

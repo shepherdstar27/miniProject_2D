@@ -2001,7 +2001,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03238aed0bcc7f842aa61ee8a14073de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButton
-  Button_Base: {fileID: 0}
+  Button_Base: {fileID: 1314512653204238420}
+  Text_Base: {fileID: 0}
+  Image_Base: {fileID: 0}
+  Image_Select: {fileID: 0}
 --- !u!1 &6696486018837075224
 GameObject:
   m_ObjectHideFlags: 0
