@@ -11,12 +11,11 @@ public class ItemTooltipUI : MonoBehaviour
     [SerializeField] private Image Image_BigItemIcon;
     [SerializeField] private TextMeshProUGUI TextMesh_ItemName;
     [SerializeField] private TextMeshProUGUI TextMesh_ItemDescription;
+    [SerializeField] private TextMeshProUGUI TextMesh_ItemPrice;
 
-    private void Start()
-    {
-    }
 
-    //  [정보창 가동 출력]: 슬롯에서 호출 시 프레임을 켜고 JSON 정보를 추출 매핑합니다.
+
+    //  슬롯에서 호출 시 프레임을 켜고 JSON 정보를 추출 매핑합니다.
     public void RenderItemTooltip(string itemId)
     {
         if (GameDataManager.Instance == null || GameObject_TooltipMasterFrame == null) return;
@@ -27,6 +26,8 @@ public class ItemTooltipUI : MonoBehaviour
         // 1. 텍스트 명세 수치 동기화
         if (TextMesh_ItemName != null) TextMesh_ItemName.text = itemMaster.Name;
         if (TextMesh_ItemDescription != null) TextMesh_ItemDescription.text = itemMaster.Description;
+        if (TextMesh_ItemPrice != null) TextMesh_ItemPrice.text = itemMaster.Price;
+
 
         // 2. 외형 리소스 실시간 동적 할당
         if (Image_BigItemIcon != null)
@@ -47,12 +48,5 @@ public class ItemTooltipUI : MonoBehaviour
         GameObject_TooltipMasterFrame.SetActive(true);
     }
 
-    //  [정보창 은닉 소멸]: 마우스가 나가면 보드를 검은 장막 뒤로 숨깁니다.
-    public void HideItemTooltip()
-    {
-        if (GameObject_TooltipMasterFrame != null)
-        {
-            GameObject_TooltipMasterFrame.SetActive(false);
-        }
-    }
+
 }

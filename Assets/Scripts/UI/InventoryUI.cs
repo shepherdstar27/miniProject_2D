@@ -32,6 +32,10 @@ public class InventoryUI : UIBase
     private void Awake()
     {
         Instance = this;
+
+
+
+
         BindEvents();
     }
     private void OnEnable()

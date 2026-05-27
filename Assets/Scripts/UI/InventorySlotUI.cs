@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler
 {
     [Header("Slot Display Graphics")]
     [SerializeField] private Image Image_ItemIcon;
@@ -12,6 +12,9 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [Header("Live Assigned Slot Asset")]
     [SerializeField] private string String_CurrentSlotItemId = "";
     [SerializeField] private int Int_CurrentCount = 0;
+
+
+
 
     //  [슬롯 갱신 공정]: 아이콘 파일 경로를 찾아서 실시간 스프라이트 자원을 로드 매핑합니다.
     public void SetupSlotDetails(string itemId, int count)
@@ -78,12 +81,5 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
     }
 
-    //  [인터페이스 요청 구현 2]: 마우스 커서가 이 슬롯 영역을 벗어나 탈출했을 때의 트리거
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (InventoryUI.Instance != null && InventoryUI.Instance.GetTooltipUI() != null)
-        {
-            InventoryUI.Instance.GetTooltipUI().HideItemTooltip();
-        }
-    }
+
 }
