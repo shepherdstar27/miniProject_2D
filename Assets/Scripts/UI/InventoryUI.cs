@@ -28,6 +28,8 @@ public class InventoryUI : UIBase
     private Dictionary<int, InventorySlotUI> _itemSlotList = new Dictionary<int, InventorySlotUI>();
 
 
+
+    //이 UI가 열릴때, 스스로 아이템UI 기본적으로 안에 있는 모든 데이터를 불러온다
     private void OnEnable()
     {
         Button_CreateSlot.BindOnClickButtonEvent(OnClick_CreateSlotTest);
@@ -62,13 +64,30 @@ public class InventoryUI : UIBase
         }
     }
 
+    private void ReadItemLIst()
+    {
+        GameDataManager.Instance.List_ItemTable;
+    }
+
+    public void OnClick_ClosePopup()
+    {
+        UIManager.Instance.CloseContentUI(UIType.Inventory);
+    }
+
+
+    public void OnClick_CreateSlotTest()
+    {
+        // CreateSlot();
+    }
+
+
+
 
 
 
     //     일단 슬롯 1개 생성하고 있음
     private void CreateSlot(string dataId, int StackCount)
     {
-
         // 1-1 Instantiate로 Prefab_Slot 생성, 경로는 Transform_Prefab_Slot_Root
         GameObject gameObject = Instantiate(Prefab_Slot, Transform_Prefab_Slot_Root);
         if (gameObject == null) return; // 동적생성할때는 널인지 자주 확인해줘야 함
@@ -82,12 +101,8 @@ public class InventoryUI : UIBase
         _generatedKey++;
 
         // 1-3 여기서 slotComponent가지고 뭔가를 하는 겁니다!
-        slotComponent.InitSlot(_generatedKey, dataId, StackCount);
-
-        // 1-4 중복체크 해주면 좋긴 하지만, 일단 쉽게 컴포넌트(컴포넌트로 게임오브젝트는 받을 수 있으므로)를 보관해보자
-        _itemSlotList.Add(slotComponent.SlotInstanceId, slotComponent);
-
-        slotComponent.BindSlotSelectEvent(OnChildSlotSelected);
+        slotComponent.InitSlot(dataId, StackCount);
+        _itemSlotList.Add(_generatedKey, slotComponent);
     }
 
 

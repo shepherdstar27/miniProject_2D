@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform Canvas_VeryFrontRoot;
 
     public static UIManager Inst { get; set; }
+    public static UIManager Instance { get; set; }
 
     private Dictionary<UIType, UIBase> _createdUIDic = new Dictionary<UIType, UIBase>();
     private HashSet<UIType> _openedUISet = new HashSet<UIType>();
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Inst = this;
+        Instance = this;
         DontDestroyOnLoad(transform.root.gameObject);
     }
 

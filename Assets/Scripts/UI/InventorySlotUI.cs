@@ -26,9 +26,8 @@ public class InventorySlotUI : MonoBehaviour
     }
 
     //부모(InventoryUI) 에서 사용해야 하니 public으로 작성
-    public void InitSlot(int generatedKey, string dataId, int itemStackCount) // 카테고리에 따라 다른 데이터를 받아올 수 있도록 파라미터를 추가 하면 됨
+    public void InitSlot(string dataId, int itemStackCount) // 카테고리에 따라 다른 데이터를 받아올 수 있도록 파라미터를 추가 하면 됨
     {
-        SlotInstanceId = generatedKey;
         _slotDataID = dataId;
         _itemStackCount= itemStackCount;
     }
