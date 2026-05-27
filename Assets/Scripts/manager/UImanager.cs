@@ -56,6 +56,14 @@ public class UIManager : MonoBehaviour
         }
 
         var targetUI = GetCreatedUI(rootType, uiType);
+
+        // 🚨 [추적 1] 여기서 targetUI가 null인지 검사하고, null이면 강제 중단!
+        if (targetUI == null)
+        {
+            Debug.LogError($"[추적 1] OpenUI 멈춤: {uiType}의 targetUI가 null입니다! 화면에 띄울 수 없습니다.");
+            return null; // 에러가 터지기 전에 안전하게 빠져나갑니다.
+        }
+
         if (_openedUISet.Contains(uiType) == false)
         {
             targetUI.gameObject.SetActive(true);
@@ -87,18 +95,26 @@ public class UIManager : MonoBehaviour
         if (_createdUIDic.ContainsKey(uiType) == false)
         {
             string path = $"Prefabs/UI/{rootType}/{uiType}";
-            Debug.Log($"[UI 로드 시도] 조립된 경로: {path}");
             GameObject loadedObj = Resources.Load<GameObject>(path);
+
+            // 🚨 [추적 2] 프리팹 로드 자체를 실패했는지 확인
             if (loadedObj == null)
             {
-                Debug.LogError($"[UI 로드 실패] {path} 경로에서 프리팹을 찾지 못했습니다! 대소문자나 폴더 구조를 다시 확인하세요.");
+                Debug.LogError($"[추적 2] 로드 실패: Resources 폴더 안에서 '{path}' 경로의 프리팹을 아예 찾지 못했습니다.");
                 return null;
             }
-            Transform parentRoot = GetRootTransform(rootType);
 
+            Transform parentRoot = GetRootTransform(rootType);
             GameObject gObj = Instantiate(loadedObj, parentRoot);
 
             var uiBase = gObj.GetComponent<UIBase>();
+
+            // 🚨 [추적 3] 생성은 했는데 UIBase 컴포넌트를 못 찾았는지 확인
+            if (uiBase == null)
+            {
+                Debug.LogError($"[추적 3] 컴포넌트 실종: 프리팹({loadedObj.name})은 생성했지만, 그 최상위 객체에서 'UIBase'를 상속받은 스크립트를 찾을 수 없습니다!");
+            }
+
             _createdUIDic.Add(uiType, uiBase);
         }
         return _createdUIDic[uiType];

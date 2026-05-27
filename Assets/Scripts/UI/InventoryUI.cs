@@ -1,117 +1,136 @@
 ﻿using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class InventoryUI : UIBase
 {
-    [Header("동적 생성할 프리팹")]
-    [SerializeField] private GameObject Prefab_Slot;       // 장착할 Inventory_SlotUI 프리팹
-    [SerializeField] private Transform Prefab_ItemTooltipUI;    // 장착할 ItemTooltipUI 프리팹
-
-    [SerializeField] private UIButton Button_CreateSlot;
-    [SerializeField] private UIButton Button_CloseSelf;
-    [SerializeField] private UIButton Button_CloseSelfAllArea;
-
-    [Header("왼쪽 툴팁 UI 오브젝트 링크")]
-    [SerializeField] private TextMeshProUGUI Image_BigItemIcon;
-    [SerializeField] private TextMeshProUGUI TextMesh_ItemName;
-    [SerializeField] private TextMeshProUGUI TextMesh_ItemDescription;
-
-    [Header("슬롯 리스트")]
-    [SerializeField] private Transform Transform_Prefab_Slot_Root;  // Inventory_SlotUI 프리팹의 부모 위치
+    public static InventoryUI Instance { get; set; }
 
 
-    //자료구조를 추가하여 아이템 추적
-    private int _generatedKey = 0;
-    private Dictionary<int, InventorySlotUI> _itemSlotList = new Dictionary<int, InventorySlotUI>();
+    [Header("UI Resource References")]
+    [SerializeField] private GameObject GameObject_SlotUiPrefab;       // 장착할 InventorySlotUI 프리팹
+    [SerializeField] private Transform Transform_SlotGridContainer;    // LayoutGroup 컴포넌트가 붙은 그리드 부모 트랜스폼
+
+    [Header("Left Tooltip UI Object Link")]
+    [SerializeField] private ItemTooltipUI Component_LeftTooltipUI;    // 좌측 아이템 상세 정보창 컴포넌트 주소
+
+    [Header("Special Resource Texts")]
+    [SerializeField] private TextMeshProUGUI TextMesh_GoldAmount;
+    [SerializeField] private TextMeshProUGUI TextMesh_FuelAmount;
+    [SerializeField] private TextMeshProUGUI TextMesh_SuppliesAmount;
+
+    [Header("Generated Live Slot List")]
+    [SerializeField] private List<InventorySlotUI> List_CreatedSlotScripts = new List<InventorySlotUI>();
+
+    [Header("Close Buttons")]
+    [SerializeField] private UIButton Button_Close;
 
 
 
-    //이 UI가 열릴때, 스스로 아이템UI 기본적으로 안에 있는 모든 데이터를 불러온다
+    private void Awake()
+    {
+        Instance = this;
+        BindEvents();
+    }
     private void OnEnable()
     {
-        Button_CreateSlot.BindOnClickButtonEvent(OnClick_CreateSlotTest);
-        Button_CloseSelf.BindOnClickButtonEvent(OnClick_ClosePopup);
-        Button_CloseSelfAllArea.BindOnClickButtonEvent(OnClick_ClosePopup);
-        SetInventoryItemSlotOnEnable();
-    }
-
-    private void SetInventoryItemSlotOnEnable()
-    {
-        // 슬롯 정리 - 혹시 오픈 시점에 다른 슬롯들이 있다면 제거
-        if (_itemSlotList.Count > 0)
+        if (Inventory.Instance != null)
         {
-            foreach (KeyValuePair<int, InventorySlotUI> slot in _itemSlotList)
+            var data = Inventory.Instance.GetCargoSlots();
+
+            // 데이터가 없으면 무시, 있으면 생성 및 갱신
+            if (data != null && data.Count > 0)
             {
-                DestroyImmediate(slot.Value.gameObject);
+                if (List_CreatedSlotScripts.Count == 0)
+                {
+                    CreateUIContainerSlots(data.Count);
+                }
+                RefreshInventoryDisplay(data);
+                Debug.Log($"[인벤토리UI] {data.Count}개 슬롯 동기화 성공!");
+                Debug.Log($"[인벤토리UI] 나를 부른 Inventory ID: {Inventory.Instance.GetInstanceID()}");
             }
-            _itemSlotList.Clear();
         }
+    }
 
-        //인벤오픈 1-1) 인벤토리가 열릴때 플레이어가 보유한 모든 아이템을 출력하는 로직을 넣어봅시다
-        List<ItemModel> itemList = GameManager.Inst.GetPlayerItemList();
-        if (itemList == null || itemList.Count == 0)
+    public int GetCreatedSlotCount() 
+    {
+        return List_CreatedSlotScripts.Count; 
+    }
+
+    private void BindEvents()
+    {
+        if (Button_Close != null)
         {
-            Debug.LogWarning("보유한 아이템이 없습니다!");
-            return;
+            Button_Close.BindOnClickButtonEvent(OnClick_Close);
         }
+    }
 
-        foreach (ItemModel itemModel in itemList)
+    private void OnClick_Close()
+    {
+        if (EventSystem.current != null)
         {
-            CreateSlot(itemModel.ItemDataId, itemModel.ItemStackCount);
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        Debug.Log("[인벤토리 UI] UIManager에게 정식 폐쇄를 요청합니다.");
+
+        // UIManager의 CloseUI를 호출합니다.
+        UIManager.Inst.CloseUI(UIType.InventoryUI);
+    }
+
+
+
+    //  좌측 툴팁에 손쉽게 교차 접근을 허용하기 위한 중간 외교 게이트웨이 함수
+    public ItemTooltipUI GetTooltipUI()
+    {
+        return Component_LeftTooltipUI;
+    }
+
+    //  [슬롯 실물 작도]: 배 스펙 칸 수에 맞추어 격자 화면 UI 기물을 실시간 생성합니다.
+    public void CreateUIContainerSlots(int totalCount)
+    {
+        // 기존에 잔존하던 레이아웃 박스 요소 일제 청소 루프
+        for (int i = 0; i < List_CreatedSlotScripts.Count; i++)
+        {
+            if (List_CreatedSlotScripts[i] != null) Destroy(List_CreatedSlotScripts[i].gameObject);
+        }
+        List_CreatedSlotScripts.Clear();
+
+        // 새로운 슬롯 인스턴스 일제 생성 주입
+        for (int i = 0; i < totalCount; i++)
+        {
+            GameObject spawnSlotObj = Instantiate(GameObject_SlotUiPrefab, Transform_SlotGridContainer);
+            InventorySlotUI slotScript = spawnSlotObj.GetComponent<InventorySlotUI>();
+
+            if (slotScript != null)
+            {
+                List_CreatedSlotScripts.Add(slotScript);
+                slotScript.ClearSlotGraphic(); // 순정 공백 정돈
+            }
         }
     }
 
-    private void ReadItemLIst()
+    //  [화면 새로고침 동기화 공정]: 아이템 습득 시 백엔드 리스트를 토스받아 그래픽을 한 번에 정렬합니다.
+    public void RefreshInventoryDisplay(List<InventorySlotData> backendSlots)
     {
-        GameDataManager.Instance.List_ItemTable;
+        for (int i = 0; i < List_CreatedSlotScripts.Count; i++)
+        {
+            if (i < backendSlots.Count)
+            {
+                List_CreatedSlotScripts[i].SetupSlotDetails(backendSlots[i].String_ItemId, backendSlots[i].Int_Count);
+            }
+        }
     }
 
-    public void OnClick_ClosePopup()
+    //  [특수 재화 실시간 수치 인쇄부]
+    public void UpdateSpecialResourceText(int gold, int fuel, int supplies)
     {
-        UIManager.Instance.CloseContentUI(UIType.Inventory);
+        if (TextMesh_GoldAmount != null) TextMesh_GoldAmount.text = gold.ToString();
+        if (TextMesh_FuelAmount != null) TextMesh_FuelAmount.text = fuel.ToString();
+        if (TextMesh_SuppliesAmount != null) TextMesh_SuppliesAmount.text = supplies.ToString();
     }
-
-
-    public void OnClick_CreateSlotTest()
-    {
-        // CreateSlot();
-    }
-
-
-
-
-
-
-    //     일단 슬롯 1개 생성하고 있음
-    private void CreateSlot(string dataId, int StackCount)
-    {
-        // 1-1 Instantiate로 Prefab_Slot 생성, 경로는 Transform_Prefab_Slot_Root
-        GameObject gameObject = Instantiate(Prefab_Slot, Transform_Prefab_Slot_Root);
-        if (gameObject == null) return; // 동적생성할때는 널인지 자주 확인해줘야 함
-
-        // 1-2 자식 슬롯의 컴포넌트를 가져온다 -> 위에 게임오브젝트는 스크립트가 아직 아니므로
-        // 여기서 게임 오브젝트는 동적 생성 완료
-        InventorySlotUI slotComponent = gameObject.GetComponent<InventorySlotUI>();
-        if (slotComponent == null) return; // 동적생성할때는 널인지 자주 확인해줘야 함
-
-        //인벤토리이니 아이템의 dataId는 중복이 될 수 있으니 임시 키 발급
-        _generatedKey++;
-
-        // 1-3 여기서 slotComponent가지고 뭔가를 하는 겁니다!
-        slotComponent.InitSlot(dataId, StackCount);
-        _itemSlotList.Add(_generatedKey, slotComponent);
-    }
-
-
-
-
-
-
-
-
 
 
 }

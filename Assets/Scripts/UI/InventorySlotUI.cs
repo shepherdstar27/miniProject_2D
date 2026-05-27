@@ -1,45 +1,89 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
 
+public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    [Header("Slot Display Graphics")]
+    [SerializeField] private Image Image_ItemIcon;
+    [SerializeField] private TextMeshProUGUI TextMesh_StackCount;
 
-public class InventorySlotUI : MonoBehaviour
-{ 
-    [Header("기본 정보")]
-    [SerializeField] private TextMeshProUGUI TextMesh_Item_Image;    // 아이템 이미지
-    [SerializeField] private TextMeshProUGUI TextMesh_Item_StackCount;    // 아이템 수량
-    [SerializeField] private GameObject TextMesh_Item_Selected;    // 아이템 선택됨 이미지, 왜 GameObject인가? 활성/비활성화 기능으로만 사용
+    [Header("Live Assigned Slot Asset")]
+    [SerializeField] private string String_CurrentSlotItemId = "";
+    [SerializeField] private int Int_CurrentCount = 0;
 
-    private int _generatedKey; // 슬롯이 자기가 살아있는동안 어떤 슬롯인지 보관,  클릭했을때 위에서 Id를 통해서 부모에게 전달해줘야 하므로 임시보관을 하는 것임
-    private string _slotDataID; // 슬롯이 자기가 살아있는동안 어떤 슬롯인지 보관,  클릭했을때 위에서 Id를 통해서 부모에게 전달해줘야 하므로 임시보관을 하는 것임
-    private int _itemStackCount; // 슬롯이 자기가 살아있는동안 어떤 슬롯인지 보관,  클릭했을때 위에서 Id를 통해서 부모에게 전달해줘야 하므로 임시보관을 하는 것임
-
-    private event Action<int> OnSelectEvent;
-
-    public int SlotInstanceId { get; private set; }
-
-
-    private void OnDisable()
+    //  [슬롯 갱신 공정]: 아이콘 파일 경로를 찾아서 실시간 스프라이트 자원을 로드 매핑합니다.
+    public void SetupSlotDetails(string itemId, int count)
     {
-        OnSelectEvent = null;
+
+        String_CurrentSlotItemId = itemId;
+        Int_CurrentCount = count;
+
+        if (string.IsNullOrEmpty(itemId) == true || count <= 0)
+        {
+            ClearSlotGraphic();
+            return;
+        }
+
+        // 아이템 마스터 테이블을 가동해 JSON 내 IconPath 주소를 서칭합니다.
+        if (GameDataManager.Instance != null)
+        {
+            ItemData itemMaster = GameDataManager.Instance.GetItemData(itemId);
+            if (itemMaster != null && Image_ItemIcon != null)
+            {
+                Sprite loadedSprite = Resources.Load<Sprite>(itemMaster.IconPath);
+                if (loadedSprite != null)
+                {
+                    Image_ItemIcon.sprite = loadedSprite;
+                    Image_ItemIcon.enabled = true; // 아이콘 활성화
+                }
+            }
+        }
+
+        // 개수 인쇄
+        if (TextMesh_StackCount != null)
+        {
+            TextMesh_StackCount.text = count.ToString();
+            TextMesh_StackCount.enabled = true;
+        }
     }
 
-    //부모(InventoryUI) 에서 사용해야 하니 public으로 작성
-    public void InitSlot(string dataId, int itemStackCount) // 카테고리에 따라 다른 데이터를 받아올 수 있도록 파라미터를 추가 하면 됨
+    public void ClearSlotGraphic()
     {
-        _slotDataID = dataId;
-        _itemStackCount= itemStackCount;
+        String_CurrentSlotItemId = "";
+        Int_CurrentCount = 0;
+
+        if (Image_ItemIcon != null)
+        {
+            Image_ItemIcon.sprite = null;
+            Image_ItemIcon.enabled = false; // 빈 슬롯은 유령화 처리
+        }
+        if (TextMesh_StackCount != null)
+        {
+            TextMesh_StackCount.enabled = false;
+        }
     }
 
-    public void OnClick_SelectItem()
+    //  [인터페이스 요청 구현 1]: 마우스 커서가 본 슬롯 영역 안에 포개어 안착했을 때의 트리거
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        // 부모한테 알려주자
-        OnSelectEvent?.Invoke(SlotInstanceId);
+        // 빈 슬롯 상태이면 툴팁 정보창 연산을 가동하지 않습니다.
+        if (string.IsNullOrEmpty(String_CurrentSlotItemId) == true) return;
 
-
-        Debug.Log($"{SlotInstanceId}눌러졌다");
-        // 나중에 툴팁, 팝업 다 여기서 띄워주면 된다
+        // 중앙 UI 컨트롤러 허브를 거쳐 좌측 정보창 렌더러 함수를 록온 격발 호출합니다.
+        if (InventoryUI.Instance != null && InventoryUI.Instance.GetTooltipUI() != null)
+        {
+            InventoryUI.Instance.GetTooltipUI().RenderItemTooltip(String_CurrentSlotItemId);
+        }
     }
 
+    //  [인터페이스 요청 구현 2]: 마우스 커서가 이 슬롯 영역을 벗어나 탈출했을 때의 트리거
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (InventoryUI.Instance != null && InventoryUI.Instance.GetTooltipUI() != null)
+        {
+            InventoryUI.Instance.GetTooltipUI().HideItemTooltip();
+        }
+    }
 }
