@@ -80,18 +80,19 @@ public class LootBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") == true)
+        // 이제 태그 검사를 수행합니다.
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log($"[루팅 청취] 플레이어 함선과 드랍 보물상자 충돌 확인.");
+            Debug.Log("[루팅 테스트] 성공! 플레이어를 감지했습니다.");
 
-            if (Inventory.Instance != null)
+            var inv = Object.FindFirstObjectByType<Inventory>();
+            if (inv != null)
             {
-                // [최종 수송]: 상자가 간직했던 아이템 마스터 정보 ID와 수량을 
-                // 인벤토리 백엔드 매니저의 필터 적재 연산 함수인 AddItemToInventory로 토스 배달합니다.
-                Inventory.Instance.AddItemToInventory(String_ContainedItemId, Int_ContainedItemCount);
+                inv.AddItemToInventory(String_ContainedItemId, Int_ContainedItemCount);
+                Debug.Log($"[강제루팅] {String_ContainedItemId}를 인벤토리에 넣었습니다.");
             }
-            // 상자 기물 파쇄 철거
             Destroy(gameObject);
         }
+
     }
 }

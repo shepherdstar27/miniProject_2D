@@ -16,6 +16,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     //  [슬롯 갱신 공정]: 아이콘 파일 경로를 찾아서 실시간 스프라이트 자원을 로드 매핑합니다.
     public void SetupSlotDetails(string itemId, int count)
     {
+
         String_CurrentSlotItemId = itemId;
         Int_CurrentCount = count;
 

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : UIBase
 {
     public static InventoryUI Instance { get; set; }
 
@@ -27,10 +28,35 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private UIButton Button_Close;
 
 
+
     private void Awake()
     {
         Instance = this;
         BindEvents();
+    }
+    private void OnEnable()
+    {
+        if (Inventory.Instance != null)
+        {
+            var data = Inventory.Instance.GetCargoSlots();
+
+            // 데이터가 없으면 무시, 있으면 생성 및 갱신
+            if (data != null && data.Count > 0)
+            {
+                if (List_CreatedSlotScripts.Count == 0)
+                {
+                    CreateUIContainerSlots(data.Count);
+                }
+                RefreshInventoryDisplay(data);
+                Debug.Log($"[인벤토리UI] {data.Count}개 슬롯 동기화 성공!");
+                Debug.Log($"[인벤토리UI] 나를 부른 Inventory ID: {Inventory.Instance.GetInstanceID()}");
+            }
+        }
+    }
+
+    public int GetCreatedSlotCount() 
+    {
+        return List_CreatedSlotScripts.Count; 
     }
 
     private void BindEvents()
@@ -50,7 +76,7 @@ public class InventoryUI : MonoBehaviour
 
         Debug.Log("[인벤토리 UI] UIManager에게 정식 폐쇄를 요청합니다.");
 
-        // 수정된 UIManager의 CloseUI를 호출합니다.
+        // UIManager의 CloseUI를 호출합니다.
         UIManager.Inst.CloseUI(UIType.InventoryUI);
     }
 
