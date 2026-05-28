@@ -1,0 +1,86 @@
+[
+  {
+    "Id": "BuyAndSell_0001",
+    "Name": "구매및판매가0001",
+    "Trade_Id": "Trade_0001",
+    "Gold_0001": 100,
+    "Fuel_0002": 100,
+    "Supplies_0003": 100,
+    "TradingGoods_0004": 100,
+    "TradingGoods_0005": 200,
+    "TradingGoods_0006": 200,
+    "TradingGoods_0007": 100
+  },
+  {
+    "Id": "BuyAndSell_0002",
+    "Name": "구매및판매가0002",
+    "Trade_Id": "Trade_0002",
+    "Gold_0001": 100,
+    "Fuel_0002": 100,
+    "Supplies_0003": 100,
+    "TradingGoods_0004": 200,
+    "TradingGoods_0005": 100,
+    "TradingGoods_0006": 100,
+    "TradingGoods_0007": 200
+  },
+  {
+    "Id": "BuyAndSell_0003",
+    "Name": "구매및판매가0003",
+    "Trade_Id": "Trade_0003",
+    "Gold_0001": 100,
+    "Fuel_0002": 100,
+    "Supplies_0003": 100,
+    "TradingGoods_0004": 100,
+    "TradingGoods_0005": 100,
+    "TradingGoods_0006": 100,
+    "TradingGoods_0007": 100
+  },
+  {
+    "Id": "BuyAndSell_0004",
+    "Name": "구매및판매가0004",
+    "Trade_Id": "Trade_0004",
+    "Gold_0001": 100,
+    "Fuel_0002": 100,
+    "Supplies_0003": 100,
+    "TradingGoods_0004": 100,
+    "TradingGoods_0005": 100,
+    "TradingGoods_0006": 100,
+    "TradingGoods_0007": 100
+  },
+  {
+    "Id": "BuyAndSell_0005",
+    "Name": "구매및판매가0005",
+    "Trade_Id": "Trade_0005",
+    "Gold_0001": 100,
+    "Fuel_0002": 100,
+    "Supplies_0003": 100,
+    "TradingGoods_0004": 100,
+    "TradingGoods_0005": 100,
+    "TradingGoods_0006": 100,
+    "TradingGoods_0007": 100
+  },
+  {
+    "Id": "BuyAndSell_0006",
+    "Name": "구매및판매가0006",
+    "Trade_Id": "Trade_0006",
+    "Gold_0001": 100,
+    "Fuel_0002": 100,
+    "Supplies_0003": 100,
+    "TradingGoods_0004": 100,
+    "TradingGoods_0005": 100,
+    "TradingGoods_0006": 100,
+    "TradingGoods_0007": 100
+  },
+  {
+    "Id": "BuyAndSell_0007",
+    "Name": "구매및판매가0007",
+    "Trade_Id": "Trade_0007",
+    "Gold_0001": 100,
+    "Fuel_0002": 100,
+    "Supplies_0003": 100,
+    "TradingGoods_0004": 100,
+    "TradingGoods_0005": 100,
+    "TradingGoods_0006": 100,
+    "TradingGoods_0007": 100
+  }
+]

@@ -12,7 +12,9 @@ public class GameDataManager : MonoBehaviour
     [SerializeField] private List<EngineData> List_EngineTable = new List<EngineData>(); // 엔진 테이블 그릇 추가
     [SerializeField] private List<ShipData> List_ShipTable = new List<ShipData>(); // 배 테이블 그릇 추가
     [SerializeField] private List<DropTableData> List_DropTable = new List<DropTableData>(); // 드랍테이블 테이블 그릇 추가
-
+    [SerializeField] private List<TradeData> List_TradeTable = new List<TradeData>(); // 트레이드테이블 테이블 그릇 추가
+    [SerializeField] private List<BuyAndSellData> List_BuyAndSellTable = new List<BuyAndSellData>(); // 가격배율테이블 테이블 그릇 추가
+    [SerializeField] private List<PortData> List_PortTable = new List<PortData>(); // 항구테이블 테이블 그릇 추가
 
 
 
@@ -202,6 +204,88 @@ public class GameDataManager : MonoBehaviour
         }
 
 
+        // =========================================================================
+        // TradeData 로드 로직
+        // =========================================================================
+        string TradeJsonPath = "JsonOutput/Trade";
+        TextAsset TradeTextAsset = Resources.Load<TextAsset>(TradeJsonPath);
+
+        if (TradeTextAsset != null)
+        {
+            //  앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)
+            string cleanJson = ShipTextAsset.text.Trim();
+            string wrappedJson = "{ \"Data\": " + cleanJson + " }";
+
+            //  TradeTable 규격으로 FromJson을 실행
+            TradeTable parsedTable = JsonUtility.FromJson<TradeTable>(wrappedJson);
+
+            if (parsedTable != null && parsedTable.Data != null)
+            {
+                List_TradeTable = parsedTable.Data;
+                Debug.Log($"[GameDataManager] {List_TradeTable.Count}개의 Trade 기획 데이터를 성공적으로 로드했습니다!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"[GameDataManager] {TradeJsonPath} 경로에서 데이터를 찾지 못했습니다.");
+        }
+
+
+        // =========================================================================
+        // BuyAndSellData 로드 로직
+        // =========================================================================
+        string BuyAndSellJsonPath = "JsonOutput/BuyAndSell";
+        TextAsset BuyAndSellTextAsset = Resources.Load<TextAsset>(BuyAndSellJsonPath);
+
+        if (BuyAndSellTextAsset != null)
+        {
+            //  [핵심 해결] 앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)합니다.
+            string cleanJson = BuyAndSellTextAsset.text.Trim();
+            string wrappedJson = "{ \"Data\": " + cleanJson + " }";
+
+            //  BuyAndSellTable 규격으로 FromJson을 실행
+            BuyAndSellTable parsedTable = JsonUtility.FromJson<BuyAndSellTable>(wrappedJson);
+
+            if (parsedTable != null && parsedTable.Data != null)
+            {
+                List_BuyAndSellTable = parsedTable.Data;
+                Debug.Log($"[GameDataManager] {List_BuyAndSellTable.Count}개의 배 기획 데이터를 성공적으로 로드했습니다!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"[GameDataManager] {BuyAndSellJsonPath} 경로에서 데이터를 찾지 못했습니다.");
+        }
+
+
+        // =========================================================================
+        // PortData 로드 로직
+        // =========================================================================
+        string PortJsonPath = "JsonOutput/Port";
+        TextAsset PortTextAsset = Resources.Load<TextAsset>(PortJsonPath);
+
+        if (PortTextAsset != null)
+        {
+            //  [핵심 해결] 앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)합니다.
+            string cleanJson = PortTextAsset.text.Trim();
+            string wrappedJson = "{ \"Data\": " + cleanJson + " }";
+
+            //  PortTable 규격으로 FromJson을 실행
+            PortTable parsedTable = JsonUtility.FromJson<PortTable>(wrappedJson);
+
+            if (parsedTable != null && parsedTable.Data != null)
+            {
+                List_PortTable = parsedTable.Data;
+                Debug.Log($"[GameDataManager] {List_PortTable.Count}개의 배 기획 데이터를 성공적으로 로드했습니다!");
+            }
+        }
+        else
+        {
+            Debug.LogError($"[GameDataManager] {PortJsonPath} 경로에서 데이터를 찾지 못했습니다.");
+        }
+
+
+
     }
 
 
@@ -244,7 +328,6 @@ public class GameDataManager : MonoBehaviour
     // =========================================================================
     // EnemyData 조회 메서드 
     // =========================================================================
-
     public EnemyData GetEnemyData(string targetId)
     {
         foreach (EnemyData Enemy in List_EnemyTable)
@@ -308,6 +391,54 @@ public class GameDataManager : MonoBehaviour
         return null;
     }
 
+
+    // =========================================================================
+    // TradeData 조회 메서드 
+    // =========================================================================
+    public TradeData GetTradeData(string targetId)
+    {
+        foreach (TradeData Trade in List_TradeTable)
+        {
+            if (Trade.Id == targetId)
+            {
+                return Trade;
+            }
+        }
+        Debug.LogWarning($"[GameDataManager] 트레이드테이블 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
+        return null;
+    }
+
+    // =========================================================================
+    // BuyAndSellData 조회 메서드 
+    // =========================================================================
+    public BuyAndSellData GetBuyAndSellData(string targetId)
+    {
+        foreach (BuyAndSellData BuyAndSell in List_BuyAndSellTable)
+        {
+            if (BuyAndSell.Id == targetId)
+            {
+                return BuyAndSell;
+            }
+        }
+        Debug.LogWarning($"[GameDataManager] BuyAndSell테이블 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
+        return null;
+    }
+
+    // =========================================================================
+    // PortData 조회 메서드 
+    // =========================================================================
+    public PortData GetPortData(string targetId)
+    {
+        foreach (PortData Port in List_PortTable)
+        {
+            if (Port.Id == targetId)
+            {
+                return Port;
+            }
+        }
+        Debug.LogWarning($"[GameDataManager] 항구테이블 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
+        return null;
+    }
 
 
 

@@ -15,6 +15,8 @@ public class PortUI : UIBase
 
     [Header("Port UI Menu Window")]
     [SerializeField] private GameObject PortUI_pier_Menu;
+    [SerializeField] private GameObject PortUI_Trade_Menu;
+
 
 
 
@@ -59,7 +61,6 @@ public class PortUI : UIBase
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
-
         // UIManager를 통해 현재 인벤토리가 열려있는지 확인하여 분기 처리
         if (UIManager.Inst.IsOpened(UIType.InventoryUI) == true)
         {
@@ -80,10 +81,60 @@ public class PortUI : UIBase
     {
         Debug.Log("[항구 UI] 승무원 버튼 클릭됨");
     }
+
+
+
+
+
+
+
+
+
+
+
     private void OnClick_Trade()
     {
         Debug.Log("[항구 UI] 교역소 버튼 클릭됨");
+        Toggle_Trade_Window();
     }
+
+
+    private void Toggle_Trade_Window()
+    {
+        // 버튼 클릭 후 유니티 UI 포커스 강제 해제 (안전장치 유지)
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        // UIManager를 통해 현재 인벤토리가 열려있는지 확인하여 분기 처리
+        if (UIManager.Inst.IsOpened(UIType.TradeUI) == true)
+        {
+            Debug.Log("[항구 UI] 거래창이 이미 열려있으므로, UIManager에게 폐쇄");
+            UIManager.Inst.CloseUI(UIType.TradeUI);
+        }
+        else
+        {
+            Debug.Log("[항구 UI] 거래창이 닫혀있으므로, UIManager에게 동적 생성");
+            UIManager.Inst.OpenTradeUI(); // (또는 UIManager.Inst.OpenUI(UIRootType.PopupUI, UIType.InventoryUI);)
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void OnClick_pier()
     {
         Debug.Log("[항구 UI] 선착장 버튼 클릭됨");

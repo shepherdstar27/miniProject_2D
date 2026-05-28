@@ -22,6 +22,8 @@ public static class UIManagerExtension
         uiManager.OpenUI(UIRootType.MainUI, UIType.MainUI);
     }
 
+
+
     public static void OpenPortUI(this UIManager uiManager)
     {
         //  PortUI 열기
@@ -40,6 +42,9 @@ public static class UIManagerExtension
         }
     }
 
+
+
+
     public static void OpenInventoryUI(this UIManager manager)
     {
         // PopupUI 또는 ContentUI 레이어에 InventoryUI 프리팹을 찍어냅니다.
@@ -51,6 +56,22 @@ public static class UIManagerExtension
     {
         manager.CloseUI(UIType.InventoryUI);
     }
+
+
+
+
+    public static void OpenTradeUI(this UIManager manager)
+    {
+        // PopupUI 또는 ContentUI 레이어에 TradeUI 프리팹을 찍어냅니다.
+        manager.OpenUI(UIRootType.PopupUI, UIType.TradeUI);
+    }
+
+    // 트레이드 UI 완전 파괴 및 닫기 함수
+    public static void CloseTradeUI(this UIManager manager)
+    {
+        manager.CloseUI(UIType.TradeUI);
+    }
+
 
 
 }
