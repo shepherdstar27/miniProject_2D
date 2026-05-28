@@ -3,44 +3,53 @@
 public class PortZone : MonoBehaviour
 {
     [Header("Port Settings")]
-    [SerializeField] private string String_PortName = "기본 항구";
+    // 규칙 반영: 일반 변수 _소문자 시작, 유니티 인스펙터 개방
+    [SerializeField] private string _portName = "기본 항구";
+    [SerializeField] private string _tradeId = "Trade_0001"; // 하이어라키에서 이 값을 교역소마다 다르게 설정
 
-    // 배가 항구 영역 안으로 진입했을 때 물리 엔진이 자동으로 호출하는 정석 함수
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"[물리 체크] 항구 구역에 무언가 물리적으로 접촉함! 대상 이름: {collision.gameObject.name}");
-
         if (collision.CompareTag("Player") == true)
         {
-            Debug.Log($"[항구 시스템] {String_PortName}에 플레이어 진입!");
+            Debug.Log($"[항구 시스템] {_portName}에 플레이어 진입! 교역소 ID: {_tradeId}");
 
             PlayerInteractionPort interactionPort = collision.GetComponent<PlayerInteractionPort>();
 
             if (interactionPort != null)
             {
                 interactionPort.SetNearPort(true, this);
+
+                // 플레이어가 진입하는 즉시 TradeManager에 현재 상점 ID를 갱신합니다.
+                if (TradeManager.Instance != null)
+                {
+                    TradeManager.Instance.CurrentTradeId = _tradeId;
+                }
             }
         }
     }
 
-    // 배가 항구 영역 밖으로 벗어났을 때 자동으로 호출되는 함수
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") == true)
         {
-            Debug.Log($"[항구 시스템] {String_PortName}에서 플레이어 이탈.");
+            Debug.Log($"[항구 시스템] {_portName}에서 플레이어 이탈.");
 
             PlayerInteractionPort interactionPort = collision.GetComponent<PlayerInteractionPort>();
 
             if (interactionPort != null)
             {
                 interactionPort.SetNearPort(false, null);
+
+                if (TradeManager.Instance != null)
+                {
+                    TradeManager.Instance.CurrentTradeId = ""; // 이탈 시 초기화
+                }
             }
         }
     }
 
     public string GetPortName()
     {
-        return String_PortName;
+        return _portName;
     }
 }

@@ -8,13 +8,14 @@ public class TradeData
     public string Id;          // 교역소 고유 ID
     public string Name;        // 교역소 이름
     public string Description; // 교역소 설명
-    public int Gold_0001;         // 재고량
-    public int Fuel_0002;          // 재고량
-    public int Supplies_0003;      // 재고량
-    public int TradingGoods_0004;  // 재고량  
-    public int TradingGoods_0005;  // 재고량  
-    public int TradingGoods_0006;  // 재고량 
-    public int TradingGoods_0007;  // 재고량 
+    public string Port_Id;     //  항구 ID
+    public int Gold_0001_Stock;         // 재고량
+    public int Fuel_0002_Stock;          // 재고량
+    public int Supplies_0003_Stock;      // 재고량
+    public int TradingGoods_0004_Stock;  // 재고량  
+    public int TradingGoods_0005_Stock;  // 재고량  
+    public int TradingGoods_0006_Stock;  // 재고량 
+    public int TradingGoods_0007_Stock;  // 재고량 
 }
 
 

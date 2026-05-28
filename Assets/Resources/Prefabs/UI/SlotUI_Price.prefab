@@ -305,9 +305,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlotUI
   Image_ItemIcon: {fileID: 6966407824660858843}
+  TextMesh_Price: {fileID: 5238071417743002268}
   TextMesh_StackCount: {fileID: 542163979577676137}
-  String_CurrentSlotItemId: 
-  Int_CurrentCount: 0
+  _currentSlotItemId: 
+  _currentPrice: 0
+  _currentCount: 0
 --- !u!1 &6829478541641777729
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,11 +3,11 @@
 public class LootBox : MonoBehaviour
 {
     [Header("Loot Box Component Cache")]
-    [SerializeField] private SpriteRenderer SpriteRenderer_InsideIcon; //  아이템 아이콘 이미지를 그려줄 컴포넌트
+    [SerializeField] private SpriteRenderer SpriteRenderer_InsideIcon;
 
     [Header("Loot Box Inside Contents")]
-    [SerializeField] private string String_ContainedItemId;
-    [SerializeField] private int Int_ContainedItemCount;
+    [SerializeField] private string _containedItemId;
+    [SerializeField] private int _containedItemCount;
 
     private void Awake()
     {
@@ -16,7 +16,6 @@ public class LootBox : MonoBehaviour
 
     private void CacheLootBoxComponents()
     {
-        // 만약 인스펙터에서 깜빡하고 할당을 안 했다면, 자기 자신이나 자식 기물에서 자동으로 렌더러를 찾아옵니다.
         if (SpriteRenderer_InsideIcon == null)
         {
             SpriteRenderer_InsideIcon = GetComponent<SpriteRenderer>();
@@ -28,13 +27,12 @@ public class LootBox : MonoBehaviour
         }
     }
 
-    //  [핵심 데이터 주입구]: BattleManager가 상자를 Instantiate한 직후 이 함수를 호출하여 내용을 심습니다.
+    // [핵심 데이터 주입구]
     public void SetupLootBoxContents(string itemId, int count)
     {
-        String_ContainedItemId = itemId;
-        Int_ContainedItemCount = count;
+        _containedItemId = itemId;
+        _containedItemCount = count;
 
-        //  [실시간 데이터 드리븐 외형 동기화]: 알맹이가 정해진 즉시 JSON 이미지 경로를 추적합니다.
         ApplyItemIconFromTable();
     }
 
@@ -46,28 +44,22 @@ public class LootBox : MonoBehaviour
             return;
         }
 
-        // 1. 유저님이 개설해 두신 공용 아이템 마스터 테이블에서 ID를 기점으로 로드합니다.
-        // (아이템 데이터 클래스 명칭이 ItemData 라고 가정하고 규격을 세팅합니다)
-        ItemData itemMaster = GameDataManager.Instance.GetItemData(String_ContainedItemId);
+        ItemData itemMaster = GameDataManager.Instance.GetItemData(_containedItemId);
 
         if (itemMaster == null)
         {
-            Debug.LogWarning($"[루팅박스 경고] 아이템 ID [{String_ContainedItemId}]를 마스터 테이블에서 찾을 수 없습니다.");
+            Debug.LogWarning($"[루팅박스 경고] 아이템 ID [{_containedItemId}]를 마스터 테이블에서 찾을 수 없습니다.");
             return;
         }
 
-        // 2.  [경로 추적 및 로드]: JSON에 기록된 "IconPath" 텍스트 정보(예: "Icons/Gold")를 파싱합니다.
-        //  조건: 해당 이미지 에셋은 반드시 프로젝트 창의 'Assets/Resources/' 폴더 내부에 물리적으로 존재해야 합니다.
         string targetResourcePath = itemMaster.IconPath;
 
         if (string.IsNullOrEmpty(targetResourcePath) == false)
         {
-            // Resources.Load API를 가동하여 텍스트 주소지에 매핑된 스프라이트 원본 리소스를 메모리에 낚아챕니다.
             Sprite loadedIconSprite = Resources.Load<Sprite>(targetResourcePath);
 
             if (loadedIconSprite != null)
             {
-                // 3. 내 몸뚱이에 붙은 SpriteRenderer의 이미지를 실시간으로 교체 배정합니다.
                 SpriteRenderer_InsideIcon.sprite = loadedIconSprite;
                 Debug.Log($" [외형 동기화 성공] 전리품 상자 그래픽 갱신 완료. 경로: {targetResourcePath}");
             }
@@ -80,19 +72,28 @@ public class LootBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 이제 태그 검사를 수행합니다.
         if (collision.CompareTag("Player"))
         {
             Debug.Log("[루팅 테스트] 성공! 플레이어를 감지했습니다.");
 
-            var inv = Object.FindFirstObjectByType<Inventory>();
-            if (inv != null)
+            // 데이터 중앙 관리 원칙: GameManager의 PlayerModel 원본에 직접 접근하여 데이터 적재
+            if (GameManager.Inst != null && GameManager.Inst.PlayerModel != null)
             {
-                inv.AddItemToInventory(String_ContainedItemId, Int_ContainedItemCount);
-                Debug.Log($"[강제루팅] {String_ContainedItemId}를 인벤토리에 넣었습니다.");
-            }
-            Destroy(gameObject);
-        }
+                GameManager.Inst.PlayerModel.AddItem(_containedItemId, _containedItemCount);
+                Debug.Log($"[강제루팅] {_containedItemId} 아이템 {_containedItemCount}개를 PlayerModel에 안전하게 저장했습니다.");
 
+                // 데이터 적재 완료 후, UI 동기화는 브리지(Inventory)가 활성화되어 있을 때만 호출
+                if (Inventory.Instance != null)
+                {
+                    Inventory.Instance.RefreshInventoryUI();
+                }
+
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("[루팅 실패] GameManager 또는 PlayerModel 인스턴스가 존재하지 않아 아이템을 저장할 수 없습니다.");
+            }
+        }
     }
 }

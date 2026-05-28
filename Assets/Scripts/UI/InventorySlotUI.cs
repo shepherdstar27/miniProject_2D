@@ -3,25 +3,22 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler
+public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     [Header("Slot Display Graphics")]
     [SerializeField] private Image Image_ItemIcon;
+    [SerializeField] private TextMeshProUGUI TextMesh_Price;
     [SerializeField] private TextMeshProUGUI TextMesh_StackCount;
 
     [Header("Live Assigned Slot Asset")]
-    [SerializeField] private string String_CurrentSlotItemId = "";
-    [SerializeField] private int Int_CurrentCount = 0;
+    [SerializeField] private string _currentSlotItemId = "";
+    [SerializeField] private int _currentPrice = 0;
+    [SerializeField] private int _currentCount = 0;
 
-
-
-
-    //  [슬롯 갱신 공정]: 아이콘 파일 경로를 찾아서 실시간 스프라이트 자원을 로드 매핑합니다.
     public void SetupSlotDetails(string itemId, int count)
     {
-
-        String_CurrentSlotItemId = itemId;
-        Int_CurrentCount = count;
+        _currentSlotItemId = itemId;
+        _currentCount = count;
 
         if (string.IsNullOrEmpty(itemId) == true || count <= 0)
         {
@@ -29,22 +26,58 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler
             return;
         }
 
-        // 아이템 마스터 테이블을 가동해 JSON 내 IconPath 주소를 서칭합니다.
         if (GameDataManager.Instance != null)
         {
             ItemData itemMaster = GameDataManager.Instance.GetItemData(itemId);
-            if (itemMaster != null && Image_ItemIcon != null)
+
+            if (itemMaster != null)
             {
-                Sprite loadedSprite = Resources.Load<Sprite>(itemMaster.IconPath);
-                if (loadedSprite != null)
+                // [해결 1] 가격 텍스트 안전 파싱 및 강제 활성화
+                if (TextMesh_Price != null)
                 {
-                    Image_ItemIcon.sprite = loadedSprite;
-                    Image_ItemIcon.enabled = true; // 아이콘 활성화
+                    string cleanPrice = "";
+                    if (string.IsNullOrEmpty(itemMaster.Price) == false)
+                    {
+                        cleanPrice = itemMaster.Price.Trim(); // 혹시 모를 공백 제거
+                    }
+
+                    int basePrice = 0;
+                    if (int.TryParse(cleanPrice, out basePrice) == true)
+                    {
+                        int finalPrice = basePrice;
+
+                        if (TradeManager.Instance != null)
+                        {
+                            finalPrice = TradeManager.Instance.GetItemTradePrice(itemId, basePrice);
+                        }
+
+                        _currentPrice = finalPrice;
+                        TextMesh_Price.text = finalPrice.ToString();
+                        TextMesh_Price.gameObject.SetActive(true); // 컴포넌트 enabled 대신 오브젝트 자체를 On
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[가격 에러] 아이템 {itemId}의 Price 값 '{itemMaster.Price}'을 숫자로 변환할 수 없습니다.");
+                        TextMesh_Price.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("[UI 에러] Slot 프리팹에 TextMesh_Price가 인스펙터에 할당되지 않았습니다!");
+                }
+
+                if (Image_ItemIcon != null)
+                {
+                    Sprite loadedSprite = Resources.Load<Sprite>(itemMaster.IconPath);
+                    if (loadedSprite != null)
+                    {
+                        Image_ItemIcon.sprite = loadedSprite;
+                        Image_ItemIcon.enabled = true;
+                    }
                 }
             }
         }
 
-        // 개수 인쇄
         if (TextMesh_StackCount != null)
         {
             TextMesh_StackCount.text = count.ToString();
@@ -54,32 +87,42 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler
 
     public void ClearSlotGraphic()
     {
-        String_CurrentSlotItemId = "";
-        Int_CurrentCount = 0;
+        _currentSlotItemId = "";
+        _currentCount = 0;
+        _currentPrice = 0;
 
         if (Image_ItemIcon != null)
         {
             Image_ItemIcon.sprite = null;
-            Image_ItemIcon.enabled = false; // 빈 슬롯은 유령화 처리
+            Image_ItemIcon.enabled = false;
         }
         if (TextMesh_StackCount != null)
         {
             TextMesh_StackCount.enabled = false;
         }
-    }
-
-    //  [인터페이스 요청 구현 1]: 마우스 커서가 본 슬롯 영역 안에 포개어 안착했을 때의 트리거
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        // 빈 슬롯 상태이면 툴팁 정보창 연산을 가동하지 않습니다.
-        if (string.IsNullOrEmpty(String_CurrentSlotItemId) == true) return;
-
-        // 중앙 UI 컨트롤러 허브를 거쳐 좌측 정보창 렌더러 함수를 록온 격발 호출합니다.
-        if (InventoryUI.Instance != null && InventoryUI.Instance.GetTooltipUI() != null)
+        if (TextMesh_Price != null)
         {
-            InventoryUI.Instance.GetTooltipUI().RenderItemTooltip(String_CurrentSlotItemId);
+            TextMesh_Price.gameObject.SetActive(false);
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (string.IsNullOrEmpty(_currentSlotItemId) == true) return;
 
+        if (InventoryUI.Instance != null && InventoryUI.Instance.GetTooltipUI() != null)
+        {
+            InventoryUI.Instance.GetTooltipUI().RenderItemTooltip(_currentSlotItemId);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (string.IsNullOrEmpty(_currentSlotItemId) == true) return;
+
+        if (InventoryUI.Instance != null && InventoryUI.Instance.GetTooltipUI() != null)
+        {
+            InventoryUI.Instance.GetTooltipUI().RenderItemTooltip(_currentSlotItemId);
+        }
+    }
 }

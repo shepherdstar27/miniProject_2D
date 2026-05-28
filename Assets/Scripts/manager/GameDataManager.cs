@@ -17,7 +17,6 @@ public class GameDataManager : MonoBehaviour
     [SerializeField] private List<PortData> List_PortTable = new List<PortData>(); // 항구테이블 테이블 그릇 추가
 
 
-
     // [SerializeField] private List<PortData> List_PortTable = new List<PortData>();       // 추후 확장용
 
     private void Awake()
@@ -213,7 +212,7 @@ public class GameDataManager : MonoBehaviour
         if (TradeTextAsset != null)
         {
             //  앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)
-            string cleanJson = ShipTextAsset.text.Trim();
+            string cleanJson = TradeTextAsset.text.Trim();
             string wrappedJson = "{ \"Data\": " + cleanJson + " }";
 
             //  TradeTable 규격으로 FromJson을 실행
@@ -239,17 +238,18 @@ public class GameDataManager : MonoBehaviour
 
         if (BuyAndSellTextAsset != null)
         {
-            //  [핵심 해결] 앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)합니다.
+            // [핵심 해결] 앞뒤 공백을 자르고, 중괄호 객체 형태로 강제 변환(래핑)합니다.
             string cleanJson = BuyAndSellTextAsset.text.Trim();
             string wrappedJson = "{ \"Data\": " + cleanJson + " }";
 
-            //  BuyAndSellTable 규격으로 FromJson을 실행
+            // BuyAndSellTable 규격으로 FromJson을 실행
             BuyAndSellTable parsedTable = JsonUtility.FromJson<BuyAndSellTable>(wrappedJson);
 
             if (parsedTable != null && parsedTable.Data != null)
             {
+                // 이미 선언해두신 List_BuyAndSellTable에 데이터 리스트를 통째로 넣습니다.
                 List_BuyAndSellTable = parsedTable.Data;
-                Debug.Log($"[GameDataManager] {List_BuyAndSellTable.Count}개의 배 기획 데이터를 성공적으로 로드했습니다!");
+                Debug.Log($"[GameDataManager] {List_BuyAndSellTable.Count}개의 가격 배율 데이터를 성공적으로 로드했습니다!");
             }
         }
         else
@@ -284,8 +284,6 @@ public class GameDataManager : MonoBehaviour
             Debug.LogError($"[GameDataManager] {PortJsonPath} 경로에서 데이터를 찾지 못했습니다.");
         }
 
-
-
     }
 
 
@@ -309,6 +307,7 @@ public class GameDataManager : MonoBehaviour
         return null;
     }
 
+
     // =========================================================================
     // WeaponData 조회 메서드 
     // =========================================================================
@@ -324,6 +323,7 @@ public class GameDataManager : MonoBehaviour
         Debug.LogWarning($"[GameDataManager] 무기 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
         return null;
     }
+
 
     // =========================================================================
     // EnemyData 조회 메서드 
@@ -375,6 +375,7 @@ public class GameDataManager : MonoBehaviour
         return null;
     }
 
+
     // =========================================================================
     // DropTableData 조회 메서드 
     // =========================================================================
@@ -408,6 +409,7 @@ public class GameDataManager : MonoBehaviour
         return null;
     }
 
+
     // =========================================================================
     // BuyAndSellData 조회 메서드 
     // =========================================================================
@@ -423,6 +425,27 @@ public class GameDataManager : MonoBehaviour
         Debug.LogWarning($"[GameDataManager] BuyAndSell테이블 Id [{targetId}] 에 해당하는 정보가 기획 데이터에 없습니다!");
         return null;
     }
+
+
+    // =========================================================================
+    // BuyAndSellData 조회 메서드 (Trade_Id 로 검색)
+    // =========================================================================
+    public BuyAndSellData GetBuyAndSellDataByTradeId(string targetTradeId)
+    {
+        // 딕셔너리 대신 이미 저장된 List_BuyAndSellTable을 순회하여 찾습니다.
+        foreach (BuyAndSellData data in List_BuyAndSellTable)
+        {
+            // JSON에 정의된 "Trade_Id" 와 현재 항구의 _currentTradeId 비교
+            if (data.Trade_Id == targetTradeId)
+            {
+                return data; // 일치하는 배율 데이터 묶음을 반환
+            }
+        }
+
+        Debug.LogWarning($"[GameDataManager] Trade_Id [{targetTradeId}] 에 해당하는 가격 배율 정보가 기획 데이터에 없습니다!");
+        return null;
+    }
+
 
     // =========================================================================
     // PortData 조회 메서드 
