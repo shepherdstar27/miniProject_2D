@@ -40,7 +40,8 @@ public class BattleManager : MonoBehaviour
         if (Bool_IsGameOver == true) return;
 
         Bool_IsGameOver = true;
-        Debug.Log(" [배틀 매니저] 플레이어 함선 파괴! 게임오버(패배) 프로세스를 가동합니다.");
+        Debug.Log(" [BattleManager] 플레이어 함선 파괴! 게임오버(패배) 프로세스를 가동합니다.");
+        UIManager.Inst.OpenUI(UIRootType.PopupUI, UIType.GameOverUI);
 
         // TODO: UImanager.Inst.ShowPopupUI("DefeatPopupUI") 연동 가능
     }
@@ -49,7 +50,7 @@ public class BattleManager : MonoBehaviour
     public void CallPlayerVictory(string dropTableId, Vector3 enemyPosition)
     {
 
-        Debug.Log(" [배틀 매니저] 적 함선 격침 완료! 승리 프로세스 및 보상 연산을 가동합니다.");
+        Debug.Log(" [BattleManager] 적 함선 격침 완료! 승리 프로세스 및 보상 연산을 가동합니다.");
 
         // 1. JSON 마스터 테이블에서 해당하는 드랍테이블 행 데이터를 조회합니다.
         if (GameDataManager.Instance != null)
@@ -101,15 +102,14 @@ public class BattleManager : MonoBehaviour
     {
         if (GameObject_BaseLootBoxPrefab == null)
         {
-            Debug.LogWarning($"[드랍 연출 경고] GameObject_BaseLootBoxPrefab이 비어있어 실물 복사를 생략합니다. (당첨 아이템: {itemId} / {count}개)");
+            Debug.LogWarning($"[드랍 연출 경고] GameObject_BaseLootBoxPrefab이 비어있어 실물 복사를 생략 (당첨 아이템: {itemId} / {count}개)");
             return;
         }
 
-        // 1. 뱃머리가 터진 바다 좌표 평면(Z=0)에 기본 보물상자 프리팹을 복사 생성합니다.
+        // 1. 뱃머리가 터진 바다 좌표 평면(Z=0)에 기본 보물상자 프리팹을 복사 생성
         GameObject spawnedBoxObj = Instantiate(GameObject_BaseLootBoxPrefab, position, Quaternion.identity);
 
-        // 2. 💡 [매우 중요]: 새로 태어난 보물상자 기물에 붙어있을 루팅용 컴포넌트(예: LootBox.cs)를 서칭합니다.
-        // 나중에 인벤토리에 들어갈 실제 알맹이 정보인 '아이템 ID'와 '수량'을 상자 데이터 그릇에 원격 주입합니다.
+        // 인벤토리에 들어갈 실제 알맹이 정보인 '아이템 ID'와 '수량'을 상자 데이터 그릇에 원격 주입
         LootBox lootBoxScript = spawnedBoxObj.GetComponent<LootBox>();
         if (lootBoxScript != null)
         {

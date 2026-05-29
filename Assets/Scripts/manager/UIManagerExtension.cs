@@ -74,4 +74,21 @@ public static class UIManagerExtension
 
 
 
+    public static void OpenGameOverUI(this UIManager manager)
+    {
+        // PopupUI 또는 ContentUI 레이어에 TradeUI 프리팹을 찍어냅니다.
+        manager.OpenUI(UIRootType.PopupUI, UIType.GameOverUI);
+    }
+
+    // 게임오버 UI 완전 파괴 및 닫기 함수
+    public static void CloseGameOverUI(this UIManager manager)
+    {
+        manager.CloseUI(UIType.GameOverUI);
+    }
+
+
+
+
+
+
 }

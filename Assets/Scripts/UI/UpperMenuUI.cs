@@ -95,7 +95,6 @@ public class UpperMenuUI : MonoBehaviour
         Debug.Log("게임 종료 버튼 클릭됨 - 데이터 저장 후 종료");
         GameManager.Inst.SaveAndEndGame();
     }
-
     private void OnClick_InGameMenu()
     {
         ToggleMenuWindow();

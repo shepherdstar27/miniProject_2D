@@ -46,7 +46,7 @@ public class TradeUI : UIBase
 
         if (TradeManager.Instance != null)
         {
-            // PortZone에서 넘겨준 동적인 현재 교역소 ID를 사용해 재고를 로드합니다.
+            // PortZone에서 넘겨준 동적인 현재 교역소 ID를 사용해 재고를 로드
             TradeManager.Instance.SetupShopInventory(TradeManager.Instance.CurrentTradeId);
         }
 

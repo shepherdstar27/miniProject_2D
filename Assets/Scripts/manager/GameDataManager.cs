@@ -5,6 +5,19 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance { get; set; }
 
+
+
+    // =========================================================================
+    // 게임 중 실시간으로 변하는 플레이어 데이터
+    // =========================================================================
+    [Header("Runtime Player Data")]
+    public PlayerModel PlayerData { get; private set; } // 외부에서는 읽기만 가능하도록 은닉
+
+
+
+    // =========================================================================
+    // Master Tables (기획 고정 데이터)
+    // =========================================================================
     [Header("Master Tables")]
     [SerializeField] private List<ItemData> List_ItemTable = new List<ItemData>();// 아이템 테이블 그릇 추가
     [SerializeField] private List<WeaponData> List_WeaponTable = new List<WeaponData>(); // 무기 테이블 그릇 추가
@@ -23,6 +36,8 @@ public class GameDataManager : MonoBehaviour
     {
         InitSingleton();
         LoadAllMasterTables();
+
+        InitPlayerData();
     }
 
     private void InitSingleton()
@@ -30,7 +45,6 @@ public class GameDataManager : MonoBehaviour
         Instance = this;
 
         // [ DontDestroyOnLoad 경고 해결 ]
-        // 만약 이 오브젝트가 다른 오브젝트의 자식으로 등록되어 있다면 최상위 부모를 파괴 불가로 만듭니다.
         if (transform.parent != null)
         {
             DontDestroyOnLoad(transform.root.gameObject);
@@ -40,6 +54,26 @@ public class GameDataManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    // =================================================
+    // Player Data 초기화 메서드
+    // =================================================
+    private void InitPlayerData()
+    {
+        // 1. 설계도(PlayerModel)를 바탕으로 실제 빈 상자 생성
+        PlayerData = new PlayerModel();
+
+        // 2. 초기 기본값 세팅 (앞서 PlayerModel에 만들었던 리셋 함수 호출)
+        PlayerData.ResetToDefault();
+
+        Debug.Log("[GameDataManager] 플레이어 런타임 데이터(PlayerModel) 생성 및 초기화 완료!");
+    }
+
+
+
+
+
+
 
     private void LoadAllMasterTables()
     {

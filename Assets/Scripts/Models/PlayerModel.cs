@@ -159,4 +159,36 @@ public class PlayerModel
             }
         }
     }
+
+
+    public void ResetToDefault()
+    {
+        // 1. 소지금 및 특수 재화 초기화 
+        _gold = 100;
+        _fuel = 10;      // 예: 기본 연료 100
+        _supplies = 10;  // 예: 기본 보급품 100
+
+        // 2. 소지품(화물창) 비우기
+        if (_cargoSlots != null)
+        {
+            foreach (InventorySlotData slot in _cargoSlots)
+            {
+                slot.ItemId = "";
+                slot.Count = 0;
+            }
+        }
+
+        // 3. 시작 위치 및 맵 초기화 (실제 게임의 첫 시작 맵 ID와 좌표로 설정)
+        _lastMapPosition = Vector3.zero;
+
+        // 4. (선택) 장비도 초기화해야 한다면 기본 장비 ID로 덮어씌웁니다.
+        _equippedShipId = "ship_0001";
+        _equippedEngineId = "Engine_0001";
+        _equippedWeaponId = "Weapon_Canon_0001";
+
+        Debug.Log("[PlayerModel] 플레이어 데이터가 초기 시작 상태로 리셋되었습니다.");
+    }
+
+
+
 }

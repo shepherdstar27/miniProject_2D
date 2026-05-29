@@ -19,7 +19,8 @@ public enum UIType
     SimplePopup,
     PortUI,
     InventoryUI,
-    TradeUI
+    TradeUI,
+    GameOverUI
 }
 
 public class UIManager : MonoBehaviour
