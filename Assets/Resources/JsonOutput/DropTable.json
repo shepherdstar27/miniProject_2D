@@ -1,9 +1,37 @@
 [
   {
     "Id": "DropTable_0001",
+    "Drop_Item_List": "Gold_0001,Fuel_0002,Supplies_0003,TradingGoods_0004",
+    "Drop_Chance_List": "50,50,50,50",
+    "Min_Count": "1,1,1,1",
+    "Max_Count": "10,2,2,2"
+  },
+  {
+    "Id": "DropTable_0002",
+    "Drop_Item_List": "Gold_0001,Fuel_0002,Supplies_0003,TradingGoods_0004",
+    "Drop_Chance_List": "50,50,50,50",
+    "Min_Count": "1,1,1,1",
+    "Max_Count": "50,2,2,3"
+  },
+  {
+    "Id": "DropTable_0003",
+    "Drop_Item_List": "Gold_0001,Fuel_0002,Supplies_0003,TradingGoods_0004,TradingGoods_0005",
+    "Drop_Chance_List": "50,50,50,50,50",
+    "Min_Count": "1,1,1,1,1",
+    "Max_Count": "100,2,2,2,2"
+  },
+  {
+    "Id": "DropTable_0004",
+    "Drop_Item_List": "Gold_0001,Fuel_0002,Supplies_0003,TradingGoods_0004,TradingGoods_0005,TradingGoods_0006",
+    "Drop_Chance_List": "50,50,50,50,50,50",
+    "Min_Count": "1,1,1,1,1,1",
+    "Max_Count": "200,2,2,2,2"
+  },
+  {
+    "Id": "DropTable_0005",
     "Drop_Item_List": "Gold_0001,Fuel_0002,Supplies_0003,TradingGoods_0004,TradingGoods_0005,TradingGoods_0006,TradingGoods_0007",
-    "Drop_Chance_List": "100,100,100,100,100,100,100",
+    "Drop_Chance_List": "50,50,50,50,50,50,50",
     "Min_Count": "1,1,1,1,1,1,1",
-    "Max_Count": "100,100,100,100,100,100,100"
+    "Max_Count": "500,2,2,2,2"
   }
 ]

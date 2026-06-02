@@ -6,6 +6,7 @@
     "Damage": 10,
     "FireCoolDown": 1,
     "FireRange": 3,
+    "Price": 500,
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -15,6 +16,7 @@
     "Damage": 15,
     "FireCoolDown": 1,
     "FireRange": 4,
+    "Price": 1000,
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -24,6 +26,7 @@
     "Damage": 20,
     "FireCoolDown": 1,
     "FireRange": 5,
+    "Price": 2000,
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -33,6 +36,7 @@
     "Damage": 30,
     "FireCoolDown": 1,
     "FireRange": 6,
+    "Price": 4000,
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -42,6 +46,7 @@
     "Damage": 50,
     "FireCoolDown": 1,
     "FireRange": 7,
+    "Price": 8000,
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -51,6 +56,7 @@
     "Damage": 80,
     "FireCoolDown": 1,
     "FireRange": 8,
+    "Price": 16000,
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -60,6 +66,7 @@
     "Damage": 20,
     "FireCoolDown": 1,
     "FireRange": 1,
+    "Price": 99999,
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -69,6 +76,7 @@
     "Damage": 40,
     "FireCoolDown": 1,
     "FireRange": 1,
+    "Price": 99999,
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -78,6 +86,7 @@
     "Damage": 60,
     "FireCoolDown": 1,
     "FireRange": 1,
+    "Price": 99999,
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -87,6 +96,7 @@
     "Damage": 80,
     "FireCoolDown": 1,
     "FireRange": 1,
+    "Price": 99999,
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -96,6 +106,7 @@
     "Damage": 100,
     "FireCoolDown": 1,
     "FireRange": 1,
+    "Price": 99999,
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   }
 ]

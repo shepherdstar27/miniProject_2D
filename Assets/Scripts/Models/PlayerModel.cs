@@ -34,13 +34,15 @@ public class PlayerModel
     private string _equippedEngineId = "Engine_0005";
     private string _equippedWeaponId = "Weapon_Canon_0006";
 
+
+
     // 인벤토리 핵심 데이터
     private int _gold;
     private int _fuel;
     private int _supplies;
     private List<InventorySlotData> _cargoSlots = new List<InventorySlotData>();
 
-    // 프로퍼티 개방 (람다 배제)
+    // 프로퍼티
     public string PlayerName { get { return _playerName; } set { _playerName = value; } }
     public int PlayerTotalExp { get { return _playerTotalExp; } set { _playerTotalExp = value; } }
     public string LastMapDataId { get { return _lastMapDataId; } set { _lastMapDataId = value; } }
@@ -160,6 +162,11 @@ public class PlayerModel
         }
     }
 
+    public void EquipWeapon(string weaponId)
+    {
+        _equippedWeaponId = weaponId;
+        Debug.Log($"[PlayerModel] 갑판포 장착 완료: {weaponId}");
+    }
 
     public void ResetToDefault()
     {

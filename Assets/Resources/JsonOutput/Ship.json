@@ -5,7 +5,9 @@
     "Description": "조각배다",
     "Max_HP": 100,
     "Cargo": 100,
-    "PrefabPath": "Prefabs/Ship/ship_0001"
+    "Price": 1000,
+    "PrefabPath": "Prefabs/Ship/ship_0001",
+    "IconPath": "Icon/Ship/ship_0001"
   },
   {
     "Id": "ship_0002",
@@ -13,7 +15,9 @@
     "Description": "통통배다",
     "Max_HP": 200,
     "Cargo": 200,
-    "PrefabPath": "Prefabs/Ship/ship_0002"
+    "Price": 5000,
+    "PrefabPath": "Prefabs/Ship/ship_0002",
+    "IconPath": "Icon/Ship/ship_0002"
   },
   {
     "Id": "ship_0003",
@@ -21,7 +25,9 @@
     "Description": "전함이다",
     "Max_HP": 500,
     "Cargo": 500,
-    "PrefabPath": "Prefabs/Ship/ship_0003"
+    "Price": 10000,
+    "PrefabPath": "Prefabs/Ship/ship_0003",
+    "IconPath": "Icon/Ship/ship_0003"
   },
   {
     "Id": "ship_0004",
@@ -29,7 +35,9 @@
     "Description": "문어이다",
     "Max_HP": 100,
     "Cargo": 100,
-    "PrefabPath": "Prefabs/Ship/ship_0004"
+    "Price": 999999,
+    "PrefabPath": "Prefabs/Ship/ship_0004",
+    "IconPath": "Icon/Ship/ship_0004"
   },
   {
     "Id": "ship_0005",
@@ -37,7 +45,9 @@
     "Description": "고래이다",
     "Max_HP": 200,
     "Cargo": 200,
-    "PrefabPath": "Prefabs/Ship/ship_0005"
+    "Price": 999999,
+    "PrefabPath": "Prefabs/Ship/ship_0005",
+    "IconPath": "Icon/Ship/ship_0005"
   },
   {
     "Id": "ship_0006",
@@ -45,7 +55,9 @@
     "Description": "상어이다",
     "Max_HP": 300,
     "Cargo": 300,
-    "PrefabPath": "Prefabs/Ship/ship_0006"
+    "Price": 999999,
+    "PrefabPath": "Prefabs/Ship/ship_0006",
+    "IconPath": "Icon/Ship/ship_0006"
   },
   {
     "Id": "ship_0007",
@@ -53,7 +65,9 @@
     "Description": "장어이다",
     "Max_HP": 400,
     "Cargo": 400,
-    "PrefabPath": "Prefabs/Ship/ship_0007"
+    "Price": 999999,
+    "PrefabPath": "Prefabs/Ship/ship_0007",
+    "IconPath": "Icon/Ship/ship_0007"
   },
   {
     "Id": "ship_0008",
@@ -61,6 +75,8 @@
     "Description": "거북이이다",
     "Max_HP": 500,
     "Cargo": 500,
-    "PrefabPath": "Prefabs/Ship/ship_0008"
+    "Price": 999999,
+    "PrefabPath": "Prefabs/Ship/ship_0008",
+    "IconPath": "Icon/Ship/ship_0008"
   }
 ]

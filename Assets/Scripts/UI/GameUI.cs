@@ -5,10 +5,11 @@ using UnityEngine.UI;
 // 실제 인게임 플레이 화면을 총괄하는 UI 컴포넌트
 public class GameUI : UIBase
 {
-    // 규칙: 유니티 참조 객체는 대문자 시작, SerializeField private 구조
 
     [Header("Bottom Menu Buttons")]
     [SerializeField] private UIButton Button_Inventory;
+    [SerializeField] private UIButton Button_Equipment;
+
 
 
     private void OnEnable()
@@ -18,10 +19,8 @@ public class GameUI : UIBase
 
     private void BindEvents()
     {
-        // 규칙: 함수는 동사로 시작할 것
-
         Button_Inventory.BindOnClickButtonEvent(OnClick_Inventory);
-
+        Button_Equipment.BindOnClickButtonEvent(OnClick_Equipment);
     }
 
 
@@ -55,6 +54,38 @@ public class GameUI : UIBase
             UIManager.Inst.OpenInventoryUI(); // (또는 UIManager.Inst.OpenUI(UIRootType.PopupUI, UIType.InventoryUI);)
         }
     }
+
+
+    private void OnClick_Equipment()
+    {
+        Debug.Log("[항구 UI] 교역소 버튼 클릭됨");
+        Toggle_Trader_Equipment();
+    }
+    private void Toggle_Trader_Equipment()
+    {
+        // 버튼 클릭 후 유니티 UI 포커스 강제 해제 (안전장치 유지)
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        // UIManager를 통해 현재 열려있는지 확인하여 분기 처리
+        if (UIManager.Inst.IsOpened(UIType.EquipmentUI) == true)
+        {
+            Debug.Log("[항구 UI] 거래창이 이미 열려있으므로, UIManager에게 폐쇄");
+            UIManager.Inst.CloseUI(UIType.EquipmentUI);
+        }
+        else
+        {
+            Debug.Log("[항구 UI] 거래창이 닫혀있으므로, UIManager에게 동적 생성");
+            UIManager.Inst.OpenEquipmentUI(); 
+        }
+    }
+
+
+
+
+
 
 
 }

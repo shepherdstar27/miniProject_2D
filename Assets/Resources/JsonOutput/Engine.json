@@ -6,7 +6,8 @@
     "MoveSpeed": 0.1,
     "RotateSpeed": 10,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 500,
+    "IconPath": "Icon/Icon_Engine_0001"
   },
   {
     "Id": "Engine_0002",
@@ -15,7 +16,8 @@
     "MoveSpeed": 0.2,
     "RotateSpeed": 12,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 1000,
+    "IconPath": "Icon/Icon_Engine_0002"
   },
   {
     "Id": "Engine_0003",
@@ -24,7 +26,8 @@
     "MoveSpeed": 0.4,
     "RotateSpeed": 14,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 2000,
+    "IconPath": "Icon/Icon_Engine_0003"
   },
   {
     "Id": "Engine_0004",
@@ -33,7 +36,8 @@
     "MoveSpeed": 0.6,
     "RotateSpeed": 16,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 4000,
+    "IconPath": "Icon/Icon_Engine_0004"
   },
   {
     "Id": "Engine_0005",
@@ -42,7 +46,8 @@
     "MoveSpeed": 0.8,
     "RotateSpeed": 20,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 8000,
+    "IconPath": "Icon/Icon_Engine_0005"
   },
   {
     "Id": "Engine_0006",
@@ -51,7 +56,8 @@
     "MoveSpeed": 0.1,
     "RotateSpeed": 10,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 99999,
+    "IconPath": "Icon/Icon_Engine_0006"
   },
   {
     "Id": "Engine_0007",
@@ -60,7 +66,8 @@
     "MoveSpeed": 0.2,
     "RotateSpeed": 12,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 99999,
+    "IconPath": "Icon/Icon_Engine_0007"
   },
   {
     "Id": "Engine_0008",
@@ -69,7 +76,8 @@
     "MoveSpeed": 0.4,
     "RotateSpeed": 14,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 99999,
+    "IconPath": "Icon/Icon_Engine_0008"
   },
   {
     "Id": "Engine_0009",
@@ -78,7 +86,8 @@
     "MoveSpeed": 0.6,
     "RotateSpeed": 16,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 99999,
+    "IconPath": "Icon/Icon_Engine_0009"
   },
   {
     "Id": "Engine_0010",
@@ -87,6 +96,7 @@
     "MoveSpeed": 0.8,
     "RotateSpeed": 20,
     "Acceleration": 0.5,
-    "IconPath": null
+    "Price": 99999,
+    "IconPath": "Icon/Icon_Engine_0010"
   }
 ]

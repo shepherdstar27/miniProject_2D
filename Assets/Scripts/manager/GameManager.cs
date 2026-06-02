@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
         set { _inst = value; }
     }
 
+    public static GameManager Instance
+    {
+        get { return _inst; }
+        set { _inst = value; }
+    }
+
     private PlayerModel _playerModel = new PlayerModel();
 
     // 외부에서 데이터 원본에 접근하기 위한 프로퍼티

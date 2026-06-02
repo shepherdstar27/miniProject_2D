@@ -432,6 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUI
   Button_Inventory: {fileID: 5898518512889670863}
+  Button_Equipment: {fileID: 4940402337455909773}
 --- !u!1 &3587373829264317323
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC120\uBC15\uC815\uBCF4"
+  m_text: "\uC7A5\uBE44"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ee4154c0eda3c4f8462fab782f9ca7, type: 2}
   m_sharedMaterial: {fileID: 4864461389729456374, guid: 63ee4154c0eda3c4f8462fab782f9ca7, type: 2}

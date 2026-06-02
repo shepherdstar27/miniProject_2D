@@ -11,6 +11,7 @@ public class EngineData
     public float MoveSpeed; // 이동속도
     public float RotateSpeed; // 배의 회전 속도
     public float Acceleration; // 배의 관성
+    public int Price; // 가격
     public string IconPath; // 엔진 표기용 Icon
 
 }

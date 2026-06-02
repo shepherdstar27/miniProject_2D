@@ -20,6 +20,7 @@ public enum UIType
     PortUI,
     InventoryUI,
     TradeUI,
+    EquipmentUI,
     GameOverUI
 }
 

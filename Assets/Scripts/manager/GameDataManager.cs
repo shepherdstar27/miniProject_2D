@@ -63,7 +63,7 @@ public class GameDataManager : MonoBehaviour
         // 1. 설계도(PlayerModel)를 바탕으로 실제 빈 상자 생성
         PlayerData = new PlayerModel();
 
-        // 2. 초기 기본값 세팅 (앞서 PlayerModel에 만들었던 리셋 함수 호출)
+        // 2. 초기 기본값 세팅 
         PlayerData.ResetToDefault();
 
         Debug.Log("[GameDataManager] 플레이어 런타임 데이터(PlayerModel) 생성 및 초기화 완료!");

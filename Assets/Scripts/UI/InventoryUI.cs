@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class InventoryUI : UIBase
 {
-    // 람다식 배제 및 고전적인 get/set 블록 사용
     private static InventoryUI _instance;
     public static InventoryUI Instance
     {
