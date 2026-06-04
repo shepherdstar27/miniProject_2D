@@ -7,6 +7,7 @@
     "FireCoolDown": 1,
     "FireRange": 3,
     "Price": 500,
+    "IconPath": "Icon/Weapon/weapon_0001",
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -17,6 +18,7 @@
     "FireCoolDown": 1,
     "FireRange": 4,
     "Price": 1000,
+    "IconPath": "Icon/Weapon/weapon_0002",
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -27,6 +29,7 @@
     "FireCoolDown": 1,
     "FireRange": 5,
     "Price": 2000,
+    "IconPath": "Icon/Weapon/weapon_0003",
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -37,6 +40,7 @@
     "FireCoolDown": 1,
     "FireRange": 6,
     "Price": 4000,
+    "IconPath": "Icon/Weapon/weapon_0004",
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -47,6 +51,7 @@
     "FireCoolDown": 1,
     "FireRange": 7,
     "Price": 8000,
+    "IconPath": "Icon/Weapon/weapon_0005",
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -57,6 +62,7 @@
     "FireCoolDown": 1,
     "FireRange": 8,
     "Price": 16000,
+    "IconPath": "Icon/Weapon/weapon_0006",
     "AttackPrefab": "Prefabs/Attack/CanonBall"
   },
   {
@@ -67,6 +73,7 @@
     "FireCoolDown": 1,
     "FireRange": 1,
     "Price": 99999,
+    "IconPath": "Icon/Weapon/weapon_0007",
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -77,6 +84,7 @@
     "FireCoolDown": 1,
     "FireRange": 1,
     "Price": 99999,
+    "IconPath": "Icon/Weapon/weapon_0008",
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -87,6 +95,7 @@
     "FireCoolDown": 1,
     "FireRange": 1,
     "Price": 99999,
+    "IconPath": "Icon/Weapon/weapon_0009",
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -97,6 +106,7 @@
     "FireCoolDown": 1,
     "FireRange": 1,
     "Price": 99999,
+    "IconPath": "Icon/Weapon/weapon_0010",
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   },
   {
@@ -107,6 +117,7 @@
     "FireCoolDown": 1,
     "FireRange": 1,
     "Price": 99999,
+    "IconPath": "Icon/Weapon/weapon_0011",
     "AttackPrefab": "Prefabs/Attack/CloseAttack"
   }
 ]

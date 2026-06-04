@@ -21,6 +21,7 @@ public class InventorySlotData
     }
 }
 
+
 [Serializable]
 public class PlayerModel
 {
