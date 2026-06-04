@@ -32,15 +32,15 @@ public class PlayerModel
 
     // 장비 ID 데이터
     private string _equippedShipId = "ship_0001";
-    private string _equippedEngineId = "Engine_0005";
-    private string _equippedWeaponId = "Weapon_Canon_0006";
+    private string _equippedEngineId = "Engine_0001";
+    private string _equippedWeaponId = "Weapon_Canon_0001";
 
 
 
     // 인벤토리 핵심 데이터
-    private int _gold;
-    private int _fuel;
-    private int _supplies;
+    private int _gold = 100;
+    private int _fuel = 100;
+    private int _supplies = 100;
     private List<InventorySlotData> _cargoSlots = new List<InventorySlotData>();
 
     // 프로퍼티

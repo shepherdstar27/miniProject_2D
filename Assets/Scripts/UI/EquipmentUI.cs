@@ -46,6 +46,9 @@ public class EquipmentUI : UIBase
     [Header("Ship그룹")]
     [SerializeField] private Image Image_ShipIcon;
 
+    [Header("Weapon그룹")]
+    [SerializeField] private Image Image_WeaponIcon;
+
     [Header("Inventory Resource Texts")]
     [SerializeField] private TextMeshProUGUI TextMesh_GoldAmount;
     [SerializeField] private TextMeshProUGUI TextMesh_FuelAmount;
@@ -162,6 +165,31 @@ public class EquipmentUI : UIBase
         if (Text_DeckGunName != null) Text_DeckGunName.text = _weaponData.Name;
         if (Text_DeckGunDamage != null) Text_DeckGunDamage.text = _weaponData.Damage.ToString();
         if (Text_DeckGunCoolTime != null) Text_DeckGunCoolTime.text = _weaponData.FireCoolDown.ToString();
+
+        if (Image_WeaponIcon != null)
+        {
+            if (string.IsNullOrEmpty(_weaponData.IconPath) == false)
+            {
+                // Resources 폴더에서 IconPath 경로의 Sprite를 불러옵니다.
+                Sprite _loadedSprite = Resources.Load<Sprite>(_weaponData.IconPath);
+
+                if (_loadedSprite != null)
+                {
+                    Image_WeaponIcon.sprite = _loadedSprite;
+                    Image_WeaponIcon.enabled = true; // 이미지가 있으므로 활성화
+                }
+                else
+                {
+                    Debug.LogWarning($"[EquipmentUI] 무기 아이콘 로드 실패. 경로를 확인하세요: {_weaponData.IconPath}");
+                    Image_WeaponIcon.enabled = false;
+                }
+            }
+        }
+        else
+        {
+            // 경로가 비어있을 경우
+            Image_WeaponIcon.enabled = false;
+        }
     }
     private void UpdateFrontGunUI(WeaponData _weaponData)
     {
@@ -242,6 +270,7 @@ public class EquipmentUI : UIBase
             }
         }
     }
+
 
     private void UpdateShipUI(ShipData _shipData)
     {
