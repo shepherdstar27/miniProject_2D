@@ -7,6 +7,9 @@ public class PortZone : MonoBehaviour
     [SerializeField] private string _portName = "기본 항구";
     [SerializeField] private string _tradeId = "Trade_0001"; // 하이어라키에서 이 값을 교역소마다 다르게 설정
 
+    [Header("오디오")]
+    [SerializeField] private AudioClip _portBgm;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") == true)
@@ -25,6 +28,20 @@ public class PortZone : MonoBehaviour
                     TradeManager.Instance.CurrentTradeId = _tradeId;
                 }
             }
+
+
+
+            if (SoundManager.Instance != null && _portBgm != null)
+            {
+                // SoundManager 내부에 구현된 BGM 재생 메서드 호출
+                SoundManager.Instance.PlayBGM(_portBgm);
+            }
+
+
+
+
+
+
         }
     }
 
@@ -45,6 +62,17 @@ public class PortZone : MonoBehaviour
                     TradeManager.Instance.CurrentTradeId = ""; // 이탈 시 초기화
                 }
             }
+
+            if (SoundManager.Instance != null)
+            {
+                // SoundManager 내부에 기본 BGM으로 돌아가는 전용 메서드를 호출
+                SoundManager.Instance.PlayDefaultSailingBGM();
+            }
+
+
+
+
+
         }
     }
 

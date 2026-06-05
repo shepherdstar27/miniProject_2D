@@ -32,13 +32,13 @@ public class PlayerModel
 
     // 장비 ID 데이터
     private string _equippedShipId = "ship_0001";
-    private string _equippedEngineId = "Engine_0001";
-    private string _equippedWeaponId = "Weapon_Canon_0001";
+    private string _equippedEngineId = "Engine_0005";
+    private string _equippedWeaponId = "Weapon_Canon_0006";
 
 
 
     // 인벤토리 핵심 데이터
-    private int _gold = 100;
+    private int _gold = 100000000;
     private int _fuel = 100;
     private int _supplies = 100;
     private List<InventorySlotData> _cargoSlots = new List<InventorySlotData>();
@@ -77,7 +77,7 @@ public class PlayerModel
         if (itemId == "Fuel_0002") { _fuel += count; return; }
         if (itemId == "Supplies_0003") { _supplies += count; return; }
 
-        // 2. [지연 초기화 공정]: 화물창이 비어있다면 임의의 수가 아닌 배의 실제 스펙을 조회합니다.
+        // 2. 화물창이 비어있다면 배의 스펙 조회
         if (_cargoSlots == null || _cargoSlots.Count == 0)
         {
             if (GameDataManager.Instance != null)
