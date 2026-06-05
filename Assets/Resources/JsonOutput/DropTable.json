@@ -2,9 +2,9 @@
   {
     "Id": "DropTable_0001",
     "Drop_Item_List": "Gold_0001,Fuel_0002,Supplies_0003,TradingGoods_0004",
-    "Drop_Chance_List": "100,50,50,50",
-    "Min_Count": "100000,1,1,1",
-    "Max_Count": "1000000,2,2,2"
+    "Drop_Chance_List": "50,50,50,50",
+    "Min_Count": "1,1,1,1",
+    "Max_Count": "10,2,2,2"
   },
   {
     "Id": "DropTable_0002",

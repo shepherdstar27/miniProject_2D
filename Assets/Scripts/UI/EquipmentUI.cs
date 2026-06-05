@@ -131,7 +131,6 @@ public class EquipmentUI : UIBase
 
         }
 
-
         // 2. 무기 UI 업데이트
         UpdateDeckGunUI(_deckGunData);
         UpdateFrontGunUI(_FrontData);
@@ -139,9 +138,6 @@ public class EquipmentUI : UIBase
 
         UpdateEngineUI(_engineData);
         UpdateShipUI(_shipData);
-
-
-
 
 
         // 자원 갱신 예시
