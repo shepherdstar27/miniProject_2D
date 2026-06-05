@@ -10,6 +10,16 @@ public class TradeManager : MonoBehaviour
         set { _currentTradeId = value; }
     }
 
+
+    public Sprite CurrentPortBackground { get; set; } // 배경 이미지
+
+
+
+
+
+
+
+
     private static TradeManager _instance;
     public static TradeManager Instance
     {

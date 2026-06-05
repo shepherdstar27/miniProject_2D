@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI; // Image 사용
 
 public class PortUI : UIBase
 {
@@ -22,13 +23,15 @@ public class PortUI : UIBase
     [SerializeField] private GameObject PortUI_Trade_Menu;
 
 
-
+    [Header("배경 이미지")]
+    [SerializeField] private Image Image_PortBackground;
 
 
 
     private void OnEnable()
     {
         BindEvents();
+        UpdateBackgroundImage();
     }
 
     private void BindEvents()
@@ -176,11 +179,24 @@ public class PortUI : UIBase
     {
         Debug.Log("[항구 UI] 출항하기 버튼 클릭됨 - UI 매니저에게 정박 UI 폐쇄를 요청합니다.");
 
-        // 동적 생성 방식 규칙: 매니저에게 나를 파괴해달라고 요청합니다.
+        // 동적 생성 방식 규칙: 매니저에게 나를 파괴해달라고 요청
         UIManager.Inst.ClosePortUI();
     }
 
 
+
+
+
+    private void UpdateBackgroundImage()
+    {
+        if (TradeManager.Instance != null && TradeManager.Instance.CurrentPortBackground != null)
+        {
+            if (Image_PortBackground != null)
+            {
+                Image_PortBackground.sprite = TradeManager.Instance.CurrentPortBackground;
+            }
+        }
+    }
 
 
 

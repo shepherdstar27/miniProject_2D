@@ -10,6 +10,9 @@ public class PortZone : MonoBehaviour
     [Header("오디오")]
     [SerializeField] private AudioClip _portBgm;
 
+    [Header("배경이미지")]
+    [SerializeField] private Sprite _portBackgroundImage; // 배경이미지
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") == true)
@@ -26,6 +29,8 @@ public class PortZone : MonoBehaviour
                 if (TradeManager.Instance != null)
                 {
                     TradeManager.Instance.CurrentTradeId = _tradeId;
+
+                    TradeManager.Instance.CurrentPortBackground = _portBackgroundImage; 
                 }
             }
 
@@ -60,6 +65,8 @@ public class PortZone : MonoBehaviour
                 if (TradeManager.Instance != null)
                 {
                     TradeManager.Instance.CurrentTradeId = ""; // 이탈 시 초기화
+
+                    TradeManager.Instance.CurrentPortBackground = null; // 이탈 시 이미지 초기화
                 }
             }
 
